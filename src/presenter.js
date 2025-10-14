@@ -8,6 +8,4 @@ form.addEventListener("submit", (event) => {
 
   const firstNumber = Number.parseInt(first.value);
   const secondNumber = Number.parseInt(second.value);
-
-  div.innerHTML = "<p>" + firstNumber secondNumber + "</p>";
 });
