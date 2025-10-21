@@ -1,10 +1,18 @@
-describe('Registro de usuario', () => {
+import registrar from './register.js';
+
+describe("Registro de Mascota", () => {
 
   it("debe registrar el nombre de una mascota:", () => {
-    expect(regitrar("Luna"))
-    .toThrow("¡Mascota Registrada!");
+    expect(registrar("Luna", 0)).toEqual(["Luna", 0]);
   });
 
+  it("debe registrar el nombre de una mascota diferente:", () => {
+    expect(registrar("Max", 0)).toEqual(["Max", 0]);
+  });
+
+  it("debe registrar el nombre de una mascota y su edad:", () => {
+    expect(registrar("Rocky", 2)).toEqual(["Rocky", 2]);
+  });
 //   test('debe fallar si la edad no es válida', async () => {
 //     const petData = { nombre: 'Luna', edad: -2, raza: 'Labrador', descripcion: 'Muy juguetona' };
 //     await expect(registerPet(petData, 1))

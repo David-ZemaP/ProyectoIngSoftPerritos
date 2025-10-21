@@ -1,0 +1,21 @@
+[
+  {
+    "sha": "HEAD",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-10-21T20:33:56.000Z",
+      "message": "Feat: Registro de nombre y edad de mascotas",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 61,
+      "additions": 49,
+      "deletions": 12,
+      "date": "2025-10-21"
+    },
+    "coverage": 100,
+    "test_count": 3,
+    "failed_tests": 0,
+    "conclusion": "success"
+  }
+]

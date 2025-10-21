@@ -1,6 +1,6 @@
-function registrar()
+function registrar(name, age) 
 {
-    return "Luna";
+    return [name, age];
 }
 
 export default registrar;
