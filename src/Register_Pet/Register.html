@@ -10,6 +10,7 @@
 </head>
 <body class="light">
 
+    <div class="container-form">
         <div class="logo-container">
             <img src="assets/Logo.png" alt="MatchPet Logo" class="logo-image">
         </div>
@@ -20,14 +21,14 @@
                 <p>Ayúdalo a encontrar su hogar perfecto</p>
             </header>
 
-            <form id="register-form" class="form-content">
+            <form class="form-content">
 
                 <div class="image-upload-wrapper">
                     <div class="image-upload-area" id="image-preview">
                         <div id="camera-icon" class="camera-icon">
                             <i class="fa-solid fa-camera"></i>
                         </div>
-                        <input type="file" id="photo-upload" name="photo" accept="image/*">
+                        <input type="file" id="photo-upload" name="photo" accept="image/*" onchange="handleImageUpload(event)">
                         
                         <label for="photo-upload" class="upload-button-floating">
                             <i class="fa-solid fa-upload"></i>

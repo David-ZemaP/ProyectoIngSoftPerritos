@@ -137,7 +137,6 @@
             }
         }
         
-        /* Sexo Radio Buttons */
         .gender-options {
             display: flex;
             gap: 1.5rem;
@@ -181,8 +180,8 @@
             margin-bottom: 1.5rem;
         }
         .logo-container .logo-image {
-            height: 10rem; 
-            width: 10rem;
+            height: 10rem; /* 12 */
+            width: 10rem; /* 12 */
             margin-left: auto;
             margin-right: auto;
         }
