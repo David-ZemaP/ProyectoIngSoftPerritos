@@ -38,17 +38,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "6fa66da6148374f8f93302cdd54fb6cdc681036e",
     "author": "Harold Sejas",
     "commit": {
       "date": "2025-10-22T00:41:08.000Z",
       "message": "Fix: Recopilar datos de mascota",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/6fa66da6148374f8f93302cdd54fb6cdc681036e"
     },
     "stats": {
       "total": 1,
       "additions": 0,
       "deletions": 1,
+      "date": "2025-10-22"
+    },
+    "coverage": 100,
+    "test_count": 5,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-10-22T22:46:38.000Z",
+      "message": "feat navbar para el index\nfix errores del registerhtml",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 192,
+      "additions": 177,
+      "deletions": 15,
       "date": "2025-10-22"
     },
     "coverage": 100,
