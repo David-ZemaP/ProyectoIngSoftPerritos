@@ -1,39 +1,58 @@
 [
   {
-    "sha": "cf7b348acf42acba92243fd0337bb4f0dcda10d3",
-    "author": "Harold Sejas",
+    "sha": "df02d5ee8640ae14078e237dd9640d9776890469",
+    "author": "Robert",
     "commit": {
-      "date": "2025-10-21T20:33:56.000Z",
-      "message": "Feat: Registro de nombre y edad de mascotas",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/cf7b348acf42acba92243fd0337bb4f0dcda10d3"
+      "date": "2025-10-22T01:39:28.000Z",
+      "message": "feat: buscar mascotas",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/df02d5ee8640ae14078e237dd9640d9776890469"
     },
     "stats": {
-      "total": 61,
-      "additions": 49,
-      "deletions": 12,
-      "date": "2025-10-21"
+      "total": 41,
+      "additions": 36,
+      "deletions": 5,
+      "date": "2025-10-22"
     },
-    "coverage": 100,
-    "test_count": 3,
+    "coverage": 0,
+    "test_count": 0,
     "failed_tests": 0,
-    "conclusion": "success"
+    "conclusion": "neutral"
   },
   {
-    "sha": "5957e1ec3f3ea52d6417f9db259e7fa150a1d3b3",
-    "author": "Harold Sejas",
+    "sha": "362eb11a0ed5653f1a4acf1992c2b5aa707efd00",
+    "author": "Robert",
     "commit": {
-      "date": "2025-10-22T00:38:32.000Z",
-      "message": "Test: Recopilar datos de mascota",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/5957e1ec3f3ea52d6417f9db259e7fa150a1d3b3"
+      "date": "2025-10-22T02:12:50.000Z",
+      "message": "fix: buscar mascotas test corregido",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/362eb11a0ed5653f1a4acf1992c2b5aa707efd00"
     },
     "stats": {
-      "total": 26,
-      "additions": 13,
-      "deletions": 13,
+      "total": 55,
+      "additions": 22,
+      "deletions": 33,
       "date": "2025-10-22"
     },
     "coverage": 100,
-    "test_count": 5,
+    "test_count": 1,
+    "failed_tests": 1,
+    "conclusion": "failure"
+  },
+  {
+    "sha": "4cd3ea16b67a8084e1e161a368133a1dc4fb46b2",
+    "author": "Robert",
+    "commit": {
+      "date": "2025-10-22T02:34:16.000Z",
+      "message": "fix: buscar mascotas test corregido",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/4cd3ea16b67a8084e1e161a368133a1dc4fb46b2"
+    },
+    "stats": {
+      "total": 8,
+      "additions": 6,
+      "deletions": 2,
+      "date": "2025-10-22"
+    },
+    "coverage": 75,
+    "test_count": 1,
     "failed_tests": 0,
     "conclusion": "success"
   },
@@ -46,13 +65,13 @@
       "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/6fa66da6148374f8f93302cdd54fb6cdc681036e"
     },
     "stats": {
-      "total": 1,
-      "additions": 0,
-      "deletions": 1,
+      "total": 59,
+      "additions": 36,
+      "deletions": 23,
       "date": "2025-10-22"
     },
     "coverage": 100,
-    "test_count": 5,
+    "test_count": 4,
     "failed_tests": 0,
     "conclusion": "success"
   },
