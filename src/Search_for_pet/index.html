@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetMatch - Encuentra tu Compañero Ideal</title>
+    <link rel="stylesheet" href="search.css">
+</head>
+<body>
+    <div class="search-container">
+        <div class="logo">
+            <img src="../assets/Logo_PetMatch.png" alt="PetMatch" height="60">
+        </div>
+
+        <h1>¡Encuentra a tu Compañero Ideal!</h1>
+        
+        <div class="search-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Especie</label>
+                    <div class="input-group">
+                        <button class="active" id="btnPerro">Perro</button>
+                        <button id="btnGato">Gato</button>
+                        <button id="btnOtros">Otros</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Raza</label>
+                    <input type="text" id="breed-input" placeholder="Ej: Golden Retriever">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Edad</label>
+                    <select id="age-select">
+                        <option value="">Seleccionar edad</option>
+                        <option value="0-1">0-1 año</option>
+                        <option value="1-5">1-5 años</option>
+                        <option value="5+">+5 años</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Sexo</label>
+                    <select id="sex-select">
+                        <option value="">Seleccionar sexo</option>
+                        <option value="M">Macho</option>
+                        <option value="H">Hembra</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ubicación</label>
+                    <input type="text" id="location-input" placeholder="Ej: Ciudad o Región">
+                </div>
+                <div class="form-group">
+                    <button class="search-button" id="search-btn">Buscar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="searchResults" style="display: none;">
+            <h2>Personalidad/Sobre mí</h2>
+            <div class="results-grid" id="resultsGrid">
+                <!-- Los resultados se mostrarán aquí dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <template id="pet-card-template">
+        <div class="pet-card">
+            <img src="" alt="">
+            <h3></h3>
+            <div class="pet-info">
+                <p class="species"></p>
+                <p class="breed"></p>
+                <p class="age"></p>
+                <p class="location"></p>
+            </div>
+            <button class="match-button">¡Match!</button>
+        </div>
+    </template>
+
+    <script type="module">
+        import buscar from './search.js';
+
+        // Manejadores de eventos para los botones de especie
+        const specieButtons = document.querySelectorAll('.input-group button');
+        specieButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                specieButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            });
+        });
+
+        // Manejador del botón de búsqueda
+        document.getElementById('search-btn').addEventListener('click', () => {
+            const searchResults = document.getElementById('searchResults');
+            const resultsGrid = document.getElementById('resultsGrid');
+            
+            try {
+                const result = buscar('Max');
+                searchResults.style.display = 'block';
+                
+                if (result === '¡Mascota No Encontrada!') {
+                    resultsGrid.innerHTML = `
+                        <div class="no-results">
+                            <p>${result}</p>
+                            <p>Intenta con otros criterios de búsqueda</p>
+                        </div>`;
+                }
+            } catch (error) {
+                searchResults.style.display = 'block';
+                // Si encuentra a Max, mostrar la tarjeta
+                const template = document.getElementById('pet-card-template');
+                const card = template.content.cloneNode(true);
+                
+                // Personalizar la tarjeta
+                card.querySelector('img').src = '../assets/Max-pet.png';
+                card.querySelector('img').alt = 'Max';
+                card.querySelector('h3').textContent = 'Max';
+                card.querySelector('.species').textContent = 'Especie: Perro';
+                card.querySelector('.breed').textContent = 'Raza: Golden Retriever';
+                card.querySelector('.age').textContent = 'Edad: 1-5 años';
+                card.querySelector('.location').textContent = 'Ubicación: Local';
+                
+                resultsGrid.innerHTML = '';
+                resultsGrid.appendChild(card);
+            }
+        });
+
+        // Manejador para los botones de Match
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('match-button')) {
+                const petName = e.target.closest('.pet-card').querySelector('h3').textContent;
+                alert(`¡Has hecho match con ${petName}! Te contactaremos pronto.`);
+            }
+        });
+    </script>
+</body>
+</html>
