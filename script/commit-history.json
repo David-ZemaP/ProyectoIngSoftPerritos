@@ -1,11 +1,11 @@
 [
   {
-    "sha": "HEAD",
+    "sha": "df02d5ee8640ae14078e237dd9640d9776890469",
     "author": "Robert",
     "commit": {
       "date": "2025-10-22T01:39:28.000Z",
       "message": "feat: buscar mascotas",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/df02d5ee8640ae14078e237dd9640d9776890469"
     },
     "stats": {
       "total": 41,
@@ -17,5 +17,24 @@
     "test_count": 0,
     "failed_tests": 0,
     "conclusion": "neutral"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Robert",
+    "commit": {
+      "date": "2025-10-22T02:12:50.000Z",
+      "message": "fix: buscar mascotas test corregido",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 55,
+      "additions": 22,
+      "deletions": 33,
+      "date": "2025-10-22"
+    },
+    "coverage": 100,
+    "test_count": 1,
+    "failed_tests": 1,
+    "conclusion": "failure"
   }
 ]
