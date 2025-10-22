@@ -1,23 +1,21 @@
-// tests/registerPet.test.js
 import buscar from '../Search_for_pet/search.js';
-describe('Busqueda de mascota', () => {
 
-    it('debe buscar el nombre de una mascota', () => {
-    // Esperamos que buscar retorne el mensaje correcto
-    expect(() => buscar('Max')).toThrow('¡Mascota Encontrada!');
+describe('Búsqueda de mascota', () => {
+
+    it('debe encontrar la mascota por nombre', () => {
+        expect(() => buscar({ nombre: 'Max' })).toThrow('¡Mascota Encontrada por nombre!');
     });
 
-//   it('debe fallar si la edad no es válida', async () => {
-//     const petData = { nombre: 'Luna', edad: -2, raza: 'Labrador' };
-//     await expect(registerPet(petData, 1))
-//       .rejects
-//       .toThrow('Edad inválida');
-//   });
+    it('debe encontrar la mascota por edad', () => {
+        expect(() => buscar({ edad: 3 })).toThrow('¡Mascota Encontrada por edad!');
+    });
 
-//   it('debe registrar correctamente una mascota', async () => {
-//     const petData = { nombre: 'Rocky', edad: 4, raza: 'Bulldog' };
-//     const result = await registerPet(petData, 1);
+    it('debe encontrar la mascota por raza', () => {
+        expect(() => buscar({ raza: 'Bulldog' })).toThrow('¡Mascota Encontrada por raza!');
+    });
 
-//     });
-//   });
+    it('debe retornar mensaje si no se encuentra la mascota', () => {
+        const result = buscar({ nombre: 'Luna', edad: 2, raza: 'Labrador' });
+        expect(result).toBe('¡Mascota No Encontrada!');
+    });
 });
