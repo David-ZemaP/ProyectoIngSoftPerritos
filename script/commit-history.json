@@ -19,17 +19,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "5957e1ec3f3ea52d6417f9db259e7fa150a1d3b3",
     "author": "Harold Sejas",
     "commit": {
       "date": "2025-10-22T00:38:32.000Z",
       "message": "Test: Recopilar datos de mascota",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/5957e1ec3f3ea52d6417f9db259e7fa150a1d3b3"
     },
     "stats": {
       "total": 26,
       "additions": 13,
       "deletions": 13,
+      "date": "2025-10-22"
+    },
+    "coverage": 100,
+    "test_count": 5,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-10-22T00:41:08.000Z",
+      "message": "Fix: Recopilar datos de mascota",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 1,
+      "additions": 0,
+      "deletions": 1,
       "date": "2025-10-22"
     },
     "coverage": 100,

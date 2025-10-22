@@ -1,4 +1,3 @@
-import e from 'express';
 import registrar from './register.js';
 
 describe("Registro de Mascota", () => {
