@@ -1,0 +1,21 @@
+[
+  {
+    "sha": "HEAD",
+    "author": "Robert",
+    "commit": {
+      "date": "2025-10-22T01:39:28.000Z",
+      "message": "feat: buscar mascotas",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 41,
+      "additions": 36,
+      "deletions": 5,
+      "date": "2025-10-22"
+    },
+    "coverage": 0,
+    "test_count": 0,
+    "failed_tests": 0,
+    "conclusion": "neutral"
+  }
+]
