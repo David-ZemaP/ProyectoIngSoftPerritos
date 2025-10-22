@@ -7,11 +7,20 @@
     <link rel="stylesheet" href="search.css">
 </head>
 <body>
-    <div class="search-container">
-        <div class="logo">
-            <img src="../assets/Logo_PetMatch.png" alt="PetMatch" height="60">
+    <div class="navbar">
+        <div class="logo-container">
+            <img src="../assets/Logo_PetMatch.png" alt="PetMatch Logo" class="logo-img">
+            <span class="logo-text">PetMatch</span>
         </div>
+        
+        <nav class="nav-links">
+            <a href="#" class="active">Buscar mascota</a>
+            <a href="#">Perfil</a>
+            <a href="#">Cerrar Sesión</a>
+        </nav>
+    </div>
 
+    <div class="search-container">
         <h1>¡Encuentra a tu Compañero Ideal!</h1>
         
         <div class="search-form">
@@ -61,8 +70,7 @@
         <div id="searchResults" style="display: none;">
             <h2>Personalidad/Sobre mí</h2>
             <div class="results-grid" id="resultsGrid">
-                <!-- Los resultados se mostrarán aquí dinámicamente -->
-            </div>
+                </div>
         </div>
     </div>
 
@@ -97,34 +105,46 @@
             const searchResults = document.getElementById('searchResults');
             const resultsGrid = document.getElementById('resultsGrid');
             
+            // Asumo que tu función 'buscar' devuelve la cadena '¡Mascota No Encontrada!' si no hay resultados, 
+            // y cualquier otra cosa si sí encuentra algo (como el objeto de la mascota, o en tu caso, "Max").
+            const searchValue = document.getElementById('breed-input').value; // Usamos el input de Raza como ejemplo
+            
+            // Limpiamos los resultados anteriores
+            resultsGrid.innerHTML = '';
+            searchResults.style.display = 'block';
+
             try {
-                const result = buscar('Max');
-                searchResults.style.display = 'block';
+                const result = buscar(searchValue);
                 
+                // LÓGICA CORREGIDA: Verifica explícitamente el resultado
                 if (result === '¡Mascota No Encontrada!') {
+                    // Muestra el mensaje de "no disponible"
                     resultsGrid.innerHTML = `
                         <div class="no-results">
-                            <p>${result}</p>
+                            <p class="not-found-message">Mascotas no disponibles 😞</p> 
                             <p>Intenta con otros criterios de búsqueda</p>
                         </div>`;
+                } else {
+                    // Muestra la tarjeta (usando los datos fijos de Max como ejemplo, 
+                    // si quieres que siempre aparezca Max cuando la búsqueda no es "no encontrada")
+                    const template = document.getElementById('pet-card-template');
+                    const card = template.content.cloneNode(true);
+                    
+                    // Personalizar la tarjeta (datos de ejemplo de Max)
+                    card.querySelector('img').src = '../assets/Max-pet.png';
+                    card.querySelector('img').alt = 'Max';
+                    card.querySelector('h3').textContent = 'Max';
+                    card.querySelector('.species').textContent = 'Especie: Perro';
+                    card.querySelector('.breed').textContent = 'Raza: Golden Retriever';
+                    card.querySelector('.age').textContent = 'Edad: 1-5 años';
+                    card.querySelector('.location').textContent = 'Ubicación: Local';
+                    
+                    resultsGrid.appendChild(card);
                 }
             } catch (error) {
-                searchResults.style.display = 'block';
-                // Si encuentra a Max, mostrar la tarjeta
-                const template = document.getElementById('pet-card-template');
-                const card = template.content.cloneNode(true);
-                
-                // Personalizar la tarjeta
-                card.querySelector('img').src = '../assets/Max-pet.png';
-                card.querySelector('img').alt = 'Max';
-                card.querySelector('h3').textContent = 'Max';
-                card.querySelector('.species').textContent = 'Especie: Perro';
-                card.querySelector('.breed').textContent = 'Raza: Golden Retriever';
-                card.querySelector('.age').textContent = 'Edad: 1-5 años';
-                card.querySelector('.location').textContent = 'Ubicación: Local';
-                
-                resultsGrid.innerHTML = '';
-                resultsGrid.appendChild(card);
+                // Manejo de errores inesperados de la función buscar()
+                console.error("Error inesperado durante la búsqueda:", error);
+                resultsGrid.innerHTML = `<div class="no-results"><p class="not-found-message">Ocurrió un error en el sistema. 😔</p><p>Revisa la consola para más detalles.</p></div>`;
             }
         });
 
