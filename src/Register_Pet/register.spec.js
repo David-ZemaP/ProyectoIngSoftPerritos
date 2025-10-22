@@ -1,17 +1,26 @@
+import e from 'express';
 import registrar from './register.js';
 
 describe("Registro de Mascota", () => {
 
   it("debe registrar el nombre de una mascota:", () => {
-    expect(registrar("Luna", 0)).toEqual(["Luna", 0]);
+    expect(registrar("Luna")).toEqual(["Luna"]);
   });
 
   it("debe registrar el nombre de una mascota diferente:", () => {
-    expect(registrar("Max", 0)).toEqual(["Max", 0]);
+    expect(registrar("Max")).toEqual(["Max"]);
   });
 
   it("debe registrar el nombre de una mascota y su edad:", () => {
     expect(registrar("Rocky", 2)).toEqual(["Rocky", 2]);
+  });
+
+  it("debe registrar el nombre de una mascota, su edad y raza:", () => {
+    expect(registrar("Mia", 4, "Schnauzer")).toEqual(["Mia", 4, "Schnauzer"]);
+  });
+
+  it("debe registrar el nombre de una mascota, su edad, su raza y descripción:", () => {
+    expect(registrar("Bella", 3, "Beagle", "Muy juguetona")).toEqual(["Bella", 3, "Beagle", "Muy juguetona"]);
   });
 //   test('debe fallar si la edad no es válida', async () => {
 //     const petData = { nombre: 'Luna', edad: -2, raza: 'Labrador', descripcion: 'Muy juguetona' };

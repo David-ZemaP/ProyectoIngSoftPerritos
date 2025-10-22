@@ -1,6 +1,6 @@
-function registrar(name, age) 
+function registrar(name, age, breed, description) 
 {
-    return [name, age];
+    return [name, age, breed, description];
 }
 
 export default registrar;

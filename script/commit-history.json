@@ -1,11 +1,11 @@
 [
   {
-    "sha": "HEAD",
+    "sha": "cf7b348acf42acba92243fd0337bb4f0dcda10d3",
     "author": "Harold Sejas",
     "commit": {
       "date": "2025-10-21T20:33:56.000Z",
       "message": "Feat: Registro de nombre y edad de mascotas",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/cf7b348acf42acba92243fd0337bb4f0dcda10d3"
     },
     "stats": {
       "total": 61,
@@ -15,6 +15,25 @@
     },
     "coverage": 100,
     "test_count": 3,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-10-22T00:38:32.000Z",
+      "message": "Test: Recopilar datos de mascota",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 26,
+      "additions": 13,
+      "deletions": 13,
+      "date": "2025-10-22"
+    },
+    "coverage": 100,
+    "test_count": 5,
     "failed_tests": 0,
     "conclusion": "success"
   }
