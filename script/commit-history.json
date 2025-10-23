@@ -114,12 +114,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "d2b03145cb87d5b6cc92b47ab99048e6df1c4e5d",
     "author": "Harold Sejas",
     "commit": {
       "date": "2025-10-23T06:57:22.000Z",
       "message": "Fix: Forzar commit para sincronizar lockfile y activar Netlify build",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/d2b03145cb87d5b6cc92b47ab99048e6df1c4e5d"
     },
     "stats": {
       "total": 6712,
@@ -131,5 +131,24 @@
     "test_count": 17,
     "failed_tests": 0,
     "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-10-23T07:05:03.000Z",
+      "message": "Merge branch 'main' of https://github.com/David-ZemaP/ProyectoIngSoftPerritos",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 385,
+      "additions": 153,
+      "deletions": 232,
+      "date": "2025-10-23"
+    },
+    "coverage": 15.15,
+    "test_count": 17,
+    "failed_tests": 11,
+    "conclusion": "failure"
   }
 ]

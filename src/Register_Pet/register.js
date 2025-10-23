@@ -7,12 +7,27 @@
  */
 function registrar(name, species, gender, age, breed, personality) 
 {
-    // Esta es la validación requerida por Cypress y la lógica de negocio
-    if (!name || !species || !gender) {
-        return 'Por favor, rellena los campos obligatorios (*): Nombre, Especie y Sexo.'; 
-    }
+    const newPet = {
+        name,
+        species,
+        gender,
+        age,
+        breed,
+        personality,
+        // Default image, since image upload is not fully implemented
+        image: '../assets/Max-pet.png' 
+    };
 
-    return { name, species, gender, age, breed, personality };
+    // Obtener la lista actual de mascotas de localStorage
+    let pets = JSON.parse(localStorage.getItem('pets')) || [];
+    
+    // Agregar la nueva mascota
+    pets.push(newPet);
+    
+    // Guardar la lista actualizada en localStorage
+    localStorage.setItem('pets', JSON.stringify(pets));
+    
+    return newPet;
 }
 
 export default registrar;

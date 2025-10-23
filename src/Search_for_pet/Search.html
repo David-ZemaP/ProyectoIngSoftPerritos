@@ -87,7 +87,7 @@
         </div>
 
 <div id="searchResults" style="display: none;">
-    <p class="pet-count" id="petCount">6 mascotas encontradas</p>
+    <p class="pet-count" id="petCount">0 mascotas encontradas</p>
     <h2 class="results-title">Resultados de Búsqueda</h2>
     
     <div class="results-grid" id="resultsGrid">
@@ -117,87 +117,6 @@
         </div>
     </template>
 
-    <script type="module">
-        import buscar from './search.js';
-        
-        function renderPetCard(name, breed, age, description, imageSrc, specie) {
-            const template = document.getElementById('pet-card-template');
-            const card = template.content.cloneNode(true);
-            
-            card.querySelector('h3').textContent = name;
-            card.querySelector('.pet-info-line:nth-child(2)').textContent = breed;
-            card.querySelector('.age').textContent = age;
-            card.querySelector('.pet-description').textContent = description;
-            card.querySelector('img').src = imageSrc;
-            card.querySelector('img').alt = name;
-            card.querySelector('.species-tag').textContent = specie;
-            
-            return card;
-        }
-
-        function displayInitialResults() {
-             const resultsGrid = document.getElementById('resultsGrid');
-             resultsGrid.innerHTML = '';
-             
-             // Simulación de resultados fijos
-             resultsGrid.appendChild(renderPetCard('Max', 'Golden Retriever • Macho', '2 años', 'Súper juguetón y amigable, le encanta nadar y jugar a buscar la pelota. Ideal para...', '../assets/Max-pet.png', 'Perro'));
-             resultsGrid.appendChild(renderPetCard('Luna', 'Mestizo • Hembra', '1 año', 'Tranquila y cariñosa, perfecta para apartamento. Le gusta acurrucarse en el...', '../assets/Luna-pet.png', 'Gato')); 
-             resultsGrid.appendChild(renderPetCard('Rocky', 'Beagle • Macho', '3 años', 'Curioso y aventurero, excelente compañero para caminatas largas. Muy sociable con...', '../assets/Rocky-pet.png', 'Perro'));
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            displayInitialResults(); 
-
-            // Manejador del botón de búsqueda
-            document.getElementById('search-btn').addEventListener('click', () => {
-                const searchResults = document.getElementById('searchResults');
-                const resultsGrid = document.getElementById('resultsGrid');
-                const searchValue = document.getElementById('breed-input').value; 
-                
-                resultsGrid.innerHTML = '';
-                searchResults.style.display = 'block';
-
-                try {
-                    const result = buscar(searchValue);
-                    
-                    if (result === '¡Mascota No Encontrada!') {
-                        resultsGrid.innerHTML = `
-                            <div class="no-results">
-                                <p class="not-found-message">Mascotas no disponibles 😞</p> 
-                                <p>Intenta con otros criterios de búsqueda</p>
-                            </div>`;
-                        document.getElementById('petCount').textContent = '0 mascotas encontradas';
-                    } else {
-                        displayInitialResults();
-                        document.getElementById('petCount').textContent = '3 mascotas encontradas';
-                    }
-                } catch (error) {
-                    console.error("Error inesperado durante la búsqueda:", error);
-                    resultsGrid.innerHTML = `<div class="no-results"><p class="not-found-message">Ocurrió un error en el sistema. 😔</p><p>Revisa la consola para más detalles.</p></div>`;
-                    document.getElementById('petCount').textContent = '0 mascotas encontradas';
-                }
-            });
-
-            // Manejador del botón Limpiar
-             document.getElementById('clear-btn').addEventListener('click', () => {
-                document.getElementById('name-input').value = '';
-                document.getElementById('breed-input').value = '';
-                document.getElementById('species-select').value = 'todos';
-                document.getElementById('sex-select').value = 'todos';
-                document.getElementById('age-select').value = 'todos';
-                
-                displayInitialResults();
-                document.getElementById('petCount').textContent = '6 mascotas encontradas';
-            });
-
-            // Manejador para los botones de Match (Mantenido)
-            document.addEventListener('click', (e) => {
-                if (e.target.classList.contains('match-button')) {
-                    const petName = e.target.closest('.pet-card').querySelector('h3').textContent;
-                    alert(`¡Has hecho match con ${petName}! Te contactaremos pronto.`);
-                }
-            });
-        });
-    </script>
+    <script type="module" src="presenterSearch.js"></script>
 </body>
 </html>
