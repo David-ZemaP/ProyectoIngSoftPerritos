@@ -1,7 +1,7 @@
 {
   "name": "parcel-jest-base",
   "version": "1.0.0",
-  "description": "",
+  "description": "Base para proyecto con Parcel, Jest y Cypress",
   "default": "index.html",
   "type": "module",
   "scripts": {
