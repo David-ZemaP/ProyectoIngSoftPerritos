@@ -1,33 +1,45 @@
-function buscar({ nombre, especie, genero, edad, raza }) {
-    const mascota = {
-        nombre: 'Max',
-        edad: 3,
-        raza: 'Bulldog',
-        especie: 'Perro',
-        genero: 'Macho'
-    };
+export function buscar(pets, filters) {
+    return pets.filter(pet => {
+        // Filtro por nombre
+        if (filters.name && !pet.name.toLowerCase().includes(filters.name.toLowerCase())) {
+            return false;
+        }
 
+        // Filtro por especie
+        if (filters.species !== 'todos' && pet.species.toLowerCase() !== filters.species.toLowerCase()) {
+            return false;
+        }
 
-    if (nombre && nombre === mascota.nombre) {
-        throw new Error('¡Mascota Encontrada por nombre!');
-    }
+        // Filtro por sexo
+        if (filters.gender !== 'todos' && pet.gender !== filters.gender) {
+            return false;
+        }
 
-    if (especie && especie === mascota.especie) {
-        throw new Error('¡Mascota Encontrada por especie!');
-    }
-    if (edad !== undefined && edad === mascota.edad) {
-        throw new Error('¡Mascota Encontrada por edad!');
-    }
+        // Filtro por raza
+        if (filters.breed && !pet.breed.toLowerCase().includes(filters.breed.toLowerCase())) {
+            return false;
+        }
 
-    if (raza && raza === mascota.raza) {
-        throw new Error('¡Mascota Encontrada por raza!');
-    }
+        // Filtro por edad
+        if (filters.age !== 'todos') {
+            const petAge = parseInt(pet.age, 10);
+            if (isNaN(petAge)) return false; // No se puede comparar si la edad de la mascota no es un número
 
-    if (genero && genero === mascota.genero) {
-        throw new Error('¡Mascota Encontrada por género!');
-    }
+            switch (filters.age) {
+                case '0-1':
+                    if (petAge > 1) return false;
+                    break;
+                case '1-5':
+                    if (petAge < 1 || petAge > 5) return false;
+                    break;
+                case '5+':
+                    if (petAge < 5) return false;
+                    break;
+                default:
+                    break;
+            }
+        }
 
-    return '¡Mascota No Encontrada!';
+        return true; // Si pasa todos los filtros, se incluye en el resultado
+    });
 }
-
-export default buscar;
