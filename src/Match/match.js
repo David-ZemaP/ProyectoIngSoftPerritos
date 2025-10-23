@@ -2,7 +2,7 @@ export const checkMatch = (petId) => {
   return petId === 'pet-3';
 };
 
-const MOCK_PETS = [
+export const MOCK_PETS = [
   {
     id: 'pet-1',
     name: 'Max',
