@@ -1,4 +1,4 @@
-import registrar from './register.js'; // Ahora esto apunta al archivo register.js creado
+import registrar from "../Function/register";
 
 const DEFAULT_SPECIES = 'perro';
 const DEFAULT_GENDER = 'macho';

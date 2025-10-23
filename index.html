@@ -20,7 +20,7 @@
         
         <div class="navbar-nav">
             
-            <button class="btn-search"id="btn-buscar-mascota">
+            <button class="btn-search" id="btn-buscar-mascota">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 Buscar Mascota
             </button>
@@ -39,8 +39,30 @@
         
     </nav>
 
-</body>
-</html>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const registerButton = document.getElementById('btn-ir-a-register');
+            
+            if (registerButton) {
+                // Ruta para navegar a src/Register_Pet/Register.html
+                const registerPath = './src/Register_Pet/Register.html'; 
+                
+                registerButton.addEventListener('click', () => {
+                    window.location.href = registerPath;
+                });
+            }
+            
+            // Si necesitas conectar 'Buscar Mascota' o 'Mi Perfil', puedes hacerlo aquí:
+            // const searchButton = document.getElementById('btn-buscar-mascota');
+            // if (searchButton) {
+            //     searchButton.addEventListener('click', () => {
+            //         window.location.href = './src/Search_for_pet/search.html'; 
+            //     });
+            // }
+        });
+    </script>
+    
     <script type="module" src="./src/presenter.js"></script>
-  </body>
+
+</body>
 </html>

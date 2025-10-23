@@ -114,12 +114,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "6302e79e954dad91ba7410f122f6add5d153b842",
     "author": "Robert",
     "commit": {
       "date": "2025-10-23T02:30:54.000Z",
       "message": "feat: agregacion de test",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/6302e79e954dad91ba7410f122f6add5d153b842"
     },
     "stats": {
       "total": 1337,
@@ -144,6 +144,25 @@
       "total": 1337,
       "additions": 830,
       "deletions": 507,
+      "date": "2025-10-23"
+    },
+    "coverage": 100,
+    "test_count": 10,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-10-23T03:00:02.000Z",
+      "message": "Docs: Orden de documentación",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 34,
+      "additions": 28,
+      "deletions": 6,
       "date": "2025-10-23"
     },
     "coverage": 100,
