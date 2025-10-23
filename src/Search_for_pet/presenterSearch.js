@@ -14,6 +14,7 @@ import buscar from './search.js';
 function renderPetCard(name, breed, age, description, imageSrc, specie) {
     const template = document.getElementById('pet-card-template');
     const card = template.content.cloneNode(true);
+    
     card.querySelector('h3').textContent = name;
     card.querySelector('.pet-info-line:nth-child(2)').textContent = breed;
     card.querySelector('.age').textContent = age;
@@ -21,6 +22,7 @@ function renderPetCard(name, breed, age, description, imageSrc, specie) {
     card.querySelector('img').src = imageSrc;
     card.querySelector('img').alt = name;
     card.querySelector('.species-tag').textContent = specie;
+    
     return card;
 }
 
@@ -31,6 +33,7 @@ function renderPetCard(name, breed, age, description, imageSrc, specie) {
 function displayResults(petCount) {
     const resultsGrid = document.getElementById('resultsGrid');
     resultsGrid.innerHTML = '';
+    
     // Si petCount es mayor a 0, muestra las tarjetas simuladas
     if (petCount >= 1) {
         // Max
@@ -68,9 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultsGrid = document.getElementById('resultsGrid');
 
     // 1. Inicializar la vista: Ocultar la sección de resultados y poner el conteo a 0
-    resultsGrid.innerHTML = '';
+    resultsGrid.innerHTML = ''; 
     document.getElementById('petCount').textContent = '0 mascotas encontradas';
     document.getElementById('searchResults').style.display = 'none';
+    
     // 2. Manejadores para los botones de especie (Mantenido)
     const specieButtons = document.querySelectorAll('.input-group button');
     specieButtons.forEach(button => {
@@ -82,11 +86,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Manejador del botón de búsqueda
     document.getElementById('search-btn').addEventListener('click', () => {
-        const searchValue = document.getElementById('breed-input').value;
+        const searchValue = document.getElementById('breed-input').value; 
+        
         resultsGrid.innerHTML = ''; // Limpiar antes de buscar
 
         try {
             const result = buscar(searchValue);
+            
             if (result === '¡Mascota No Encontrada!') {
                 // Muestra el mensaje de "no disponible" y el conteo a 0
                 resultsGrid.innerHTML = `
@@ -97,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('petCount').textContent = '0 mascotas encontradas';
             } else {
                 // Si la búsqueda tiene éxito, muestra 3 resultados simulados
-                displayResults(3);
+                displayResults(3); 
             }
         } catch (error) {
             // Manejo de errores (ej: el throw en search.js)
@@ -106,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('petCount').textContent = '0 mascotas encontradas';
         }
     });
+    
     // 4. Manejador del botón Limpiar
     document.getElementById('clear-btn').addEventListener('click', () => {
         // Limpiar inputs
@@ -114,10 +121,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('species-select').value = 'todos';
         document.getElementById('sex-select').value = 'todos';
         document.getElementById('age-select').value = 'todos';
+        
+        // Volver al estado inicial: oculto y con conteo a 0
         resultsGrid.innerHTML = '';
         document.getElementById('petCount').textContent = '0 mascotas encontradas';
         document.getElementById('searchResults').style.display = 'none';
     });
+    
     // 5. Manejador para los botones de Match (Mantenido)
     document.addEventListener('click', (e) => {
         if (e.target.classList.contains('match-button')) {
