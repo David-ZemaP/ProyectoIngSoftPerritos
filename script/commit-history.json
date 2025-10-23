@@ -76,6 +76,12 @@
     "conclusion": "success"
   },
   {
+    "sha": "df16d8242a86c11b10ba86b26a9283beec83cb39",
+    "author": "Robert",
+    "commit": {
+      "date": "2025-10-22T03:01:05.000Z",
+      "message": "feat: test implementados",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/df16d8242a86c11b10ba86b26a9283beec83cb39"
     "sha": "5cc0eb4ecc4879cc9500ea37f2880e4a58c102b1",
     "author": "MateoDVE",
     "commit": {
@@ -167,6 +173,139 @@
     },
     "coverage": 84.62,
     "test_count": 10,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "197b5beadd9f4afd9c3f2ae0001391cb400c72c5",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-10-23T02:55:03.000Z",
+      "message": "test: green test para el check match",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/197b5beadd9f4afd9c3f2ae0001391cb400c72c5"
+    },
+    "stats": {
+      "total": 6737,
+      "additions": 6737,
+      "deletions": 0,
+      "date": "2025-10-23"
+    },
+    "coverage": 100,
+    "test_count": 10,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "5c99e54dfab585f9248a05088a9f24063083b4f9",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-10-23T03:04:21.000Z",
+      "message": "feat: implemnetacion de checkmatch",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/5c99e54dfab585f9248a05088a9f24063083b4f9"
+    },
+    "stats": {
+      "total": 8,
+      "additions": 6,
+      "deletions": 2,
+      "date": "2025-10-23"
+    },
+    "coverage": 100,
+    "test_count": 11,
+    "failed_tests": 1,
+    "conclusion": "failure"
+  },
+  {
+    "sha": "56fb0eca7d9ba2a9bcdbb7b5afc5b02e19f3044e",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-10-23T03:06:05.000Z",
+      "message": "fix: fix test of checkmatch",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/56fb0eca7d9ba2a9bcdbb7b5afc5b02e19f3044e"
+    },
+    "stats": {
+      "total": 8,
+      "additions": 7,
+      "deletions": 1,
+      "date": "2025-10-23"
+    },
+    "coverage": 100,
+    "test_count": 12,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "ace66e487120db991072ef9aa9a41a0e335e676d",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-10-23T03:09:23.000Z",
+      "message": "test: implementacion de test de validacion",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/ace66e487120db991072ef9aa9a41a0e335e676d"
+    },
+    "stats": {
+      "total": 12,
+      "additions": 12,
+      "deletions": 0,
+      "date": "2025-10-23"
+    },
+    "coverage": 100,
+    "test_count": 15,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "47a93b04ae00a1bb94a76ed24123562753bd2175",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-10-23T03:26:19.000Z",
+      "message": "feat: implementacion de parte visual y logica",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/47a93b04ae00a1bb94a76ed24123562753bd2175"
+    },
+    "stats": {
+      "total": 262,
+      "additions": 260,
+      "deletions": 2,
+      "date": "2025-10-23"
+    },
+    "coverage": 100,
+    "test_count": 15,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "9a62dfa16ad518433175b608a3affa0fffe35ed0",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-10-23T03:34:25.000Z",
+      "message": "test: tests para ejecutar el cypress",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/9a62dfa16ad518433175b608a3affa0fffe35ed0"
+    },
+    "stats": {
+      "total": 53,
+      "additions": 51,
+      "deletions": 2,
+      "date": "2025-10-23"
+    },
+    "coverage": 100,
+    "test_count": 15,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-10-23T03:34:54.000Z",
+      "message": "fix: errores de sintaxis",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 55,
+      "additions": 29,
+      "deletions": 26,
+      "date": "2025-10-23"
+    },
+    "coverage": 100,
+    "test_count": 15,
     "failed_tests": 0,
     "conclusion": "success"
   }
