@@ -10,7 +10,27 @@
  */
 function registrar(name, species, gender, age, breed, personality) 
 {
-    return { name, species, gender, age, breed, personality };
+    const newPet = {
+        name,
+        species,
+        gender,
+        age,
+        breed,
+        personality,
+        // Default image, since image upload is not fully implemented
+        image: '../assets/Max-pet.png' 
+    };
+
+    // Obtener la lista actual de mascotas de localStorage
+    let pets = JSON.parse(localStorage.getItem('pets')) || [];
+    
+    // Agregar la nueva mascota
+    pets.push(newPet);
+    
+    // Guardar la lista actualizada en localStorage
+    localStorage.setItem('pets', JSON.stringify(pets));
+    
+    return newPet;
 }
 
 export default registrar;
