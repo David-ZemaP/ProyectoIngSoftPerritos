@@ -12,8 +12,10 @@ export function handleImageUpload(event) {
         reader.onload = function(e) {
             previewContainer.style.backgroundImage = `url('${e.target.result}')`;
             if (iconContainer) {
+                // Ocultar el ícono de la cámara
                 iconContainer.classList.add('hidden');
             }
+            // Quitar el borde dashed (asumiendo que solid y 0 es el estado "con imagen")
             previewContainer.style.borderStyle = 'solid';
             previewContainer.style.borderWidth = '0';
         };
@@ -30,17 +32,22 @@ export function resetFormView(form) {
     const previewContainer = document.getElementById('image-preview');
     const iconContainer = document.getElementById('camera-icon');
     
-    // Restablecer la vista de la imagen
+    // 1. Restablecer la vista de la imagen (vuelve al estado inicial con borde dashed)
     previewContainer.style.backgroundImage = 'none';
     previewContainer.style.borderStyle = 'dashed';
     previewContainer.style.borderWidth = '2px';
     if (iconContainer) {
-         iconContainer.classList.remove('hidden');
+        // Mostrar el ícono de la cámara
+        iconContainer.classList.remove('hidden');
     }
     
-    // Oculta el mensaje de estado
+    // 2. CORRECCIÓN CLAVE: Oculta el mensaje de estado y limpia las clases de estilo.
     const messageElement = document.getElementById('form-message');
     if (messageElement) {
+        // Asegura que el mensaje se oculte
         messageElement.classList.add('hidden');
+        
+        // Limpia las clases de color que quedaron del mensaje anterior (éxito o error)
+        messageElement.classList.remove('text-success', 'text-error');
     }
 }

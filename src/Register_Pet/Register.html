@@ -43,7 +43,7 @@
                 <p>Ayúdalo a encontrar su hogar perfecto</p>
             </header>
 
-            <form class="form-content" id="register-form"> <div class="image-upload-wrapper">
+            <form class="form-content" id="register-form" novalidate> <div class="image-upload-wrapper">
                     <div class="image-upload-area" id="image-preview">
                         <div id="camera-icon" class="camera-icon">
                             <i class="fa-solid fa-camera"></i>
@@ -66,8 +66,8 @@
                     <div class="grid-2-cols">
                         <div>
                             <label for="species" class="form-label">Especie *</label>
-                            <select id="species" name="species" required class="custom-input">
-                                <option value="" disabled selected>Selecciona...</option>
+                            <select id="species" class="custom-input">
+                                <option value="" disabled selected>Selecciona...</option> 
                                 <option value="perro">Perro</option>
                                 <option value="gato">Gato</option>
                                 <option value="otro">Otro</option>

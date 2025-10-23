@@ -87,4 +87,20 @@ describe("Registro de Mascota (ADAPTADO)", () => {
             personality: DEFAULT_PERSONALITY
         });
     });
+
+    it("debe devolver un mensaje de error si faltan campos obligatorios", () => {
+        // 1. Falta Nombre
+        expect(registrar("", DEFAULT_SPECIES, DEFAULT_GENDER, DEFAULT_AGE, DEFAULT_BREED, DEFAULT_PERSONALITY))
+            .toEqual('Por favor, rellena los campos obligatorios (*): Nombre, Especie y Sexo.');
+        
+        // 2. Falta Especie (asumiendo que 'selecciona...' tiene valor vacío '')
+        expect(registrar("Max", "", DEFAULT_GENDER, DEFAULT_AGE, DEFAULT_BREED, DEFAULT_PERSONALITY))
+            .toEqual('Por favor, rellena los campos obligatorios (*): Nombre, Especie y Sexo.');
+        
+        // 3. Falta Sexo
+        expect(registrar("Max", DEFAULT_SPECIES, "", DEFAULT_AGE, DEFAULT_BREED, DEFAULT_PERSONALITY))
+            .toEqual('Por favor, rellena los campos obligatorios (*): Nombre, Especie y Sexo.');
+    });
+
+    // ... el resto de tus pruebas de éxito Jest
 });

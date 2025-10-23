@@ -1,24 +1,28 @@
 import registrar from './register.js';
 import displayMessage from './displayMessage.js';
-import { handleImageUpload, resetFormView } from './RegisterView.js'; // 👈 IMPORTACIÓN DE LAS FUNCIONES DE VISTA
+import { handleImageUpload, resetFormView } from './RegisterView.js';
 
 /**
  * Recolecta todos los datos del formulario y los devuelve como un objeto.
+ * Se han ajustado los nombres de las propiedades para coincidir con la función registrar.
  * @returns {object} Un objeto con los datos de la mascota.
  */
 function collectFormData() {
     // 1. Recolección de datos (obligatorios)
-    const petName = document.getElementById('name').value.trim();
-    const petSpecies = document.getElementById('species').value;
-    const petGenderElement = document.querySelector('input[name="gender"]:checked');
-    const petGender = petGenderElement ? petGenderElement.value : '';
+    // Usamos 'name', 'species', 'gender' para coincidir con los parámetros de registrar
+    const name = document.getElementById('name').value.trim();
+    const species = document.getElementById('species').value;
+    const genderElement = document.querySelector('input[name="gender"]:checked');
+    const gender = genderElement ? genderElement.value : '';
 
     // 2. Recolección de datos (opcionales)
-    const petPersonality = document.getElementById('personality').value.trim();
-    const petAge = document.getElementById('age').value.trim();
-    const petBreed = document.getElementById('breed').value.trim();
+    // Usamos 'personality', 'age', 'breed'
+    const personality = document.getElementById('personality').value.trim();
+    const age = document.getElementById('age').value.trim();
+    const breed = document.getElementById('breed').value.trim();
 
-    return { petName, petSpecies, petGender, petPersonality, petAge, petBreed };
+    // NOTA: Devolvemos el objeto con las propiedades con los nombres correctos.
+    return { name, species, gender, personality, age, breed };
 }
 
 
@@ -31,7 +35,7 @@ function init() {
     photoInput.addEventListener('change', handleImageUpload);
 
     if (toggleButton) {
-        // Lógica para el botón de tema (asumiendo que toggleDarkMode existe)
+        // Lógica para el botón de tema (se mantiene comentada)
         // toggleButton.addEventListener('click', toggleDarkMode);
     }
 
@@ -46,30 +50,40 @@ function init() {
 
         const data = collectFormData();
 
-        // Validación de campos obligatorios (*)
-        if (!data.petName || !data.petSpecies || !data.petGender) {
-            displayMessage('Por favor, rellena los campos obligatorios (*): Nombre, Especie y Sexo.', 'error');
-            return;
-        }
-
         try {
-            // Llamada a la lógica de negocio
-            const petData = registrar(
-                data.petName, 
-                data.petSpecies, 
-                data.petGender, 
-                data.petAge, 
-                data.petBreed, 
-                data.petPersonality
+            // Llamada a la lógica de negocio (registrar.js)
+            // Usamos las propiedades del objeto 'data' directamente
+            const result = registrar(
+                data.name,        // Antes era data.petName
+                data.species,     // Antes era data.petSpecies
+                data.gender,      // Antes era data.petGender
+                data.age,         // Antes era data.petAge
+                data.breed,       // Antes era data.petBreed
+                data.personality  // Antes era data.petPersonality
             );
             
-            console.log('Datos de la mascota a registrar:', petData);
-            
-            // Retroalimentación al usuario y limpieza
-            displayMessage(`¡${data.petName} ha sido registrado(a) exitosamente!`, 'success');
-            resetFormView(form);
+            // ----------------------------------------------------
+            // CORRECCIÓN/VERIFICACIÓN: La lógica de manejo es correcta
+            // ----------------------------------------------------
+
+            if (typeof result === 'string') {
+                // Caso de FALLO (Validación desde registrar.js)
+                // Usamos el mensaje devuelto por 'registrar'
+                displayMessage(result, 'error'); // 👈 El fallo de Cypress se resuelve aquí, si displayMessage remueve la clase 'hidden'
+                
+            } else {
+                // Caso de ÉXITO (El módulo devuelve el objeto de datos)
+                const petData = result;
+                
+                console.log('Datos de la mascota a registrar:', petData);
+                
+                // Retroalimentación al usuario y limpieza
+                displayMessage(`¡${petData.name} ha sido registrado(a) exitosamente!`, 'success');
+                resetFormView(form);
+            }
 
         } catch (error) {
+            // Manejo de errores de ejecución inesperados (no de validación)
             console.error('Error al registrar:', error);
             displayMessage(error.message || 'Ocurrió un error inesperado al registrar la mascota.', 'error');
         }

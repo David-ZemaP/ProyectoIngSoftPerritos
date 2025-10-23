@@ -57,12 +57,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "c3ccb2cd8195f297a7dda9cd9b573f4281ed41eb",
     "author": "Harold Sejas",
     "commit": {
       "date": "2025-10-23T05:09:41.000Z",
       "message": "Merge remote-tracking branch 'origin' into borrador",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/c3ccb2cd8195f297a7dda9cd9b573f4281ed41eb"
     },
     "stats": {
       "total": 584,
@@ -72,6 +72,25 @@
     },
     "coverage": 88.24,
     "test_count": 22,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-10-23T06:29:44.000Z",
+      "message": "Refactor: Historia para registro de mascotas",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 1064,
+      "additions": 189,
+      "deletions": 875,
+      "date": "2025-10-23"
+    },
+    "coverage": 88.89,
+    "test_count": 17,
     "failed_tests": 0,
     "conclusion": "success"
   }

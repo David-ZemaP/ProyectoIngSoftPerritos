@@ -1,22 +1,24 @@
-/**
- * Muestra mensajes de éxito/error en la vista. 
- * NOTA: Asume que tienes clases CSS 'text-error' y 'text-success' definidas.
- * @param {string} message 
- * @param {'success'|'error'} type 
- */
+// displayMessage.js (Verifica que tu código haga esto)
 function displayMessage(message, type) {
-    const msgElement = document.getElementById('form-message');
-    msgElement.textContent = message;
+    const messageBox = document.getElementById('form-message');
     
-    // Limpia y añade clases base
-    msgElement.classList.remove('hidden', 'text-error', 'text-success');
-    msgElement.classList.add('text-center', 'font-semibold');
-
-    if (type === 'error') {
-        msgElement.classList.add('text-error');
-    } else if (type === 'success') {
-        msgElement.classList.add('text-success');
+    // 1. Ocultar y limpiar (buena práctica)
+    messageBox.classList.add('hidden');
+    messageBox.classList.remove('text-success', 'text-error');
+    messageBox.textContent = '';
+    
+    // 2. Si hay mensaje, hacerlo visible y darle estilo
+    if (message) {
+        messageBox.textContent = message;
+        
+        // ¡ESTA LÍNEA ES CRUCIAL PARA CYPRESS!
+        messageBox.classList.remove('hidden'); 
+        
+        if (type === 'success') {
+            messageBox.classList.add('text-success');
+        } else if (type === 'error') {
+            messageBox.classList.add('text-error');
+        }
     }
 }
-
 export default displayMessage;

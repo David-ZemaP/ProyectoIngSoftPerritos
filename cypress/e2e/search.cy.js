@@ -1,10 +1,12 @@
 
 describe('Busqueda de Mascota E2E', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:1234/search.html');
-        cy.get('#form-message').as('messageBox').invoke('attr', 'class', 'hidden');
+        cy.visit("http://localhost:1234/src/Search_for_pet/Search.html"); 
+        
+        cy.get('#form-message').as('messageBox')
+            .invoke('addClass', 'hidden') 
+            .invoke('removeClass', 'text-success text-error'); 
     });
-
     it('Debe mostrar error si no se ingresa ningún criterio', () => {
         cy.get('button[type="submit"]').click();
 
