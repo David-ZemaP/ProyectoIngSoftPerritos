@@ -133,12 +133,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "bbf8c20a17b724c37d9834f681a31c4f3081d93c",
     "author": "Harold Sejas",
     "commit": {
       "date": "2025-10-23T07:05:03.000Z",
       "message": "Merge branch 'main' of https://github.com/David-ZemaP/ProyectoIngSoftPerritos",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/bbf8c20a17b724c37d9834f681a31c4f3081d93c"
     },
     "stats": {
       "total": 385,
@@ -150,5 +150,24 @@
     "test_count": 17,
     "failed_tests": 11,
     "conclusion": "failure"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-10-23T07:27:21.000Z",
+      "message": "Fix: testing",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 89,
+      "additions": 31,
+      "deletions": 58,
+      "date": "2025-10-23"
+    },
+    "coverage": 88.89,
+    "test_count": 17,
+    "failed_tests": 0,
+    "conclusion": "success"
   }
 ]
