@@ -19,17 +19,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "00ed9a832de1db95ffec685938eced6b5e5cfac7",
     "author": "MateoDVE",
     "commit": {
       "date": "2025-10-23T04:23:53.000Z",
       "message": "fix: update navigation links",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/00ed9a832de1db95ffec685938eced6b5e5cfac7"
     },
     "stats": {
       "total": 346,
       "additions": 24,
       "deletions": 322,
+      "date": "2025-10-23"
+    },
+    "coverage": 87.5,
+    "test_count": 16,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-10-23T04:56:31.000Z",
+      "message": "feat: add match css and update navigation links",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 652,
+      "additions": 556,
+      "deletions": 96,
       "date": "2025-10-23"
     },
     "coverage": 87.5,
