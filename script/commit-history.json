@@ -190,17 +190,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "1b7f33bc61a3c5d542045102906bee72b5a3cb9a",
     "author": "Harold Sejas",
     "commit": {
       "date": "2025-10-23T07:38:31.000Z",
       "message": "Fix: tests 3",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/1b7f33bc61a3c5d542045102906bee72b5a3cb9a"
     },
     "stats": {
       "total": 2,
       "additions": 1,
       "deletions": 1,
+      "date": "2025-10-23"
+    },
+    "coverage": 88.89,
+    "test_count": 17,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-10-23T07:42:02.000Z",
+      "message": "Fix: archivos corruptos",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 209,
+      "additions": 1,
+      "deletions": 208,
       "date": "2025-10-23"
     },
     "coverage": 88.89,
