@@ -1,69 +1,72 @@
 import registrar from './register.js';
+import displayMessage from './displayMessage.js';
+import { handleImageUpload, resetFormView } from './RegisterView.js'; // 👈 IMPORTACIÓN DE LAS FUNCIONES DE VISTA
 
 /**
- * Maneja la carga de imágenes y muestra una vista previa.
- * @param {Event} event
+ * Recolecta todos los datos del formulario y los devuelve como un objeto.
+ * @returns {object} Un objeto con los datos de la mascota.
  */
-function handleImageUpload(event) {
-    const file = event.target.files[0];
-    const previewContainer = document.getElementById('image-preview');
-    const iconContainer = document.getElementById('camera-icon');
+function collectFormData() {
+    // 1. Recolección de datos (obligatorios)
+    const petName = document.getElementById('name').value.trim();
+    const petSpecies = document.getElementById('species').value;
+    const petGenderElement = document.querySelector('input[name="gender"]:checked');
+    const petGender = petGenderElement ? petGenderElement.value : '';
 
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            previewContainer.style.backgroundImage = `url('${e.target.result}')`;
-            if (iconContainer) {
-                iconContainer.classList.add('hidden');
-            }
-            previewContainer.style.borderStyle = 'solid';
-            previewContainer.style.borderWidth = '0';
-        };
-        reader.readAsDataURL(file);
-    }
+    // 2. Recolección de datos (opcionales)
+    const petPersonality = document.getElementById('personality').value.trim();
+    const petAge = document.getElementById('age').value.trim();
+    const petBreed = document.getElementById('breed').value.trim();
+
+    return { petName, petSpecies, petGender, petPersonality, petAge, petBreed };
 }
 
-function resetFormView(form) {
-    form.reset();
-    const previewContainer = document.getElementById('image-preview');
-    const iconContainer = document.getElementById('camera-icon');
-    previewContainer.style.backgroundImage = 'none';
-    previewContainer.style.borderStyle = 'dashed';
-    previewContainer.style.borderWidth = '2px';
-    if (iconContainer) {
-         iconContainer.classList.remove('hidden');
-    }
-}
 
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('register-form');
+function init() {
+    const form = document.getElementById('register-form'); 
     const photoInput = document.getElementById('photo-upload');
-    const toggleButton = document.getElementById('toggle-theme-button');
-    
+    const toggleButton = document.getElementById('toggle-theme-button'); 
+
+    // 1. Configuración de Listeners de la vista
     photoInput.addEventListener('change', handleImageUpload);
+
     if (toggleButton) {
-        toggleButton.addEventListener('click', toggleDarkMode);
+        // Lógica para el botón de tema (asumiendo que toggleDarkMode existe)
+        // toggleButton.addEventListener('click', toggleDarkMode);
     }
 
+    if (!form) {
+        console.error("Error: No se encontró el formulario con ID 'register-form'.");
+        return;
+    }
+
+    // 2. Listener principal de sumisión del formulario
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const petName = document.getElementById('name').value.trim();
-        const petAge = document.getElementById('age').value.trim();
-        const petBreed = document.getElementById('breed').value.trim();
-        const petPersonality = document.getElementById('description').value.trim();
+        const data = collectFormData();
 
-        if (!petName || !petAge || !petBreed || !petPersonality) {
-            displayMessage('Por favor, rellena todos los campos obligatorios (*).', 'error');
+        // Validación de campos obligatorios (*)
+        if (!data.petName || !data.petSpecies || !data.petGender) {
+            displayMessage('Por favor, rellena los campos obligatorios (*): Nombre, Especie y Sexo.', 'error');
             return;
         }
 
         try {
-            const petData = registrar(petName, petAge, petBreed, petPersonality);
+            // Llamada a la lógica de negocio
+            const petData = registrar(
+                data.petName, 
+                data.petSpecies, 
+                data.petGender, 
+                data.petAge, 
+                data.petBreed, 
+                data.petPersonality
+            );
             
             console.log('Datos de la mascota a registrar:', petData);
             
-            displayMessage(`¡${petName} ha sido registrado(a) exitosamente!`, 'success');
+            // Retroalimentación al usuario y limpieza
+            displayMessage(`¡${data.petName} ha sido registrado(a) exitosamente!`, 'success');
             resetFormView(form);
 
         } catch (error) {
@@ -71,4 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
             displayMessage(error.message || 'Ocurrió un error inesperado al registrar la mascota.', 'error');
         }
     });
-});
+}
+
+document.addEventListener('DOMContentLoaded', init);
