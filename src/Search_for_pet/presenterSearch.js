@@ -1,7 +1,13 @@
 import { buscar } from './search.js';
 
 function getPetsFromStorage() {
-    return JSON.parse(localStorage.getItem('pets')) || [];
+    try {
+        const pets = localStorage.getItem('pets');
+        return pets ? JSON.parse(pets) : [];
+    } catch (error) {
+        console.error('Error al parsear las mascotas de localStorage:', error);
+        return []; // Devuelve un array vacío si hay un error
+    }
 }
 
 function renderPetCard(pet) {
