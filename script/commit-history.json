@@ -1,5 +1,24 @@
 [
   {
+    "sha": "6fa66da6148374f8f93302cdd54fb6cdc681036e",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-10-22T00:41:08.000Z",
+      "message": "Fix: Recopilar datos de mascota",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/6fa66da6148374f8f93302cdd54fb6cdc681036e"
+    },
+    "stats": {
+      "total": 59,
+      "additions": 36,
+      "deletions": 23,
+      "date": "2025-10-22"
+    },
+    "coverage": 100,
+    "test_count": 4,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
     "sha": "df02d5ee8640ae14078e237dd9640d9776890469",
     "author": "Robert",
     "commit": {
@@ -63,15 +82,97 @@
       "date": "2025-10-22T03:01:05.000Z",
       "message": "feat: test implementados",
       "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/df16d8242a86c11b10ba86b26a9283beec83cb39"
+    "sha": "5cc0eb4ecc4879cc9500ea37f2880e4a58c102b1",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-10-22T22:46:38.000Z",
+      "message": "feat navbar para el index\nfix errores del registerhtml",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/5cc0eb4ecc4879cc9500ea37f2880e4a58c102b1"
     },
     "stats": {
-      "total": 59,
-      "additions": 36,
-      "deletions": 23,
+      "total": 192,
+      "additions": 177,
+      "deletions": 15,
       "date": "2025-10-22"
     },
     "coverage": 100,
-    "test_count": 4,
+    "test_count": 5,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "35e542abaaad3ba825596c4972389f5472dddd55",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-10-23T00:39:30.000Z",
+      "message": "Refactor: Función Registrar",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/35e542abaaad3ba825596c4972389f5472dddd55"
+    },
+    "stats": {
+      "total": 418,
+      "additions": 284,
+      "deletions": 134,
+      "date": "2025-10-23"
+    },
+    "coverage": 100,
+    "test_count": 10,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "2c88dde70d5e65847b5a3531e2eb0e6b5447ca07",
+    "author": "Robert",
+    "commit": {
+      "date": "2025-10-23T03:27:32.000Z",
+      "message": "fix:correccion de funciones no definidas",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/2c88dde70d5e65847b5a3531e2eb0e6b5447ca07"
+    },
+    "stats": {
+      "total": 16528,
+      "additions": 6659,
+      "deletions": 9869,
+      "date": "2025-10-23"
+    },
+    "coverage": 84.62,
+    "test_count": 10,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "bc677a3ff0de07fa83d1c525dc851a9f49f253b0",
+    "author": "Robert",
+    "commit": {
+      "date": "2025-10-23T03:29:59.000Z",
+      "message": ".",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/bc677a3ff0de07fa83d1c525dc851a9f49f253b0"
+    },
+    "stats": {
+      "total": 623,
+      "additions": 620,
+      "deletions": 3,
+      "date": "2025-10-23"
+    },
+    "coverage": 84.62,
+    "test_count": 10,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Robert",
+    "commit": {
+      "date": "2025-10-23T03:35:22.000Z",
+      "message": "refactor:adicion archivos cypress",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 0,
+      "additions": 0,
+      "deletions": 0,
+      "date": "2025-10-23"
+    },
+    "coverage": 84.62,
+    "test_count": 10,
     "failed_tests": 0,
     "conclusion": "success"
   },
