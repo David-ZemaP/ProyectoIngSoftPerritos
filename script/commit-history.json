@@ -133,17 +133,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "bc677a3ff0de07fa83d1c525dc851a9f49f253b0",
     "author": "Robert",
     "commit": {
       "date": "2025-10-23T03:29:59.000Z",
       "message": ".",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/bc677a3ff0de07fa83d1c525dc851a9f49f253b0"
     },
     "stats": {
       "total": 623,
       "additions": 620,
       "deletions": 3,
+      "date": "2025-10-23"
+    },
+    "coverage": 84.62,
+    "test_count": 10,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Robert",
+    "commit": {
+      "date": "2025-10-23T03:35:22.000Z",
+      "message": "refactor:adicion archivos cypress",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 0,
+      "additions": 0,
+      "deletions": 0,
       "date": "2025-10-23"
     },
     "coverage": 84.62,
