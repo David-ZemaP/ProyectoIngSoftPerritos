@@ -95,17 +95,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "fbebdf2f29c8ab130a969528c4285b3828bc65a0",
     "author": "Harold Sejas",
     "commit": {
       "date": "2025-10-23T06:38:37.000Z",
       "message": "Fix: Corrección para deployar el proyecto",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/fbebdf2f29c8ab130a969528c4285b3828bc65a0"
     },
     "stats": {
       "total": 482,
       "additions": 478,
       "deletions": 4,
+      "date": "2025-10-23"
+    },
+    "coverage": 88.89,
+    "test_count": 17,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-10-23T06:57:22.000Z",
+      "message": "Fix: Forzar commit para sincronizar lockfile y activar Netlify build",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 6712,
+      "additions": 2,
+      "deletions": 6710,
       "date": "2025-10-23"
     },
     "coverage": 88.89,
