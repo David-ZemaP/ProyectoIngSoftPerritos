@@ -171,17 +171,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "9a62dfa16ad518433175b608a3affa0fffe35ed0",
     "author": "David-ZemaP",
     "commit": {
       "date": "2025-10-23T03:34:25.000Z",
       "message": "test: tests para ejecutar el cypress",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/9a62dfa16ad518433175b608a3affa0fffe35ed0"
     },
     "stats": {
       "total": 53,
       "additions": 51,
       "deletions": 2,
+      "date": "2025-10-23"
+    },
+    "coverage": 100,
+    "test_count": 15,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-10-23T03:34:54.000Z",
+      "message": "fix: errores de sintaxis",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 55,
+      "additions": 29,
+      "deletions": 26,
       "date": "2025-10-23"
     },
     "coverage": 100,
