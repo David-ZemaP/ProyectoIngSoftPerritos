@@ -1,11 +1,11 @@
 [
   {
-    "sha": "HEAD",
+    "sha": "ced17170d1305a7b1670de522553e3a32f591508",
     "author": "Harold Sejas",
     "commit": {
       "date": "2025-10-23T03:04:30.000Z",
       "message": "Merge branch 'registrar-front' into Registrar",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/ced17170d1305a7b1670de522553e3a32f591508"
     },
     "stats": {
       "total": 89,
@@ -15,6 +15,25 @@
     },
     "coverage": 100,
     "test_count": 10,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-10-23T03:20:01.000Z",
+      "message": "Merge remote-tracking branch 'origin' into Registrar",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 1501,
+      "additions": 1472,
+      "deletions": 29,
+      "date": "2025-10-23"
+    },
+    "coverage": 100,
+    "test_count": 16,
     "failed_tests": 0,
     "conclusion": "success"
   }
