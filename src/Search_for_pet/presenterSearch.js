@@ -1,4 +1,4 @@
-import { buscar } from './search.js';
+import buscar from '../Search_for_pet/search.js';
 
 function getPetsFromStorage() {
     try {
