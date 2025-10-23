@@ -76,17 +76,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "65d3f0f7b415fd7810489028eddb2852a5557db8",
     "author": "Harold Sejas",
     "commit": {
       "date": "2025-10-23T06:29:44.000Z",
       "message": "Refactor: Historia para registro de mascotas",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/65d3f0f7b415fd7810489028eddb2852a5557db8"
     },
     "stats": {
       "total": 1064,
       "additions": 189,
       "deletions": 875,
+      "date": "2025-10-23"
+    },
+    "coverage": 88.89,
+    "test_count": 17,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-10-23T06:38:37.000Z",
+      "message": "Fix: Corrección para deployar el proyecto",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 482,
+      "additions": 478,
+      "deletions": 4,
       "date": "2025-10-23"
     },
     "coverage": 88.89,

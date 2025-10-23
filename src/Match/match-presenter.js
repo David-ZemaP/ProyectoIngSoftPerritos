@@ -2,7 +2,7 @@ import { checkMatch, MOCK_PETS } from './match.js';
 import { setTimeout } from 'timers/promises';
 
 const currentPetIndex = 0;
-const isProcessing = false;
+let isProcessing = false;
 
 const petCardEl = document.getElementById('pet-card');
 const dislikeBtn = document.getElementById('dislike-btn');
