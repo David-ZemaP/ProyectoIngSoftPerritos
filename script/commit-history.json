@@ -133,17 +133,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "ace66e487120db991072ef9aa9a41a0e335e676d",
     "author": "David-ZemaP",
     "commit": {
       "date": "2025-10-23T03:09:23.000Z",
       "message": "test: implementacion de test de validacion",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/ace66e487120db991072ef9aa9a41a0e335e676d"
     },
     "stats": {
       "total": 12,
       "additions": 12,
       "deletions": 0,
+      "date": "2025-10-23"
+    },
+    "coverage": 100,
+    "test_count": 15,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-10-23T03:26:19.000Z",
+      "message": "feat: implementacion de parte visual y logica",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 262,
+      "additions": 260,
+      "deletions": 2,
       "date": "2025-10-23"
     },
     "coverage": 100,
