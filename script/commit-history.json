@@ -95,12 +95,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "5c99e54dfab585f9248a05088a9f24063083b4f9",
     "author": "David-ZemaP",
     "commit": {
       "date": "2025-10-23T03:04:21.000Z",
       "message": "feat: implemnetacion de checkmatch",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/5c99e54dfab585f9248a05088a9f24063083b4f9"
     },
     "stats": {
       "total": 8,
@@ -112,5 +112,24 @@
     "test_count": 11,
     "failed_tests": 1,
     "conclusion": "failure"
+  },
+  {
+    "sha": "HEAD",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-10-23T03:06:05.000Z",
+      "message": "fix: fix test of checkmatch",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 8,
+      "additions": 7,
+      "deletions": 1,
+      "date": "2025-10-23"
+    },
+    "coverage": 100,
+    "test_count": 12,
+    "failed_tests": 0,
+    "conclusion": "success"
   }
 ]
