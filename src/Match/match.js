@@ -1,3 +1,3 @@
-export const checkMatch = () => {
-  return true;
+export const checkMatch = (petId) => {
+  return petId === 'pet-3';
 };
