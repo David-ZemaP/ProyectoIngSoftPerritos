@@ -1,5 +1,24 @@
 [
   {
+    "sha": "6fa66da6148374f8f93302cdd54fb6cdc681036e",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-10-22T00:41:08.000Z",
+      "message": "Fix: Recopilar datos de mascota",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/6fa66da6148374f8f93302cdd54fb6cdc681036e"
+    },
+    "stats": {
+      "total": 59,
+      "additions": 36,
+      "deletions": 23,
+      "date": "2025-10-22"
+    },
+    "coverage": 100,
+    "test_count": 4,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
     "sha": "df02d5ee8640ae14078e237dd9640d9776890469",
     "author": "Robert",
     "commit": {
@@ -57,31 +76,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "6fa66da6148374f8f93302cdd54fb6cdc681036e",
-    "author": "Harold Sejas",
-    "commit": {
-      "date": "2025-10-22T00:41:08.000Z",
-      "message": "Fix: Recopilar datos de mascota",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/6fa66da6148374f8f93302cdd54fb6cdc681036e"
-    },
-    "stats": {
-      "total": 59,
-      "additions": 36,
-      "deletions": 23,
-      "date": "2025-10-22"
-    },
-    "coverage": 100,
-    "test_count": 4,
-    "failed_tests": 0,
-    "conclusion": "success"
-  },
-  {
-    "sha": "HEAD",
+    "sha": "b4988b05d689c4753a755d4fc0ad01efe68975dd",
     "author": "MateoDVE",
     "commit": {
       "date": "2025-10-22T22:46:38.000Z",
       "message": "feat navbar para el index\nfix errores del registerhtml",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/b4988b05d689c4753a755d4fc0ad01efe68975dd"
     },
     "stats": {
       "total": 192,
@@ -91,6 +91,25 @@
     },
     "coverage": 100,
     "test_count": 5,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-10-23T02:55:51.000Z",
+      "message": "feat: rutas para navegacion entre paginas",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 69,
+      "additions": 28,
+      "deletions": 41,
+      "date": "2025-10-23"
+    },
+    "coverage": 100,
+    "test_count": 9,
     "failed_tests": 0,
     "conclusion": "success"
   }
