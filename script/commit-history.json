@@ -152,16 +152,35 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "47a93b04ae00a1bb94a76ed24123562753bd2175",
     "author": "David-ZemaP",
     "commit": {
       "date": "2025-10-23T03:26:19.000Z",
       "message": "feat: implementacion de parte visual y logica",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/47a93b04ae00a1bb94a76ed24123562753bd2175"
     },
     "stats": {
       "total": 262,
       "additions": 260,
+      "deletions": 2,
+      "date": "2025-10-23"
+    },
+    "coverage": 100,
+    "test_count": 15,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-10-23T03:34:25.000Z",
+      "message": "test: tests para ejecutar el cypress",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 53,
+      "additions": 51,
       "deletions": 2,
       "date": "2025-10-23"
     },
