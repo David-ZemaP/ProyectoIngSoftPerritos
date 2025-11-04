@@ -1,4 +1,4 @@
-import buscar from '../Search_for_pet/search.js';
+import buscarMascota from '../Search_for_pet/search.js';
 
 function getPetsFromStorage() {
     try {
@@ -70,7 +70,7 @@ function handleSearch() {
 
     const allPets = getPetsFromStorage();
     const filters = { name, species, gender, age, breed };
-    const filteredPets = buscar(allPets, filters);
+    const filteredPets = buscarMascota(allPets, filters);
     
     displayPets(filteredPets);
 }

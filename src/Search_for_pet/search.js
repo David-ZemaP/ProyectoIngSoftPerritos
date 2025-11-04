@@ -1,4 +1,4 @@
-function buscar({ nombre, especie, genero, edad, raza }) {
+function buscarMascota({ nombre, especie, genero, edad, raza }) {
     const mascota = {
         nombre: 'Max',
         edad: 3,
@@ -30,4 +30,4 @@ function buscar({ nombre, especie, genero, edad, raza }) {
     return '¡Mascota No Encontrada!';
 }
 
-export default buscar;
+export default buscarMascota;
