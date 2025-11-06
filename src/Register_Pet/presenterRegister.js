@@ -9,7 +9,7 @@ import { handleImageUpload, resetFormView } from './RegisterView.js';
  */
 function collectFormData() {
     // 1. Recolección de datos (obligatorios)
-    // Usamos 'name', 'species', 'gender' para coincidir con los parámetros de registrar
+    // Usamos 'name', 'species', 'gender' para coincidir con los parametros de registrar
     const name = document.getElementById('name').value.trim();
     const species = document.getElementById('species').value;
     const genderElement = document.querySelector('input[name="gender"]:checked');
@@ -34,32 +34,25 @@ function init() {
     // 1. Configuración de Listeners de la vista
     photoInput.addEventListener('change', handleImageUpload);
 
-    if (toggleButton) {
-        // Lógica para el botón de tema (se mantiene comentada)
-        // toggleButton.addEventListener('click', toggleDarkMode);
-    }
 
-    if (!form) {
-        console.error("Error: No se encontró el formulario con ID 'register-form'.");
-        return;
-    }
 
-    // 2. Listener principal de sumisión del formulario
+
+    // 2. Listener principal de sumision del formulario
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const data = collectFormData();
 
         try {
-            // Llamada a la lógica de negocio (registrar.js)
+            // Llamada a la logica de negocio (registrar.js)
             // Usamos las propiedades del objeto 'data' directamente
             const result = registrar(
-                data.name,        // Antes era data.petName
-                data.species,     // Antes era data.petSpecies
-                data.gender,      // Antes era data.petGender
-                data.age,         // Antes era data.petAge
-                data.breed,       // Antes era data.petBreed
-                data.personality  // Antes era data.petPersonality
+                data.name,        
+                data.species,     
+                data.gender,      
+                data.age,         
+                data.breed,       
+                data.personality  
             );
             
             // ----------------------------------------------------
