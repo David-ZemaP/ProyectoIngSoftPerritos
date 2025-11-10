@@ -247,18 +247,37 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "f0792153c4a443a1a8c7aeb58a76669e4f27d59f",
     "author": "Robert",
     "commit": {
       "date": "2025-11-06T13:24:56.000Z",
       "message": "refactor:eliminacion de codigo innecesario",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/f0792153c4a443a1a8c7aeb58a76669e4f27d59f"
     },
     "stats": {
       "total": 27,
       "additions": 10,
       "deletions": 17,
       "date": "2025-11-06"
+    },
+    "coverage": 88.89,
+    "test_count": 17,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Robert",
+    "commit": {
+      "date": "2025-11-10T06:03:55.000Z",
+      "message": "chore:añadir base de datos al proyecto",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 5277,
+      "additions": 3683,
+      "deletions": 1594,
+      "date": "2025-11-10"
     },
     "coverage": 88.89,
     "test_count": 17,

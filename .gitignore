@@ -8,3 +8,4 @@ report.json
 ./.husky/_
 tdd_log.json
 .husky/.commit-state
+.env
