@@ -285,17 +285,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "d35b1ca59f90c8495f09a6c1bc8236ecaf2eb1b9",
     "author": "Robert",
     "commit": {
       "date": "2025-11-11T17:28:05.000Z",
       "message": "refactor: adicion de clase para el objeto mascota",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/d35b1ca59f90c8495f09a6c1bc8236ecaf2eb1b9"
     },
     "stats": {
       "total": 170,
       "additions": 115,
       "deletions": 55,
+      "date": "2025-11-11"
+    },
+    "coverage": 88.89,
+    "test_count": 17,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Robert",
+    "commit": {
+      "date": "2025-11-11T17:52:17.000Z",
+      "message": "refactor: funcionalidad buscar optimizada",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 228,
+      "additions": 132,
+      "deletions": 96,
       "date": "2025-11-11"
     },
     "coverage": 88.89,

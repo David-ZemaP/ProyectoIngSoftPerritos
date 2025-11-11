@@ -1,113 +1,149 @@
-import buscarMascota from '../Search_for_pet/search.js';
+// src/Search_for_pet/presenterSearch.js
+import '../firebase.js';
+import { searchPets } from '../services/pets.service.js';
+import Pet from '../models/Pet.js';
 
-function getPetsFromStorage() {
-    try {
-        const pets = localStorage.getItem('pets');
-        return pets ? JSON.parse(pets) : [];
-    } catch (error) {
-        console.error('Error al parsear las mascotas de localStorage:', error);
-        return []; // Devuelve un array vacío si hay un error
-    }
+
+const $ = (id) => document.getElementById(id);
+
+// Normaliza especie/sexo desde UI a los valores que guardas en BD
+function normalizeSpecies(v) {
+  if (!v || v === 'todos') return undefined;
+  return v.toLowerCase(); // "perro" | "gato" | "otro"
+}
+function normalizeGender(v) {
+  if (!v || v === 'todos') return undefined;
+  const s = v.toLowerCase();
+  if (s === 'm') return 'macho';
+  if (s === 'h') return 'hembra';
+  return s; // por si ya viene "macho"/"hembra"
 }
 
-function renderPetCard(pet) {
-    const template = document.getElementById('pet-card-template');
-    if (!template) {
-        console.error('La plantilla de tarjeta de mascota no se encontró.');
-        return null;
-    }
-    const card = template.content.cloneNode(true);
-
-    const petImageContainer = card.querySelector('.pet-image-container');
-    if (petImageContainer) {
-        // Establecer la imagen de fondo
-        petImageContainer.style.backgroundImage = `url(${pet.image || '../assets/Max-pet.png'})`;
-    }
-    
-    card.querySelector('h3').textContent = pet.name;
-    const genderText = pet.gender === 'M' ? 'Macho' : (pet.gender === 'H' ? 'Hembra' : '');
-    card.querySelector('.pet-info-line').textContent = `${pet.breed} • ${genderText}`;
-    card.querySelector('.age').textContent = pet.age ? `${pet.age} años` : 'Edad no especificada';
-    card.querySelector('.pet-description').textContent = pet.personality || 'No se ha proporcionado una descripción.';
-    card.querySelector('.species-tag').textContent = pet.species;
-
-    return card;
+// Intenta convertir la edad (string) a número (años)
+function parseAgeToNumber(age) {
+  if (age == null) return NaN;
+  // Si guardaste "2", "3", etc. convertirá bien; si guardaste "2 años", extrae primer número
+  const m = String(age).match(/\d+(\.\d+)?/);
+  return m ? Number(m[0]) : NaN;
 }
 
-function displayPets(pets) {
-    const resultsGrid = document.getElementById('resultsGrid');
-    const petCountElement = document.getElementById('petCount');
-    const searchResultsContainer = document.getElementById('searchResults');
+// Aplica filtros por texto y rango de edad en cliente
+function applyClientFilters(pets, { name, breed, gender, ageBucket }) {
+  const txt = (x) => (x ?? '').toString().toLowerCase();
 
-    resultsGrid.innerHTML = '';
+  return pets.filter((p) => {
+    const okName = !name || txt(p.name).includes(name);
+    const okBreed = !breed || txt(p.breed).includes(breed);
 
-    if (pets.length === 0) {
-        resultsGrid.innerHTML = `
-            <div class="no-results">
-                <p class="not-found-message">No se encontraron mascotas con esos criterios. 😞</p>
-                <p>Intenta con otros filtros de búsqueda.</p>
-            </div>`;
-        petCountElement.textContent = '0 mascotas encontradas';
-    } else {
-        pets.forEach(pet => {
-            const card = renderPetCard(pet);
-            if (card) {
-                resultsGrid.appendChild(card);
-            }
-        });
-        petCountElement.textContent = `${pets.length} mascota(s) encontrada(s)`;
+    const okGender = !gender || (p.gender && p.gender.toLowerCase() === gender);
+
+    let okAge = true;
+    if (ageBucket && ageBucket !== 'todos') {
+      const n = parseAgeToNumber(p.age);
+      if (Number.isFinite(n)) {
+        if (ageBucket === '0-1') okAge = n >= 0 && n <= 1;
+        else if (ageBucket === '1-5') okAge = n >= 1 && n <= 5;
+        else if (ageBucket === '5+') okAge = n > 5;
+      }
     }
 
-    searchResultsContainer.style.display = 'block';
+    return okName && okBreed && okGender && okAge;
+  });
 }
 
-function handleSearch() {
-    const name = document.getElementById('name-input').value;
-    const species = document.getElementById('species-select').value;
-    const gender = document.getElementById('sex-select').value;
-    const age = document.getElementById('age-select').value;
-    const breed = document.getElementById('breed-input').value;
+/* ========= render ========= */
 
-    const allPets = getPetsFromStorage();
-    const filters = { name, species, gender, age, breed };
-    const filteredPets = buscarMascota(allPets, filters);
-    
-    displayPets(filteredPets);
+function cardFromTemplate(pet) {
+  const tpl = $('pet-card-template');
+  const node = tpl.content.firstElementChild.cloneNode(true);
+
+  const imgBox = node.querySelector('.pet-image-container');
+  const speciesTag = node.querySelector('.species-tag');
+  const h3 = node.querySelector('h3');
+  const infoLine = node.querySelector('.pet-info-line');
+  const ageEl = node.querySelector('.pet-info-line.age');
+  const desc = node.querySelector('.pet-description');
+
+  const photoUrl = pet.photoUrl
+    ? pet.photoUrl
+    : `https://placehold.co/400x260/A3A3A3/FFFFFF?text=${encodeURIComponent(pet.name || 'Mascota')}`;
+
+  imgBox.style.background = `center / cover no-repeat url('${photoUrl}')`;
+  speciesTag.textContent = (pet.species ?? '—').toString().charAt(0).toUpperCase() + (pet.species ?? '—').toString().slice(1);
+
+  h3.textContent = pet.name ?? 'Sin nombre';
+  infoLine.textContent = `${pet.breed ?? '—'} • ${pet.gender ?? '—'}`;
+  ageEl.textContent = `${pet.age ?? '—'} años`;
+  desc.textContent = pet.personality ?? 'Sin descripción';
+
+  return node;
 }
 
-function handleClear() {
-    document.getElementById('name-input').value = '';
-    document.getElementById('breed-input').value = '';
-    document.getElementById('species-select').value = 'todos';
-    document.getElementById('sex-select').value = 'todos';
-    document.getElementById('age-select').value = 'todos';
+function renderResults(pets) {
+  const grid = $('resultsGrid');
+  const wrap = $('searchResults');
+  const counter = $('petCount');
 
-    const allPets = getPetsFromStorage();
-    displayPets(allPets);
+  if (!grid) return;
+
+  if (!pets.length) {
+    grid.innerHTML = '';
+    counter.textContent = '0 mascotas encontradas';
+    wrap.style.display = 'block';
+    return;
+  }
+
+  grid.innerHTML = '';
+  pets.forEach((p) => grid.appendChild(cardFromTemplate(p)));
+
+  counter.textContent = `${pets.length} mascota${pets.length === 1 ? '' : 's'} encontradas`;
+  wrap.style.display = 'block';
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const searchButton = document.getElementById('search-btn');
-    const clearButton = document.getElementById('clear-btn');
+/* ========= main search ========= */
 
-    if (searchButton) {
-        searchButton.addEventListener('click', handleSearch);
-    }
+async function runSearch() {
+  const name = $('name-input')?.value.trim().toLowerCase() || '';
+  const species = normalizeSpecies($('species-select')?.value || '');
+  const breed = $('breed-input')?.value.trim().toLowerCase() || '';
+  const gender = normalizeGender($('sex-select')?.value || '');
+  const ageBucket = $('age-select')?.value || 'todos';
 
-    if (clearButton) {
-        clearButton.addEventListener('click', handleClear);
-    }
+  // 1) Firestore (filtramos en server SOLO por species; lo demás en cliente)
+  let results = await searchPets({ species });
 
-    // Carga inicial de todas las mascotas
-    const allPets = getPetsFromStorage();
-    displayPets(allPets);
+  // Asegurar instancias Pet
+  results = results.map((r) => (r instanceof Pet ? r : new Pet(r)));
 
-    // Manejador para los botones de Match
-    document.addEventListener('click', (e) => {
-        const matchButton = e.target.closest('.match-button');
-        if (matchButton) {
-            const petName = matchButton.closest('.pet-card').querySelector('h3').textContent;
-            alert(`¡Has hecho match con ${petName}! Te contactaremos pronto.`);
-        }
-    });
-});
+  // 2) Filtros en cliente
+  const filtered = applyClientFilters(results, { name, breed, gender, ageBucket });
+
+  // 3) Render
+  renderResults(filtered);
+}
+
+/* ========= init ========= */
+
+function init() {
+  // Buscar
+  $('search-btn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    runSearch();
+  });
+
+  // Limpiar
+  $('clear-btn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    $('name-input').value = '';
+    $('species-select').value = 'todos';
+    $('breed-input').value = '';
+    $('sex-select').value = 'todos';
+    $('age-select').value = 'todos';
+    renderResults([]); // limpia resultados
+    $('searchResults').style.display = 'none';
+  });
+
+
+}
+
+document.addEventListener('DOMContentLoaded', init);
