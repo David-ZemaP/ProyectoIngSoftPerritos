@@ -266,18 +266,37 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "cf48081514e1fcb8cd1f5b97643c2f1b603b4f80",
     "author": "Robert",
     "commit": {
       "date": "2025-11-10T06:03:55.000Z",
       "message": "chore:añadir base de datos al proyecto",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/cf48081514e1fcb8cd1f5b97643c2f1b603b4f80"
     },
     "stats": {
       "total": 5277,
       "additions": 3683,
       "deletions": 1594,
       "date": "2025-11-10"
+    },
+    "coverage": 88.89,
+    "test_count": 17,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Robert",
+    "commit": {
+      "date": "2025-11-11T17:28:05.000Z",
+      "message": "refactor: adicion de clase para el objeto mascota",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 170,
+      "additions": 115,
+      "deletions": 55,
+      "date": "2025-11-11"
     },
     "coverage": 88.89,
     "test_count": 17,

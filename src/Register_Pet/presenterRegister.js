@@ -1,16 +1,12 @@
-// src/Register_Pet/presenterRegister.js
-import '../firebase.js';                         // inicializa Firebase
-import { auth } from '../firebase';              // para obtener el usuario actual (si hay)
-import { createPet } from '../services/pets.service.js';  // guarda en Firestore
+import '../firebase.js';
+import { auth } from '../firebase';
+import { createPet } from '../services/pets.service.js';
 
 import registrar from './register.js';
 import displayMessage from './displayMessage.js';
 import { handleImageUpload, resetFormView } from './RegisterView.js';
+import Pet from '../models/Pet.js';
 
-/**
- * Recolecta todos los datos del formulario y los devuelve como un objeto.
- * Los nombres coinciden con los parámetros de registrar().
- */
 function collectFormData() {
   const name = document.getElementById('name').value.trim();
   const species = document.getElementById('species').value;
@@ -29,7 +25,6 @@ function init() {
   const photoInput = document.getElementById('photo-upload');
   const msgBox = document.getElementById('form-message');
 
-  // Vista: preview de imagen (no subimos a Storage todavía)
   photoInput.addEventListener('change', handleImageUpload);
 
   form.addEventListener('submit', async (e) => {
@@ -42,7 +37,7 @@ function init() {
     const data = collectFormData();
 
     try {
-      // 1) Validación de negocio (NO tocar por Cypress)
+      // 1) Validación de negocio (no tocar por Cypress)
       const result = registrar(
         data.name,
         data.species,
@@ -53,34 +48,25 @@ function init() {
       );
 
       if (typeof result === 'string') {
-        // Falla de validación
         displayMessage(result, 'error');
         return;
       }
 
-      // 2) Éxito: persistir en Firestore
-      const petData = result;
-
-      // Si aún no implementaste login, guardamos como 'guest'
+      // 2) Instancia Pet + persistencia
       const user = auth.currentUser;
       const ownerId = user ? user.uid : 'guest';
 
-      // Puedes mapear age a número si lo prefieres:
-      // const ageNum = Number(petData.age ?? 0) || 0;
+      const pet = new Pet({
+        ...result,          // name, species, gender, age, breed, personality
+        status: 'available',
+        ownerId,
+        // photoUrl: (cuando uses Storage)
+      });
 
-      await createPet(
-        {
-          ...petData,          // { name, species, gender, age, breed, personality }
-          status: 'available', // campo adicional
-          // photoUrl: null,    // si luego subes a Storage
-        },
-        ownerId
-      );
+      await createPet(pet, ownerId);
 
-      // 3) Feedback y limpieza de UI
-      displayMessage(`¡${petData.name} ha sido registrado(a) exitosamente!`, 'success');
+      displayMessage(`¡${pet.name} ha sido registrado(a) exitosamente!`, 'success');
       resetFormView(form);
-
     } catch (error) {
       console.error('Error al registrar:', error);
       displayMessage(error.message || 'Ocurrió un error inesperado al registrar la mascota.', 'error');
