@@ -31,7 +31,7 @@
     "svgo": "^4.0.0"
   },
   "dependencies": {
-    "firebase": "^12.5.0",
+    "firebase": "^12.6.0",
     "parcel-jest-base": "file:"
   }
 }

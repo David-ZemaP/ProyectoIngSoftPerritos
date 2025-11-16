@@ -1,53 +1,78 @@
+// src/Register_Pet/RegisterView.js
+//
+// Responsabilidad: Funciones de manipulación directa de la interfaz de usuario (DOM).
+
+// --- Constantes DOM ---
+const PREVIEW_ID = 'image-preview';
+const ICON_ID = 'camera-icon';
+const MESSAGE_ID = 'form-message';
+
 /**
  * Maneja la carga de imágenes y muestra una vista previa.
- * @param {Event} event
+ * Utiliza FileReader para leer el archivo local.
+ * @param {Event} event - El evento change del input de archivo.
  */
 export function handleImageUpload(event) {
-    const file = event.target.files[0];
-    const previewContainer = document.getElementById('image-preview');
-    const iconContainer = document.getElementById('camera-icon');
+    const file = event.target.files?.[0]; // Uso de optional chaining para seguridad
+    const previewContainer = document.getElementById(PREVIEW_ID);
 
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            previewContainer.style.backgroundImage = `url('${e.target.result}')`;
-            if (iconContainer) {
-                // Ocultar el ícono de la cámara
-                iconContainer.classList.add('hidden');
-            }
-            // Quitar el borde dashed (asumiendo que solid y 0 es el estado "con imagen")
-            previewContainer.style.borderStyle = 'solid';
-            previewContainer.style.borderWidth = '0';
-        };
-        reader.readAsDataURL(file);
-    }
+    if (!file || !previewContainer) return; // Robustez
+
+    const iconContainer = document.getElementById(ICON_ID);
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        // Aplicación de estilos de forma concisa (cssText)
+        previewContainer.style.cssText = `
+            background-image: url('${e.target.result}');
+            border-style: solid;
+            border-width: 0;
+        `;
+
+        // Ocultar el ícono de la cámara
+        if (iconContainer) {
+            iconContainer.classList.add('hidden');
+        }
+    };
+
+    reader.readAsDataURL(file);
 }
+
+// --- Estado Inicial del Contenedor ---
+const INITIAL_PREVIEW_STYLES = `
+    background-image: none;
+    border-style: dashed;
+    border-width: 2px;
+`;
 
 /**
  * Restablece el formulario a su estado inicial, incluyendo la vista previa de la imagen.
- * @param {HTMLFormElement} form
+ * @param {HTMLFormElement} form - La referencia al formulario a resetear.
  */
 export function resetFormView(form) {
+    if (!form) return; // Robustez
+
     form.reset();
-    const previewContainer = document.getElementById('image-preview');
-    const iconContainer = document.getElementById('camera-icon');
     
-    // 1. Restablecer la vista de la imagen (vuelve al estado inicial con borde dashed)
-    previewContainer.style.backgroundImage = 'none';
-    previewContainer.style.borderStyle = 'dashed';
-    previewContainer.style.borderWidth = '2px';
+    const previewContainer = document.getElementById(PREVIEW_ID);
+    const iconContainer = document.getElementById(ICON_ID);
+    const messageElement = document.getElementById(MESSAGE_ID);
+    
+    // 1. Restablecer la vista de la imagen
+    if (previewContainer) {
+        previewContainer.style.cssText = INITIAL_PREVIEW_STYLES;
+    }
+    
+    // 2. Mostrar el ícono de la cámara
     if (iconContainer) {
-        // Mostrar el ícono de la cámara
         iconContainer.classList.remove('hidden');
     }
     
-    // 2. CORRECCIÓN CLAVE: Oculta el mensaje de estado y limpia las clases de estilo.
-    const messageElement = document.getElementById('form-message');
+    // 3. Ocultar y limpiar el mensaje de estado (CORRECCIÓN CLAVE)
     if (messageElement) {
-        // Asegura que el mensaje se oculte
         messageElement.classList.add('hidden');
-        
-        // Limpia las clases de color que quedaron del mensaje anterior (éxito o error)
+        // Usar remove para limpiar las clases de color que quedaron del intento anterior
         messageElement.classList.remove('text-success', 'text-error');
     }
 }

@@ -6,28 +6,28 @@
     <title>MatchPet - Registra a tu Compañero</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="registerStyle.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar-logo">
-            <div class="logo-box">
+            <a href="../Match/match.html" class="logo-box">
                 <img src="../assets/Logo.png" alt="MatchPet Logo" class="logo-image">
-            </div>
+            </a>
         </div>
         <div class="navbar-nav">
             <a class="btn-search" href="../Search_for_pet/Search.html">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 Buscar Mascota
             </a>
-            <a class="nav-link" href="./Register.html">
+            <a class="nav-link current-page" href="./Register.html">
                 <i class="fa-solid fa-cloud-arrow-up"></i>
                 <span>Publicar</span>
             </a>
             <a class="nav-link" href="../Match/match.html">
-            <i class="fa-solid fa-heart"></i>
-            <span>Inicio</span>
+                <i class="fa-solid fa-heart"></i>
+                <span>Inicio</span>
             </a>
             <a class="nav-link" href="#">
                 <i class="fa-solid fa-user"></i>
@@ -36,18 +36,20 @@
         </div>
     </nav>
 
-    <div class="container-form">
+    <main class="container-form">
         <div class="card-container">
             <header class="header-content">
-                <h1>¡Registra a tu Compañero! <i class="fa-solid fa-paw" style="color: var(--primary);"></i></h1>
+                <h1>¡Registra a tu Compañero! <i class="fa-solid fa-paw"></i></h1>
                 <p>Ayúdalo a encontrar su hogar perfecto</p>
             </header>
 
-            <form class="form-content" id="register-form" novalidate> <div class="image-upload-wrapper">
+            <form class="form-content" id="register-form" novalidate>
+                <div class="image-upload-wrapper">
                     <div class="image-upload-area" id="image-preview">
                         <div id="camera-icon" class="camera-icon">
                             <i class="fa-solid fa-camera"></i>
                         </div>
+                        
                         <input type="file" id="photo-upload" name="photo" accept="image/*"> 
                         
                         <label for="photo-upload" class="upload-button-floating">
@@ -66,7 +68,7 @@
                     <div class="grid-2-cols">
                         <div>
                             <label for="species" class="form-label">Especie *</label>
-                            <select id="species" class="custom-input">
+                            <select id="species" name="species" class="custom-input" required>
                                 <option value="" disabled selected>Selecciona...</option> 
                                 <option value="perro">Perro</option>
                                 <option value="gato">Gato</option>
@@ -85,14 +87,14 @@
                     </div>
 
                     <div>
-                        <label class="form-label" style="margin-bottom: 0.5rem;">Sexo *</label>
+                        <label class="form-label">Sexo *</label>
                         <div class="gender-options">
                             <div class="gender-option">
                                 <input type="radio" id="male" name="gender" value="macho" required class="radio-input">
                                 <label for="male">Macho</label>
                             </div>
                             <div class="gender-option">
-                                <input type="radio" id="female" name="gender" value="hembra" required class="radio-input">
+                                <input type="radio" id="female" name="gender" value="hembra" class="radio-input">
                                 <label for="female">Hembra</label>
                             </div>
                         </div>
@@ -100,7 +102,7 @@
 
                     <div>
                         <label for="personality" class="form-label">Personalidad / Sobre mí</label>
-                        <textarea id="personality" name="personality" rows="4" placeholder="Cuéntanos sobre su personalidad, comportamiento, necesidades especiales..." class="custom-input" style="resize: none;"></textarea>
+                        <textarea id="personality" name="personality" rows="4" placeholder="Cuéntanos sobre su personalidad, comportamiento, necesidades especiales..." class="custom-input"></textarea>
                     </div>
                 </div>
 
@@ -112,12 +114,12 @@
                 </button>
 
                 <div class="link-volver">
-                    <a href="#">Volver</a>
+                    <a href="../Match/match.html">Volver</a>
                 </div>
             </form>
         </div>
-    </div>
+    </main>
     
-    <script type="module" src="./presenterRegister.js"></script>
+    <script type="module" src="./register.presenter.js"></script>
 </body>
 </html>

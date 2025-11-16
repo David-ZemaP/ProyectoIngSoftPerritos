@@ -1,18 +1,43 @@
-// register.js (MANTENER ESTE CÓDIGO)
+// src/Register_Pet/register.js
+
+import Pet from '../models/Pet.js'; 
+
 /**
- * Simula la lógica de registro de una mascota, incluyendo la validación
- * de campos obligatorios.
- * @returns {object|string} Un objeto con los datos de la mascota si es exitoso, 
- * o un string con el mensaje de error si falla la validación.
+ * Valida los campos obligatorios de una mascota y, si son válidos, 
+ * crea y devuelve una nueva instancia de Pet con los datos limpios.
+ * * @param {string} name - Nombre de la mascota (obligatorio).
+ * @param {string} species - Especie de la mascota (obligatorio).
+ * @param {string} gender - Sexo de la mascota (obligatorio).
+ * @param {string | number | null} age - Edad de la mascota.
+ * @param {string | null} breed - Raza de la mascota.
+ * @param {string} personality - Personalidad de la mascota.
+ * @returns {Pet | string} Instancia de Pet si es válido, o mensaje de error (string).
  */
-function registrar(name, species, gender, age, breed, personality) 
-{
-    // Esta es la validación requerida por Cypress y la lógica de negocio
-    if (!name || !species || !gender) {
+export function validateAndCreatePet(name, species, gender, age, breed, personality) {
+    
+    // Limpia el nombre para la validación y el uso posterior.
+    // Si 'name' es null o undefined, trimName será null o undefined (coalescencia nula).
+    const trimmedName = name?.trim();
+    
+    // Validación: Se verifica que trimmedName exista (no nulo/undefined) Y no sea una cadena vacía ('').
+    // Se verifica que species y gender existan (no nulos/undefined/cadenas vacías).
+    if (!trimmedName || !species || !gender) {
         return 'Por favor, rellena los campos obligatorios (*): Nombre, Especie y Sexo.'; 
     }
 
-    return { name, species, gender, age, breed, personality };
+    // El objeto petData incluye todos los campos, usando el nombre limpio (trimmedName)
+    const petData = { 
+        name: trimmedName,
+        species, 
+        gender, 
+        age, 
+        breed, 
+        personality 
+    };
+
+    // La lógica de la clase Pet se encarga de aplicar los valores por defecto (status, ownerId, etc.)
+    return Pet.fromPlain(petData); 
 }
 
-export default registrar;
+// Mantener export por defecto para compatibilidad con tests que usan import default
+export default validateAndCreatePet;

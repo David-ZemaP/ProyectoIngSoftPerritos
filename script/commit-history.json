@@ -304,12 +304,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "814ef3f2692b6978263feb34469e47069b522d8e",
     "author": "Robert",
     "commit": {
       "date": "2025-11-11T17:52:17.000Z",
       "message": "refactor: funcionalidad buscar optimizada",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/814ef3f2692b6978263feb34469e47069b522d8e"
     },
     "stats": {
       "total": 228,
@@ -319,6 +319,25 @@
     },
     "coverage": 88.89,
     "test_count": 17,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-11-16T14:32:34.000Z",
+      "message": "Refactor: Registro de mascota",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 1253,
+      "additions": 859,
+      "deletions": 394,
+      "date": "2025-11-16"
+    },
+    "coverage": 43.28,
+    "test_count": 24,
     "failed_tests": 0,
     "conclusion": "success"
   }
