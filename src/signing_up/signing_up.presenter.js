@@ -46,9 +46,9 @@ export class RegistrationPresenter {
       this.showSuccess(result.message);
       this.form.reset();
       
-      // Redirigir después de 2 segundos
+      // Redirigir después de 2 segundos a la página principal de la app
       setTimeout(() => {
-        window.location.href = '/index.html';
+        window.location.href = '../Match/match.html';
       }, 2000);
     } catch (error) {
       this.showError(error.message);

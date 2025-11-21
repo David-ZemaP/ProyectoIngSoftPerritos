@@ -60,12 +60,18 @@ export async function registerUser(fullName, email, password, confirmPassword) {
     };
   } catch (error) {
     // Manejo de errores específicos de Firebase
+    console.error('Error de Firebase:', error.code, error.message);
+    
     if (error.code === 'auth/email-already-in-use') {
       throw new Error('Este correo electrónico ya está registrado');
     } else if (error.code === 'auth/invalid-email') {
       throw new Error('El correo electrónico no es válido');
     } else if (error.code === 'auth/weak-password') {
       throw new Error('La contraseña es muy débil');
+    } else if (error.code === 'auth/configuration-not-found') {
+      throw new Error('Firebase Authentication no está configurado correctamente. Por favor, habilita Email/Password en Firebase Console.');
+    } else if (error.code === 'auth/operation-not-allowed') {
+      throw new Error('El registro de usuarios no está habilitado. Por favor, habilita Email/Password en Firebase Console.');
     } else {
       throw new Error(error.message || 'Error al registrar usuario');
     }

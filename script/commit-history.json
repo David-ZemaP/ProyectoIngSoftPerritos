@@ -399,12 +399,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "123f4b46ec503fc76d19470390c6944eac889d76",
     "author": "MateoDVE",
     "commit": {
       "date": "2025-11-21T04:33:50.000Z",
       "message": "feat: add login page with styling and functionality for user authentication",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/123f4b46ec503fc76d19470390c6944eac889d76"
     },
     "stats": {
       "total": 399,
@@ -413,6 +413,25 @@
       "date": "2025-11-21"
     },
     "coverage": 57.3,
+    "test_count": 53,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-21T13:46:02.000Z",
+      "message": "feat: implement authentication system with Firebase, including user registration and login functionality",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 396,
+      "additions": 379,
+      "deletions": 17,
+      "date": "2025-11-21"
+    },
+    "coverage": 57.45,
     "test_count": 53,
     "failed_tests": 0,
     "conclusion": "success"

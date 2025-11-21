@@ -40,9 +40,9 @@ export class LoginPresenter {
       this.showSuccess(result.message);
       this.form.reset();
       
-      // Redirigir después de 1 segundo
+      // Redirigir después de 1 segundo a la página principal de la app
       setTimeout(() => {
-        window.location.href = '/index.html';
+        window.location.href = '../Match/match.html';
       }, 1000);
     } catch (error) {
       this.showError(error.message);

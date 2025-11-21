@@ -31,6 +31,8 @@ export async function loginUser(email, password) {
     };
   } catch (error) {
     // Manejo de errores específicos de Firebase
+    console.error('Error de Firebase:', error.code, error.message);
+    
     if (error.code === 'auth/user-not-found') {
       throw new Error('No existe una cuenta con este correo electrónico');
     } else if (error.code === 'auth/wrong-password') {
@@ -43,6 +45,10 @@ export async function loginUser(email, password) {
       throw new Error('Demasiados intentos fallidos. Intenta más tarde');
     } else if (error.code === 'auth/invalid-credential') {
       throw new Error('Credenciales inválidas. Verifica tu email y contraseña');
+    } else if (error.code === 'auth/configuration-not-found') {
+      throw new Error('Firebase Authentication no está configurado correctamente. Por favor, habilita Email/Password en Firebase Console.');
+    } else if (error.code === 'auth/operation-not-allowed') {
+      throw new Error('El inicio de sesión no está habilitado. Por favor, habilita Email/Password en Firebase Console.');
     } else {
       throw new Error(error.message || 'Error al iniciar sesión');
     }
