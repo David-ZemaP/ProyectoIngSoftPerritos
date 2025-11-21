@@ -323,12 +323,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "ee9d4c4eafae9de71b7117482feb3b47be556ecf",
     "author": "Harold Sejas",
     "commit": {
       "date": "2025-11-16T14:32:34.000Z",
       "message": "Refactor: Registro de mascota",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/ee9d4c4eafae9de71b7117482feb3b47be556ecf"
     },
     "stats": {
       "total": 1253,
@@ -338,6 +338,101 @@
     },
     "coverage": 43.28,
     "test_count": 24,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "4bc52094c2d83b92bbf1b4b4c5e4a3a1b46b71ae",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-21T03:52:51.000Z",
+      "message": "feat: implement user registration functionality with validation and Firebase integration",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/4bc52094c2d83b92bbf1b4b4c5e4a3a1b46b71ae"
+    },
+    "stats": {
+      "total": 479,
+      "additions": 479,
+      "deletions": 0,
+      "date": "2025-11-21"
+    },
+    "coverage": 51.59,
+    "test_count": 37,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "5acb408f4afd90ba49e314dedf8612e41b00cf18",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-21T03:56:36.000Z",
+      "message": "feat: add sign-up form with validation and styling",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/5acb408f4afd90ba49e314dedf8612e41b00cf18"
+    },
+    "stats": {
+      "total": 392,
+      "additions": 392,
+      "deletions": 0,
+      "date": "2025-11-21"
+    },
+    "coverage": 51.59,
+    "test_count": 37,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "7e395d088b541712bee4405e52e432cfc2979d0f",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-21T04:16:23.000Z",
+      "message": "feat: implement user login functionality with validation and error handling",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/7e395d088b541712bee4405e52e432cfc2979d0f"
+    },
+    "stats": {
+      "total": 522,
+      "additions": 506,
+      "deletions": 16,
+      "date": "2025-11-21"
+    },
+    "coverage": 57.3,
+    "test_count": 53,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "123f4b46ec503fc76d19470390c6944eac889d76",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-21T04:33:50.000Z",
+      "message": "feat: add login page with styling and functionality for user authentication",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/123f4b46ec503fc76d19470390c6944eac889d76"
+    },
+    "stats": {
+      "total": 399,
+      "additions": 399,
+      "deletions": 0,
+      "date": "2025-11-21"
+    },
+    "coverage": 57.3,
+    "test_count": 53,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-21T13:46:02.000Z",
+      "message": "feat: implement authentication system with Firebase, including user registration and login functionality",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 396,
+      "additions": 379,
+      "deletions": 17,
+      "date": "2025-11-21"
+    },
+    "coverage": 57.45,
+    "test_count": 53,
     "failed_tests": 0,
     "conclusion": "success"
   }
