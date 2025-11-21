@@ -92,22 +92,19 @@ body {
     background-color: var(--color-secondary);
     border-radius: 50%;
     margin: 0 auto;
+    /* Estas 3 líneas son clave para centrar la imagen dentro del círculo: */
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
+    position: relative; /* Mantenlo para posibles futuros elementos superpuestos */
 }
-.logo-circle i {
-    color: #fff;
-    font-size: 1.3rem;
-    position: absolute;
-}
-/* Posicionamiento de las dos patitas para simular el logo */
-.logo-circle .fa-paw:first-child {
-    transform: translate(-10px, 10px) rotate(-25deg);
-}
-.logo-circle .second-paw {
-    transform: translate(10px, -10px) rotate(20deg);
+.logo-image {
+    max-width: 100%; /* La imagen nunca será más ancha que su contenedor */
+    max-height: 100%; /* La imagen nunca será más alta que su contenedor */
+    object-fit: contain; /* Asegura que la imagen esté contenida sin ser recortada */
+    border-radius: 50%; /* Opcional: para que la imagen también se vea circular si es cuadrada */
+    /* Añade un poco de relleno interno si es necesario para que no toque el borde del círculo */
+    padding: 0.5rem; 
 }
 
 /* --- Formulario y Entradas --- */

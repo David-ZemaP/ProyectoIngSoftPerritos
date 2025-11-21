@@ -361,12 +361,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "5acb408f4afd90ba49e314dedf8612e41b00cf18",
     "author": "MateoDVE",
     "commit": {
       "date": "2025-11-21T03:56:36.000Z",
       "message": "feat: add sign-up form with validation and styling",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/5acb408f4afd90ba49e314dedf8612e41b00cf18"
     },
     "stats": {
       "total": 392,
@@ -376,6 +376,25 @@
     },
     "coverage": 51.59,
     "test_count": 37,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-21T04:16:23.000Z",
+      "message": "feat: implement user login functionality with validation and error handling",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 522,
+      "additions": 506,
+      "deletions": 16,
+      "date": "2025-11-21"
+    },
+    "coverage": 57.3,
+    "test_count": 53,
     "failed_tests": 0,
     "conclusion": "success"
   }
