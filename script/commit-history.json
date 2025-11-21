@@ -380,17 +380,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "7e395d088b541712bee4405e52e432cfc2979d0f",
     "author": "MateoDVE",
     "commit": {
       "date": "2025-11-21T04:16:23.000Z",
       "message": "feat: implement user login functionality with validation and error handling",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/7e395d088b541712bee4405e52e432cfc2979d0f"
     },
     "stats": {
       "total": 522,
       "additions": 506,
       "deletions": 16,
+      "date": "2025-11-21"
+    },
+    "coverage": 57.3,
+    "test_count": 53,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-21T04:33:50.000Z",
+      "message": "feat: add login page with styling and functionality for user authentication",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 399,
+      "additions": 399,
+      "deletions": 0,
       "date": "2025-11-21"
     },
     "coverage": 57.3,
