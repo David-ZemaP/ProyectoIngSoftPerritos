@@ -342,16 +342,35 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "4bc52094c2d83b92bbf1b4b4c5e4a3a1b46b71ae",
     "author": "MateoDVE",
     "commit": {
       "date": "2025-11-21T03:52:51.000Z",
       "message": "feat: implement user registration functionality with validation and Firebase integration",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/4bc52094c2d83b92bbf1b4b4c5e4a3a1b46b71ae"
     },
     "stats": {
       "total": 479,
       "additions": 479,
+      "deletions": 0,
+      "date": "2025-11-21"
+    },
+    "coverage": 51.59,
+    "test_count": 37,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-21T03:56:36.000Z",
+      "message": "feat: add sign-up form with validation and styling",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 392,
+      "additions": 392,
       "deletions": 0,
       "date": "2025-11-21"
     },
