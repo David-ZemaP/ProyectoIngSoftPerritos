@@ -475,16 +475,35 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "d348925a3246614e2c30207f192ceaa1c6cc0408",
     "author": "David-ZemaP",
     "commit": {
       "date": "2025-11-23T18:57:38.000Z",
       "message": "test: cypress test updated to use the new feature",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/d348925a3246614e2c30207f192ceaa1c6cc0408"
     },
     "stats": {
       "total": 30,
       "additions": 30,
+      "deletions": 0,
+      "date": "2025-11-23"
+    },
+    "coverage": 58.97,
+    "test_count": 51,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-11-23T19:06:22.000Z",
+      "message": "test: cypress test to adopt pets",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 23,
+      "additions": 23,
       "deletions": 0,
       "date": "2025-11-23"
     },
