@@ -494,12 +494,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "699519b64cf3c5dcee2208c71290b48fac416a3e",
     "author": "David-ZemaP",
     "commit": {
       "date": "2025-11-23T19:06:22.000Z",
       "message": "test: cypress test to adopt pets",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/699519b64cf3c5dcee2208c71290b48fac416a3e"
     },
     "stats": {
       "total": 23,
@@ -509,6 +509,25 @@
     },
     "coverage": 58.97,
     "test_count": 51,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-11-23T19:45:32.000Z",
+      "message": "feat: adoption logic implemented",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 68,
+      "additions": 58,
+      "deletions": 10,
+      "date": "2025-11-23"
+    },
+    "coverage": 58.91,
+    "test_count": 52,
     "failed_tests": 0,
     "conclusion": "success"
   }
