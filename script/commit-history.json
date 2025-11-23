@@ -456,17 +456,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "43014b86c09a61d2432288c97b8abaac83d189e6",
     "author": "David-ZemaP",
     "commit": {
       "date": "2025-11-23T18:56:57.000Z",
       "message": "feat: match logic implemented and updated",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/43014b86c09a61d2432288c97b8abaac83d189e6"
     },
     "stats": {
       "total": 109,
       "additions": 53,
       "deletions": 56,
+      "date": "2025-11-23"
+    },
+    "coverage": 58.97,
+    "test_count": 51,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-11-23T18:57:38.000Z",
+      "message": "test: cypress test updated to use the new feature",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 30,
+      "additions": 30,
+      "deletions": 0,
       "date": "2025-11-23"
     },
     "coverage": 58.97,
