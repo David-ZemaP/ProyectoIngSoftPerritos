@@ -1,32 +1,54 @@
-import { checkMatch } from './match.js';
+import { addMatchToUser, checkMatch } from './match.js';
+
+import { db, auth } from '../firebase.js';
+
+import { doc, updateDoc } from 'firebase/firestore';
+
+jest.mock('../firebase.js', () => ({
+  db: {},
+  auth: { currentUser: { uid: 'test-user-123' } },
+}));
+
+jest.mock('firebase/firestore', () => ({
+  doc: jest.fn(() => 'mock-ref'),
+  updateDoc: jest.fn(),
+  arrayUnion: jest.fn((val) => val),
+}));
 
 describe('TDD: Lógica Central de Match (checkMatch)', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('Debe retornar TRUE para el ID que genera Match', () => {
     expect(checkMatch('pet-3')).toBe(true);
   });
 
-  it('Debe retornar TRUE para el ID que genera Match ("pet-3")', () => {
-    // La prueba TDD valida la regla de negocio: pet-3 siempre es un match.
-    const petIdToLike = 'pet-3';
-    const result = checkMatch(petIdToLike);
-    expect(result).toBe(true);
+  // Simplified test for the "All Matches" rule
+  it('Debe retornar TRUE para cualquier mascota (Regla: match con todos)', () => {
+    expect(checkMatch('pet-1')).toBe(true);
+    expect(checkMatch('pet-99')).toBe(true);
   });
 
-  it('Debe retornar FALSE para un ID que no genera Match ("pet-5")', () => {
-    const petIdToLike = 'pet-5';
-    const result = checkMatch(petIdToLike);
-    expect(result).toBe(false);
+  it('Debe agregar el ID de la mascota a la lista de matches del usuario', async () => {
+    const petId = 'pet-555';
+
+    await addMatchToUser(petId);
+
+    expect(doc).toHaveBeenCalledWith(db, 'users', 'test-user-123');
+
+    expect(updateDoc).toHaveBeenCalledWith(expect.anything(), {
+      matches: petId,
+    });
   });
 
-  it('Debe retornar FALSE si se recibe un valor nulo', () => {
-    expect(checkMatch(null)).toBe(false);
-  });
+  // 👇 3. Add this test case to use the 'auth' import and fix the error
+  it('Debe lanzar error si el usuario no está logueado', async () => {
+    const originalUser = auth.currentUser;
+    auth.currentUser = null; // Simulate logout
 
-  it('Debe retornar FALSE si se recibe un valor indefinido', () => {
-    expect(checkMatch(undefined)).toBe(false);
-  });
+    await expect(addMatchToUser('pet-1')).rejects.toThrow('User not authenticated');
 
-  it('Debe retornar FALSE para un ID vacío', () => {
-    expect(checkMatch('')).toBe(false);
+    auth.currentUser = originalUser; // Restore user
   });
 });

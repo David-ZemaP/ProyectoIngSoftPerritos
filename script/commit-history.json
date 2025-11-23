@@ -418,12 +418,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "584443ce6b73abb09f716e014319e2354f89ef29",
     "author": "MateoDVE",
     "commit": {
       "date": "2025-11-21T13:46:02.000Z",
       "message": "feat: implement authentication system with Firebase, including user registration and login functionality",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/584443ce6b73abb09f716e014319e2354f89ef29"
     },
     "stats": {
       "total": 396,
@@ -433,6 +433,63 @@
     },
     "coverage": 57.45,
     "test_count": 53,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "9c78cedf267203e5d70b69db36b5a75ceca6aad6",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-11-23T18:56:17.000Z",
+      "message": "config: update global configs",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/9c78cedf267203e5d70b69db36b5a75ceca6aad6"
+    },
+    "stats": {
+      "total": 13,
+      "additions": 11,
+      "deletions": 2,
+      "date": "2025-11-23"
+    },
+    "coverage": 58.97,
+    "test_count": 51,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "43014b86c09a61d2432288c97b8abaac83d189e6",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-11-23T18:56:57.000Z",
+      "message": "feat: match logic implemented and updated",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/43014b86c09a61d2432288c97b8abaac83d189e6"
+    },
+    "stats": {
+      "total": 109,
+      "additions": 53,
+      "deletions": 56,
+      "date": "2025-11-23"
+    },
+    "coverage": 58.97,
+    "test_count": 51,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-11-23T18:57:38.000Z",
+      "message": "test: cypress test updated to use the new feature",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 30,
+      "additions": 30,
+      "deletions": 0,
+      "date": "2025-11-23"
+    },
+    "coverage": 58.97,
+    "test_count": 51,
     "failed_tests": 0,
     "conclusion": "success"
   }

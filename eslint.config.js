@@ -13,6 +13,11 @@ export default [
         expect: 'readonly',
         document: 'readonly',
         window: 'readonly',
+        jest: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
       },
     },
     rules: {
@@ -20,7 +25,10 @@ export default [
       semi: ['error', 'always'], // ; al final de cada linea
       'object-curly-spacing': ['error', 'always'], // espacio entre llaves
       'array-bracket-spacing': ['error', 'never'], // sin espacios dentro de corchetes
-      'no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: true, argsIgnorePattern: '^_' }], // no permite variables sin usar
+      'no-unused-vars': [
+        'error',
+        { vars: 'all', args: 'after-used', ignoreRestSiblings: true, argsIgnorePattern: '^_' },
+      ], // no permite variables sin usar
       'no-undef': 'error', // no permite el uso de variables no definidas
       'no-var': 'error', // exige el uso de `let` y `const` en vez de `var`
       'prefer-const': 'error', // prioriza el uso de `const` cuando es posible
@@ -35,3 +43,4 @@ export default [
     },
   },
 ];
+
