@@ -532,12 +532,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "1994c5f2864a7fa3dc51fe3bf256cfc0d22b0bc5",
     "author": "David-ZemaP",
     "commit": {
       "date": "2025-11-23T19:46:56.000Z",
       "message": "test: green test to be sure that pet moves from matches to adoptions",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/1994c5f2864a7fa3dc51fe3bf256cfc0d22b0bc5"
     },
     "stats": {
       "total": 6,
@@ -547,6 +547,25 @@
     },
     "coverage": 58.91,
     "test_count": 53,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-11-23T19:47:57.000Z",
+      "message": "test: green test to validate errors of missing parameters",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 4,
+      "additions": 4,
+      "deletions": 0,
+      "date": "2025-11-23"
+    },
+    "coverage": 59.41,
+    "test_count": 54,
     "failed_tests": 0,
     "conclusion": "success"
   }

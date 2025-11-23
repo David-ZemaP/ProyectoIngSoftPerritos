@@ -35,4 +35,8 @@ describe('TDD: Adoption Logic', () => {
 
     expect(userService.addAdoptedPet).toHaveBeenCalledWith(mockUserId, mockPetId);
   });
+
+  it('Should throw an error if parameters are missing', async () => {
+    await expect(adoptPet(null, mockPetId)).rejects.toThrow();
+  });
 });
