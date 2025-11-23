@@ -513,12 +513,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "c15995549351fdecaa65ba82592305c3157a154e",
     "author": "David-ZemaP",
     "commit": {
       "date": "2025-11-23T19:45:32.000Z",
       "message": "feat: adoption logic implemented",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/c15995549351fdecaa65ba82592305c3157a154e"
     },
     "stats": {
       "total": 68,
@@ -528,6 +528,25 @@
     },
     "coverage": 58.91,
     "test_count": 52,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-11-23T19:46:56.000Z",
+      "message": "test: green test to be sure that pet moves from matches to adoptions",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 6,
+      "additions": 6,
+      "deletions": 0,
+      "date": "2025-11-23"
+    },
+    "coverage": 58.91,
+    "test_count": 53,
     "failed_tests": 0,
     "conclusion": "success"
   }

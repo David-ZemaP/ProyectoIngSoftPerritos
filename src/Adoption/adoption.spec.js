@@ -29,4 +29,10 @@ describe('TDD: Adoption Logic', () => {
       ownerId: mockUserId,
     });
   });
+
+  it('Should move the pet from user matches to adoptions', async () => {
+    await adoptPet(mockUserId, mockPetId);
+
+    expect(userService.addAdoptedPet).toHaveBeenCalledWith(mockUserId, mockPetId);
+  });
 });
