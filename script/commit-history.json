@@ -551,17 +551,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "76cf963693d49cfb04b9e550d904aa3a4bb8a85f",
     "author": "David-ZemaP",
     "commit": {
       "date": "2025-11-23T19:47:57.000Z",
       "message": "test: green test to validate errors of missing parameters",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/76cf963693d49cfb04b9e550d904aa3a4bb8a85f"
     },
     "stats": {
       "total": 4,
       "additions": 4,
       "deletions": 0,
+      "date": "2025-11-23"
+    },
+    "coverage": 59.41,
+    "test_count": 54,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-11-23T19:49:39.000Z",
+      "message": "feat: match-presenter updated to implement new adoption feature",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 52,
+      "additions": 34,
+      "deletions": 18,
       "date": "2025-11-23"
     },
     "coverage": 59.41,

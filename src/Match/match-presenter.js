@@ -1,6 +1,8 @@
-import '../firebase.js';
+import { auth } from '../firebase.js';
 import { searchPets } from '../services/pets.service.js';
-import Pet from '../models/Pet.js'; // 👈 añadimos esto para claridad
+import { userService } from '../services/user.service.js';
+import Pet from '../models/Pet.js';
+import { checkMatch } from './match.js';
 
 // --- UI refs ---
 const petCardEl = document.getElementById('pet-card');
@@ -14,12 +16,6 @@ const matchedPetNameEl = document.getElementById('matched-pet-name');
 let pets = [];
 let currentPetIndex = 0;
 let isProcessing = false;
-
-// --- Helpers ---
-const checkMatch = (petId) => {
-  // Mantengo tu lógica simple (match con la 3ra mascota)
-  return currentPetIndex % 3 === 2 || petId === 'pet-3';
-};
 
 const renderPetCard = (pet) => {
   if (!pet) {
@@ -68,8 +64,12 @@ const showMatchAnimation = (petName) =>
   });
 
 const advanceToNextPet = (direction) => {
-  if (isProcessing) return;
-  if (!pets.length) return;
+  if (isProcessing) {
+    return;
+  }
+  if (!pets.length) {
+    return;
+  }
 
   isProcessing = true;
 
@@ -82,17 +82,32 @@ const advanceToNextPet = (direction) => {
   statusMessageEl.textContent = 'Procesando...';
 
   const transformValue =
-    direction === 'like'
-      ? 'translateX(150%) rotate(10deg)'
-      : 'translateX(-150%) rotate(-10deg)';
+    direction === 'like' ? 'translateX(150%) rotate(10deg)' : 'translateX(-150%) rotate(-10deg)';
   petCardEl.style.transform = transformValue;
   petCardEl.style.opacity = '0';
 
   setTimeout(async () => {
+    // 👇 UPDATED LOGIC HERE
     if (direction === 'like') {
-      const isMatched = checkMatch(currentPet.id);
-      if (isMatched) {
-        await showMatchAnimation(currentPet.name ?? 'esa mascota');
+      const user = auth.currentUser;
+
+      if (user) {
+        try {
+          // 1. Save to Database
+          await userService.addMatchedPet(user.uid, currentPet.id);
+          console.log(`Saved match: ${currentPet.name}`);
+
+          // 2. Check Business Rule (Show Animation?)
+          const isMatched = checkMatch(currentPet.id);
+          if (isMatched) {
+            await showMatchAnimation(currentPet.name ?? 'esa mascota');
+          }
+        } catch (error) {
+          console.error('Error saving match:', error);
+          // Optional: Handle error UI here
+        }
+      } else {
+        console.warn('User not logged in. Match not saved.');
       }
     }
 
@@ -117,7 +132,7 @@ const advanceToNextPet = (direction) => {
 const init = async () => {
   try {
     const results = await searchPets();
-    pets = results.map(p => (p instanceof Pet ? p : new Pet(p))); // 👈 aseguramos instancias Pet
+    pets = results.map((p) => (p instanceof Pet ? p : new Pet(p)));
   } catch (e) {
     console.error('Error cargando mascotas:', e);
     pets = [];
