@@ -18,6 +18,8 @@ export default [
         afterEach: 'readonly',
         beforeAll: 'readonly',
         afterAll: 'readonly',
+        setTimeout: 'readonly',
+        console: 'readonly',
       },
     },
     rules: {
@@ -43,4 +45,3 @@ export default [
     },
   },
 ];
-

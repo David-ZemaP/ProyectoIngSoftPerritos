@@ -475,12 +475,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "d348925a3246614e2c30207f192ceaa1c6cc0408",
     "author": "David-ZemaP",
     "commit": {
       "date": "2025-11-23T18:57:38.000Z",
       "message": "test: cypress test updated to use the new feature",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/d348925a3246614e2c30207f192ceaa1c6cc0408"
     },
     "stats": {
       "total": 30,
@@ -490,6 +490,101 @@
     },
     "coverage": 58.97,
     "test_count": 51,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "699519b64cf3c5dcee2208c71290b48fac416a3e",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-11-23T19:06:22.000Z",
+      "message": "test: cypress test to adopt pets",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/699519b64cf3c5dcee2208c71290b48fac416a3e"
+    },
+    "stats": {
+      "total": 23,
+      "additions": 23,
+      "deletions": 0,
+      "date": "2025-11-23"
+    },
+    "coverage": 58.97,
+    "test_count": 51,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "c15995549351fdecaa65ba82592305c3157a154e",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-11-23T19:45:32.000Z",
+      "message": "feat: adoption logic implemented",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/c15995549351fdecaa65ba82592305c3157a154e"
+    },
+    "stats": {
+      "total": 68,
+      "additions": 58,
+      "deletions": 10,
+      "date": "2025-11-23"
+    },
+    "coverage": 58.91,
+    "test_count": 52,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "1994c5f2864a7fa3dc51fe3bf256cfc0d22b0bc5",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-11-23T19:46:56.000Z",
+      "message": "test: green test to be sure that pet moves from matches to adoptions",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/1994c5f2864a7fa3dc51fe3bf256cfc0d22b0bc5"
+    },
+    "stats": {
+      "total": 6,
+      "additions": 6,
+      "deletions": 0,
+      "date": "2025-11-23"
+    },
+    "coverage": 58.91,
+    "test_count": 53,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "76cf963693d49cfb04b9e550d904aa3a4bb8a85f",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-11-23T19:47:57.000Z",
+      "message": "test: green test to validate errors of missing parameters",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/76cf963693d49cfb04b9e550d904aa3a4bb8a85f"
+    },
+    "stats": {
+      "total": 4,
+      "additions": 4,
+      "deletions": 0,
+      "date": "2025-11-23"
+    },
+    "coverage": 59.41,
+    "test_count": 54,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-11-23T19:49:39.000Z",
+      "message": "feat: match-presenter updated to implement new adoption feature",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 52,
+      "additions": 34,
+      "deletions": 18,
+      "date": "2025-11-23"
+    },
+    "coverage": 59.41,
+    "test_count": 54,
     "failed_tests": 0,
     "conclusion": "success"
   }
