@@ -437,17 +437,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "9c78cedf267203e5d70b69db36b5a75ceca6aad6",
     "author": "David-ZemaP",
     "commit": {
       "date": "2025-11-23T18:56:17.000Z",
       "message": "config: update global configs",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/9c78cedf267203e5d70b69db36b5a75ceca6aad6"
     },
     "stats": {
       "total": 13,
       "additions": 11,
       "deletions": 2,
+      "date": "2025-11-23"
+    },
+    "coverage": 58.97,
+    "test_count": 51,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "David-ZemaP",
+    "commit": {
+      "date": "2025-11-23T18:56:57.000Z",
+      "message": "feat: match logic implemented and updated",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 109,
+      "additions": 53,
+      "deletions": 56,
       "date": "2025-11-23"
     },
     "coverage": 58.97,
