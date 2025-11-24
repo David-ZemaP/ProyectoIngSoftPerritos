@@ -85,8 +85,10 @@ export class LoginPresenter {
    * Activa/desactiva el estado de carga
    */
   setLoading(isLoading) {
-    this.submitButton.disabled = isLoading;
-    this.submitButton.textContent = isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión';
+    if (this.submitButton) {
+      this.submitButton.disabled = isLoading;
+      this.submitButton.textContent = isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión';
+    }
   }
 }
 
