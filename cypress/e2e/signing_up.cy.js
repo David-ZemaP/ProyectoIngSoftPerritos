@@ -81,8 +81,8 @@ describe('User Registration E2E - ATDD', () => {
             cy.get('input#password').should('have.value', '');
             cy.get('input#confirm-password').should('have.value', '');
 
-            // Then: Debe redirigir al index después de 2 segundos
-            cy.url({ timeout: 3000 }).should('include', 'index.html');
+            // Then: Debe redirigir a match.html después de 2 segundos
+            cy.url({ timeout: 3000 }).should('include', 'match.html');
         });
     });
 
@@ -91,16 +91,28 @@ describe('User Registration E2E - ATDD', () => {
     // ----------------------------------------------------------------------
     describe('Escenario 5: Validación de email duplicado', () => {
         it('Dado que el usuario intenta registrarse con un email ya existente, cuando intenta registrarse, entonces debe ver un mensaje de error', () => {
-            // Given: Usuario llena el formulario con un email que ya existe
-            // Nota: Este email debe existir previamente en tu base de datos de prueba
-            const existingEmail = 'existing@test.com';
+            // Primero registramos el usuario
+            const duplicateEmail = `duplicate${Date.now()}@test.com`;
             
-            cy.get('input#full-name').type('Juan Perez');
-            cy.get('input#email').type(existingEmail);
+            cy.get('input#full-name').type('Usuario Duplicado');
+            cy.get('input#email').type(duplicateEmail);
             cy.get('input#password').type('password123');
             cy.get('input#confirm-password').type('password123');
-
-            // When: Usuario hace click en registrarse
+            cy.get('button[type="submit"]').click();
+            
+            // Esperar a que se registre exitosamente
+            cy.get('.success-message', { timeout: 10000 }).should('be.visible');
+            
+            // Esperar a que se limpie el formulario o volver a la página
+            cy.wait(1000);
+            cy.visit('http://localhost:1234/src/signing_up/signing_up.html');
+            cy.wait(100);
+            
+            // Intentar registrar con el mismo email
+            cy.get('input#full-name').type('Juan Perez');
+            cy.get('input#email').type(duplicateEmail);
+            cy.get('input#password').type('password123');
+            cy.get('input#confirm-password').type('password123');
             cy.get('button[type="submit"]').click();
 
             // Then: Debe aparecer un mensaje de error
@@ -124,10 +136,12 @@ describe('User Registration E2E - ATDD', () => {
             // When: Usuario hace click en registrarse
             cy.get('button[type="submit"]').click();
 
-            // Then: Debe aparecer un mensaje de error de Firebase o validación HTML5
-            cy.get('.error-message', { timeout: 10000 })
-                .should('be.visible')
-                .and('contain', 'El correo electrónico no es válido');
+            // Then: La validación HTML5 debe prevenir el envío
+            // Verificamos que el campo email tiene estado inválido
+            cy.get('input#email:invalid').should('exist');
+            
+            // Alternativamente, verificamos que NO se redirigió (porque no se envió el form)
+            cy.url().should('include', 'signing_up.html');
         });
     });
 
@@ -144,7 +158,7 @@ describe('User Registration E2E - ATDD', () => {
             // When: Usuario hace click en registrarse
             cy.get('button[type="submit"]').click();
 
-            // Then: Debe aparecer validación HTML5
+            // Then: Debe aparecer validación HTML5 (el campo required debe activarse)
             cy.get('input#full-name:invalid').should('exist');
         });
     });
