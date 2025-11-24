@@ -570,18 +570,56 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "6554a545fb52782f4763f4ab1456804a3e9a775f",
     "author": "David-ZemaP",
     "commit": {
       "date": "2025-11-23T19:49:39.000Z",
       "message": "feat: match-presenter updated to implement new adoption feature",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/6554a545fb52782f4763f4ab1456804a3e9a775f"
     },
     "stats": {
       "total": 52,
       "additions": 34,
       "deletions": 18,
       "date": "2025-11-23"
+    },
+    "coverage": 59.41,
+    "test_count": 54,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "9e4d3d18914a9208dc00a61f2c052122b2d64d2b",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-24T03:32:23.000Z",
+      "message": "feat: add required attributes to registration form inputs for validation",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/9e4d3d18914a9208dc00a61f2c052122b2d64d2b"
+    },
+    "stats": {
+      "total": 120,
+      "additions": 71,
+      "deletions": 49,
+      "date": "2025-11-24"
+    },
+    "coverage": 59.41,
+    "test_count": 54,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-24T03:35:53.000Z",
+      "message": "feat: update commit history with new adoption feature and registration form validation",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 0,
+      "additions": 0,
+      "deletions": 0,
+      "date": "2025-11-24"
     },
     "coverage": 59.41,
     "test_count": 54,
