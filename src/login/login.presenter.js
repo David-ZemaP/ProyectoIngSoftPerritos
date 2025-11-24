@@ -42,7 +42,7 @@ export class LoginPresenter {
       
       // Redirigir después de 1 segundo a la página principal de la app
       setTimeout(() => {
-        window.location.href = '../Match/match.html';
+        window.location.href = '/src/Match/match.html';
       }, 1000);
     } catch (error) {
       this.showError(error.message);

@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         await signOut(auth);
         console.log('Sesión cerrada exitosamente');
-        window.location.href = '../login/login.html';
+        window.location.href = '/src/login/login.html';
       } catch (error) {
         console.error('Error al cerrar sesión:', error);
         alert('Error al cerrar sesión. Intenta nuevamente.');
