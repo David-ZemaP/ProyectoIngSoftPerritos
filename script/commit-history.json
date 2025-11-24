@@ -627,17 +627,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "2ad704d899f87732181ae3a23735356bebedc02b",
     "author": "MateoDVE",
     "commit": {
       "date": "2025-11-24T03:42:56.000Z",
       "message": "feat: add null check for submitButton in setLoading method for login and registration presenters",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/2ad704d899f87732181ae3a23735356bebedc02b"
     },
     "stats": {
       "total": 12,
       "additions": 8,
       "deletions": 4,
+      "date": "2025-11-24"
+    },
+    "coverage": 59.41,
+    "test_count": 54,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-24T03:51:09.000Z",
+      "message": "feat: update paths in HTML and JS files for consistent routing and add Netlify configuration",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 42,
+      "additions": 23,
+      "deletions": 19,
       "date": "2025-11-24"
     },
     "coverage": 59.41,
