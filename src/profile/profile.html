@@ -30,15 +30,52 @@
     </div>
   </nav>
 
-  <main style="max-width:720px;margin:4rem auto;padding:1rem">
-    <h1>Mi Perfil</h1>
-    <p id="profile-email">Cargando información de usuario...</p>
-    <section id="profile-card" style="margin-top:1.5rem;background:white;padding:1rem;border-radius:0.75rem;box-shadow:0 6px 18px rgba(0,0,0,0.06)">
-      <h2 id="profile-display">Nombre de usuario</h2>
-      <p id="profile-bio">Aquí podrás editar tu información y ver tus matches.</p>
+  <main class="profile-main">
+    <header class="profile-header">
+      <h1>Mi Perfil</h1>
+      <p class="profile-subtitle">Gestiona tu información y preferencias de adopción</p>
+    </header>
+
+    <section id="profile-card" class="profile-card">
+      <div class="profile-left">
+        <div class="avatar-wrap">
+          <div class="logo-avatar" id="profile-avatar">N</div>
+          <button class="camera-btn" title="Cambiar foto"><i class="fa-solid fa-camera"></i></button>
+        </div>
+        <button id="edit-profile-btn" class="edit-btn">Editar Perfil</button>
+      </div>
+
+      <div class="profile-right">
+        <!-- logout inline removed (kept logout in navbar) -->
+        <h2 id="profile-display">Cargando información de usuario...</h2>
+        <p id="profile-email" class="muted">Cargando información de usuario...</p>
+        <p id="profile-bio" class="profile-bio">Aquí podrás editar tu información y ver tus matches.</p>
+      </div>
+    </section>
+
+    <!-- Estadísticas: Matches, Publicados, Adoptados -->
+    <section id="profile-stats" class="profile-stats">
+      <div class="stat-card stat-matches">
+        <div class="stat-icon"><i class="fa-solid fa-heart"></i></div>
+        <div class="stat-number" id="matches-count">0</div>
+        <div class="stat-label">Matches</div>
+      </div>
+      <div class="stat-card stat-published">
+        <div class="stat-icon"><i class="fa-solid fa-paw"></i></div>
+        <div class="stat-number" id="published-count">0</div>
+        <div class="stat-label">Publicados</div>
+      </div>
+      <div class="stat-card stat-adopted">
+        <div class="stat-icon"><i class="fa-solid fa-check"></i></div>
+        <div class="stat-number" id="adopted-count">0</div>
+        <div class="stat-label">Adoptados</div>
+      </div>
     </section>
   </main>
 
+  <link rel="stylesheet" href="./profile.theme.css" />
+  <link rel="stylesheet" href="./profile.css" />
   <script type="module" src="../services/page-guard.js"></script>
+  <script type="module" src="./profile.presenter.js"></script>
 </body>
 </html>

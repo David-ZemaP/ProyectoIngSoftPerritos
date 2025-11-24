@@ -608,17 +608,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "a24f564ca1bf36df0fa59b4812c4922cdc8c7360",
     "author": "NicoleUg",
     "commit": {
       "date": "2025-11-24T07:06:06.000Z",
       "message": "feat: create profile page with user information and navigation",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/a24f564ca1bf36df0fa59b4812c4922cdc8c7360"
     },
     "stats": {
       "total": 44,
       "additions": 44,
       "deletions": 0,
+      "date": "2025-11-24"
+    },
+    "coverage": 59.41,
+    "test_count": 54,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "NicoleUg",
+    "commit": {
+      "date": "2025-11-24T07:06:47.000Z",
+      "message": "feat: enhance profile page with user stats, inline editing, and improved navigation",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 527,
+      "additions": 506,
+      "deletions": 21,
       "date": "2025-11-24"
     },
     "coverage": 59.41,
