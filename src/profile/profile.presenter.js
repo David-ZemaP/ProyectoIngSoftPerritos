@@ -1,6 +1,8 @@
 import { auth, db } from '../firebase.js';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { searchPets, getPet } from '../services/pets.service.js';
+import { adoptPet } from '../Adoption/adoption.js';
+import Pet from '../models/Pet.js';
 import { updateProfile } from 'firebase/auth';
 
 const profileDisplay = document.getElementById('profile-display');
@@ -38,37 +40,76 @@ const loadProfileStats = async (user) => {
 
     // Render recent matches list (first 6)
     renderMatchesList(Array.isArray(data.matches) ? data.matches : []);
+    // Render adopted pets list
+    renderAdoptedList(Array.isArray(data.adoptions) ? data.adoptions : []);
   } catch (err) {
     console.error('Error cargando datos de perfil:', err);
   }
 };
 
+const renderAdoptedList = async (adoptIds = []) => {
+  const container = document.querySelector('.adopted-list');
+  if (!container) return;
+  container.innerHTML = '';
+  if (!adoptIds.length) {
+    container.innerHTML = '<p style="color:#666">Aún no has adoptado mascotas.</p>';
+    return;
+  }
+  for (const pid of adoptIds.slice(0, 12)) {
+    try {
+      const pet = await getPet(pid);
+      if (!pet) continue;
+      const card = document.createElement('div');
+      card.className = 'adopted-card';
+      const bg = pet.photoUrl || 'https://placehold.co/800x450/A3A3A3/FFFFFF?text=Mascota';
+      card.innerHTML = `
+        <div class="bg" style="background-image:url('${bg}')"></div>
+        <div class="adopted-badge">Adoptado</div>
+        <div class="meta">
+          <strong>${pet.name ?? 'Sin nombre'}</strong>
+          <div style="font-size:0.9rem;opacity:0.9">${pet.breed ?? ''}</div>
+        </div>
+      `;
+      container.appendChild(card);
+    } catch (e) {
+      console.warn('Error fetching adopted pet', e);
+    }
+  }
+};
+
 const renderMatchesList = async (matchIds = []) => {
-  const containerId = document.querySelector('.matches-list');
-  if (!containerId) return;
-  containerId.innerHTML = '';
+  const container = document.querySelector('.matches-list');
+  if (!container) return;
+  container.innerHTML = '';
   if (!matchIds.length) {
-    containerId.innerHTML = '<p style="color:#666">No tienes matches aún.</p>';
+    container.innerHTML = '<p style="color:#666">No tienes matches aún.</p>';
     return;
   }
 
-  // show up to 6 recent
-  const ids = matchIds.slice(0, 6);
+  const ids = matchIds.slice(0, 12);
   for (const pid of ids) {
     try {
       const pet = await getPet(pid);
       if (!pet) continue;
-      const div = document.createElement('div');
-      div.className = 'match-item';
-      const bg = pet.photoUrl || 'https://placehold.co/400x250/A3A3A3/FFFFFF?text=Mascota';
-      div.innerHTML = `
-        <div class="img" style="background-image:url('${bg}')"></div>
+      const card = document.createElement('div');
+      card.className = 'match-card';
+      const bg = pet.photoUrl || 'https://placehold.co/800x450/A3A3A3/FFFFFF?text=Mascota';
+      card.innerHTML = `
+        <div class="bg" style="background-image:url('${bg}')"></div>
+        <div class="badge-heart"><i class="fa-solid fa-heart"></i></div>
         <div class="meta">
           <strong>${pet.name ?? 'Sin nombre'}</strong>
-          <div style="font-size:0.85rem;color:#666">${pet.breed ?? ''}</div>
+          <div style="font-size:0.9rem;opacity:0.9">${pet.breed ?? ''} <span style="display:block;font-size:0.8rem;opacity:0.8">${pet.createdAt ? pet.createdAt : ''}</span></div>
         </div>
+        <button class="adopt-btn" data-pet-id="${pid}">Adoptar</button>
       `;
-      containerId.appendChild(div);
+
+      // adopt action: open confirmation modal first
+      card.querySelector('.adopt-btn').addEventListener('click', (e) => {
+        openAdoptConfirm(pet, pid, card);
+      });
+
+      container.appendChild(card);
     } catch (e) {
       console.warn('Error fetch pet for matches', e);
     }
@@ -286,3 +327,131 @@ function escapeHtml(str) {
     return charsToReplace[tag] || tag;
   });
 }
+
+/* --- Adoption confirmation + success UI --- */
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+const openAdoptConfirm = (pet, petId, card) => {
+  closeAdoptConfirm();
+  const modal = document.createElement('div');
+  modal.id = 'adopt-confirm-modal';
+  modal.className = 'adopt-modal';
+  modal.innerHTML = `
+    <div class="adopt-backdrop"></div>
+    <div class="adopt-panel">
+      <div class="adopt-img" style="background-image:url('${escapeHtml(pet.photoUrl || 'https://placehold.co/800x450/A3A3A3/FFFFFF?text=Mascota')}')">
+        <button class="adopt-close" title="Cerrar">✕</button>
+      </div>
+      <div class="adopt-body">
+        <h3>${escapeHtml(pet.name || 'Mascota')}</h3>
+        <p class="adopt-sub">¿Listo para adoptar a ${escapeHtml(pet.name || 'esta mascota')}?</p>
+        <p class="adopt-note">Este es un gran paso. Asegúrate de estar preparado para darle un hogar amoroso.</p>
+        <div class="adopt-info">
+          <strong>Compromiso de por vida</strong>
+          <ul>
+            <li>Cuidados veterinarios regulares</li>
+            <li>Alimentación y ejercicio diario</li>
+            <li>Amor y atención constante</li>
+            <li>Ambiente seguro y cómodo</li>
+          </ul>
+        </div>
+        <div class="adopt-actions">
+          <button id="adopt-cancel" class="btn secondary">Aún no</button>
+          <button id="adopt-confirm" class="btn primary">Sí, adoptar</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  // handlers
+  modal.querySelector('.adopt-close').addEventListener('click', closeAdoptConfirm);
+  modal.querySelector('#adopt-cancel').addEventListener('click', closeAdoptConfirm);
+  modal.querySelector('#adopt-confirm').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true;
+    btn.textContent = 'Procesando...';
+    await performAdopt(pet, petId, card, btn);
+  });
+};
+
+const closeAdoptConfirm = () => {
+  const existing = document.getElementById('adopt-confirm-modal');
+  if (existing) existing.remove();
+};
+
+const showToast = (text, ms = 2200) => {
+  const id = 'profile-toast';
+  let toast = document.getElementById(id);
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = id;
+    toast.className = 'profile-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = text;
+  toast.classList.add('visible');
+  setTimeout(() => {
+    toast.classList.remove('visible');
+  }, ms);
+};
+
+const performAdopt = async (pet, petId, card, confirmBtn) => {
+  try {
+  // simulate short processing for UX (<= 2s)
+  const simulated = sleep(1200 + Math.floor(Math.random() * 700));
+  const user = auth.currentUser;
+  if (!user) throw new Error('Usuario no autenticado');
+  // prevent adopting own pet
+  if (pet.ownerId && pet.ownerId === user.uid) throw new Error('No puedes adoptar tu propia mascota');
+  const adoptPromise = adoptPet(user.uid, petId);
+  await Promise.all([adoptPromise, simulated]);
+
+    // update counts in UI
+    const matchesEl = document.getElementById('matches-count');
+    const adoptedEl = document.getElementById('adopted-count');
+    if (matchesEl) matchesEl.textContent = String(Math.max(0, Number(matchesEl.textContent || '0') - 1));
+    if (adoptedEl) adoptedEl.textContent = String(Number(adoptedEl.textContent || '0') + 1);
+
+    // show short success toast and success modal
+    showToast(`¡${pet.name} ahora es parte de tu familia!`, 1800);
+    closeAdoptConfirm();
+    // mark card adopted and remove after a moment
+    const adoptBtn = card.querySelector('.adopt-btn');
+    if (adoptBtn) { adoptBtn.textContent = 'Adoptado'; adoptBtn.classList.add('adopted'); adoptBtn.disabled = true; }
+    setTimeout(() => { card.remove(); }, 900);
+
+    // show final success modal
+    showAdoptSuccess(pet);
+  } catch (err) {
+    console.error('Adopt failed', err);
+    if (confirmBtn) { confirmBtn.disabled = false; confirmBtn.textContent = 'Sí, adoptar'; }
+    alert('No se pudo completar la adopción. Intenta nuevamente.');
+  }
+};
+
+const showAdoptSuccess = (pet) => {
+  closeAdoptSuccess();
+  const modal = document.createElement('div');
+  modal.id = 'adopt-success-modal';
+  modal.className = 'adopt-success';
+  modal.innerHTML = `
+    <div class="adopt-success-backdrop"></div>
+    <div class="adopt-success-panel">
+      <div class="success-icon">✓</div>
+      <h3>¡Felicitaciones!</h3>
+      <p>Has adoptado oficialmente a <strong>${escapeHtml(pet.name || 'la mascota')}</strong>. Pronto recibirás información sobre los siguientes pasos.</p>
+      <div class="success-note">Te contactaremos pronto con los detalles de la adopción.</div>
+      <div style="display:flex;justify-content:center;margin-top:1rem">
+        <button id="success-close" class="btn primary">Cerrar</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  modal.querySelector('#success-close').addEventListener('click', closeAdoptSuccess);
+};
+
+const closeAdoptSuccess = () => {
+  const ex = document.getElementById('adopt-success-modal');
+  if (ex) ex.remove();
+};

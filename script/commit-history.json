@@ -627,17 +627,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "7b9d4f51919a84cd5a937d9615813987919f34b6",
     "author": "NicoleUg",
     "commit": {
       "date": "2025-11-24T07:06:47.000Z",
       "message": "feat: enhance profile page with user stats, inline editing, and improved navigation",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/7b9d4f51919a84cd5a937d9615813987919f34b6"
     },
     "stats": {
       "total": 527,
       "additions": 506,
       "deletions": 21,
+      "date": "2025-11-24"
+    },
+    "coverage": 59.41,
+    "test_count": 54,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "NicoleUg",
+    "commit": {
+      "date": "2025-11-24T07:50:51.000Z",
+      "message": "feat: add recent matches and adopted pets sections to profile page",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 273,
+      "additions": 259,
+      "deletions": 14,
       "date": "2025-11-24"
     },
     "coverage": 59.41,
