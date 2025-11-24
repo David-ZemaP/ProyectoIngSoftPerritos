@@ -570,18 +570,37 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "6554a545fb52782f4763f4ab1456804a3e9a775f",
     "author": "David-ZemaP",
     "commit": {
       "date": "2025-11-23T19:49:39.000Z",
       "message": "feat: match-presenter updated to implement new adoption feature",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/6554a545fb52782f4763f4ab1456804a3e9a775f"
     },
     "stats": {
       "total": 52,
       "additions": 34,
       "deletions": 18,
       "date": "2025-11-23"
+    },
+    "coverage": 59.41,
+    "test_count": 54,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "NicoleUg",
+    "commit": {
+      "date": "2025-11-24T04:36:00.000Z",
+      "message": "feat: implement swipe overlays for like/dislike functionality and add reset button",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 272,
+      "additions": 270,
+      "deletions": 2,
+      "date": "2025-11-24"
     },
     "coverage": 59.41,
     "test_count": 54,
