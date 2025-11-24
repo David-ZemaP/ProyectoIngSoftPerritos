@@ -1,8 +1,10 @@
 import { auth } from '../firebase.js';
-import { searchPets } from '../services/pets.service.js';
-import { userService } from '../services/user.service.js';
+import coreMatch from '../core/matchUseCase.js';
+import petsAdapter from '../adapters/petsServiceAdapter.js';
+import userAdapter from '../adapters/userServiceAdapter.js';
 import Pet from '../models/Pet.js';
 import { checkMatch } from './match.js';
+import '../services/page-guard.js';
 
 // --- UI refs ---
 const petCardEl = document.getElementById('pet-card');
@@ -194,24 +196,23 @@ const advanceToNextPet = (direction, { fromDrag = false } = {}) => {
   petCardEl.style.opacity = '0';
 
   setTimeout(async () => {
-    // 👇 UPDATED LOGIC HERE
+    // Handle like action: save to database and check for matches
     if (direction === 'like') {
       const user = auth.currentUser;
 
       if (user) {
         try {
-          // 1. Save to Database
-          await userService.addMatchedPet(user.uid, currentPet.id);
+          // Use core use-case to save match
+          await coreMatch.likePet(user, currentPet, userAdapter);
           console.log(`Saved match: ${currentPet.name}`);
 
-          // 2. Check Business Rule (Show Animation?)
+          // Check Business Rule (Show Animation?)
           const isMatched = checkMatch(currentPet.id);
           if (isMatched) {
             await showMatchAnimation(currentPet.name ?? 'esa mascota');
           }
         } catch (error) {
           console.error('Error saving match:', error);
-          // Optional: Handle error UI here
         }
       } else {
         console.warn('User not logged in. Match not saved.');
@@ -238,8 +239,8 @@ const advanceToNextPet = (direction, { fromDrag = false } = {}) => {
 
 const init = async () => {
   try {
-    const results = await searchPets();
-    pets = results.map((p) => (p instanceof Pet ? p : new Pet(p)));
+    const results = await coreMatch.loadPets(petsAdapter);
+    pets = results;
   } catch (e) {
     console.error('Error cargando mascotas:', e);
     pets = [];
@@ -294,29 +295,13 @@ const init = async () => {
         // call advance with fromDrag true so it doesn't re-show overlay twice
         advanceToNextPet(dir, { fromDrag: true });
       } else {
-        // reset to center
+        // Below threshold: reset card position
+        petCardEl.style.transition = 'transform 0.25s ease-out, opacity 0.25s ease-out';
         petCardEl.style.transform = 'none';
         petCardEl.style.opacity = '1';
-        // hide overlays smoothly
-        if (likeOverlayEl) {
-          likeOverlayEl.style.opacity = '0';
-          likeOverlayEl.style.display = 'none';
-        }
-        if (dislikeOverlayEl) {
-          dislikeOverlayEl.style.opacity = '0';
-          dislikeOverlayEl.style.display = 'none';
-        }
+        if (likeOverlayEl) likeOverlayEl.style.opacity = '0';
+        if (dislikeOverlayEl) dislikeOverlayEl.style.opacity = '0';
       }
-    });
-
-    // cancel (pointercancel) - reset
-    petCardEl.addEventListener('pointercancel', (ev) => {
-      pointerDown = false;
-      petCardEl.style.transition = 'transform 0.25s ease-out, opacity 0.25s ease-out';
-      petCardEl.style.transform = 'none';
-      petCardEl.style.opacity = '1';
-      if (likeOverlayEl) likeOverlayEl.style.opacity = '0';
-      if (dislikeOverlayEl) dislikeOverlayEl.style.opacity = '0';
     });
   }
 

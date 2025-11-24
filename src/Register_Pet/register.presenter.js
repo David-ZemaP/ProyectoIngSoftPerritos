@@ -4,14 +4,10 @@
 
 import '../firebase.js';
 import { auth } from '../firebase.js';
-import { createPet } from '../services/pets.service.js';
-
-// Import the validation unit. Use default import to be compatible with tests/mocks.
-// Import the whole module to be tolerant with different import shapes (named/default)
-import * as registerUnit from './register.js';
 import displayMessage from './displayMessage.js';
 import { handleImageUpload, resetFormView } from './RegisterView.js';
-import Pet from '../models/Pet.js';
+import coreRegister from '../core/registerUseCase.js';
+import petsAdapter from '../adapters/petsServiceAdapter.js';
 
 // La función de coleccionar datos del DOM se mantiene
 function collectFormData() {
@@ -39,77 +35,12 @@ function collectFormData() {
  */
 export async function handlePetRegistration(data, currentUser) {
     
-    // 1) Validación y Creación de la Entidad (Unidad pura)
-    // Se utiliza el orden de argumentos definido en validateAndCreatePet (name, species, gender, age, breed, personality)
-    // Resolve the validation function from the imported module (supports named or default export)
-    // When running under Jest, prefer the mocked module if jest.requireMock is available.
-    let regModule = registerUnit;
-    if (typeof jest !== 'undefined' && typeof jest.requireMock === 'function') {
-        try {
-            // Try to obtain the mocked module as the test defines it
-            regModule = jest.requireMock('./register.js') || regModule;
-        } catch (e) {
-            // ignore and fall back to the statically imported module
-        }
-    }
-
-    // Allow tests to inject a mock via a well-known global (workaround for some ESM mocking cases)
-    const globalMock = (typeof globalThis !== 'undefined' && typeof globalThis.__mockValidateAndCreatePet === 'function')
-        ? globalThis.__mockValidateAndCreatePet
-        : null;
-
-    const validateFn = globalMock || (typeof regModule.validateAndCreatePet === 'function' ? regModule.validateAndCreatePet : regModule.default);
-
-    if (typeof validateFn !== 'function') {
-        throw new Error('validateAndCreatePet is not available');
-    }
-
-    const petInstanceOrError = validateFn(
-        data.name,
-        data.species,
-        data.gender,
-        // Nota: Asegúrate de que el orden de los argumentos aquí coincida con register.js
-        data.age, 
-        data.breed,
-        data.personality
-    );
-
-    // Si la unidad devolvió un string, es un error de validación
-    if (typeof petInstanceOrError === 'string') {
-        return petInstanceOrError; 
-    }
-
-    // El resultado es una instancia de Pet válida
-    const pet = petInstanceOrError;
-
-    // 2) Asignación del Dueño y Status (solo si es necesario actualizar la instancia)
-    const ownerId = currentUser ? currentUser.uid : 'guest';
-    
-    // NOTA DE OPTIMIZACIÓN: Si validateAndCreatePet ya establece ownerId: 'guest' y status: 'available'
-    // no necesitas hacer 'new Pet' ni asignar status/ownerId aquí. 
-    // Dado que createPet requiere el ownerId, lo pasamos al servicio.
-    
-    // 3) Persistencia (Llamada al servicio)
+    // 1) Use the core use-case. It validates and persists through the injected adapter.
     try {
-        // La función createPet ya maneja la conversión a Firestore y añade timestamps
-        // Preferir mocks injected by the test environment (jest.requireMock or global) when available
-        let createFn = createPet;
-        if (typeof globalThis !== 'undefined' && typeof globalThis.__mockCreatePet === 'function') {
-            createFn = globalThis.__mockCreatePet;
-        } else if (typeof jest !== 'undefined' && typeof jest.requireMock === 'function') {
-            try {
-                const maybe = jest.requireMock('../services/pets.service.js');
-                if (maybe && typeof maybe.createPet === 'function') createFn = maybe.createPet;
-            } catch (e) {
-                // ignore
-            }
-        }
-
-        const savedPet = await createFn(pet, ownerId);
-        return savedPet; // Devuelve la mascota guardada (con ID de Firestore)
-    } catch (error) {
-        // Limpiamos el error para el usuario final
-        console.error('Error al guardar en la BD:', error);
+        const saved = await coreRegister.registerPet(data, currentUser, petsAdapter);
+        return saved;
+    } catch (err) {
+        console.error('Error al guardar en la BD (presenter):', err);
         throw new Error('Ocurrió un error inesperado al registrar la mascota.');
     }
 }
@@ -133,12 +64,21 @@ function init() {
         msgBox.textContent = '';
         msgBox.style.color = 'var(--primary)';
 
+        // Expose the last created pet id key early so E2E can always read the property
+        try { window.__LAST_CREATED_PET_ID = null; } catch (e) { /* ignore in non-browser env */ }
+
         const data = collectFormData();
         const user = auth.currentUser; 
 
         try {
             // 2. Ejecuta la lógica de negocio pura
-            const result = await handlePetRegistration(data, user); 
+            console.log('[register.presenter] submit handler invoked with data:', data);
+
+            // Mostrar un mensaje inmediato de estado para que los E2E vean actividad
+            displayMessage('Registrando...', '');
+
+            const result = await handlePetRegistration(data, user);
+            console.log('[register.presenter] handlePetRegistration result:', result);
             
             // 3. Renderiza el resultado
             
@@ -149,9 +89,16 @@ function init() {
             }
 
             // Si es exitoso, result es la instancia de Pet guardada
-            
             // PASO A: Mostrar mensaje de éxito (Cypress lo ve aquí)
-            displayMessage(`¡${result.name} ha sido registrado(a) exitosamente!`, 'success');
+            if (result && result.name) {
+                // Expose created pet id for E2E cleanup
+                try { window.__LAST_CREATED_PET_ID = result.id; } catch (e) { /* ignore in non-browser env */ }
+                displayMessage(`¡${result.name} ha sido registrado(a) exitosamente!`, 'success');
+            } else {
+                // Defensive: if adapter returned undefined/null, show a generic error
+                console.error('[register.presenter] Unexpected empty result from register flow', result);
+                displayMessage('Ocurrió un error al registrar la mascota. Intenta nuevamente.', 'error');
+            }
             
             // 🚨 SOLUCIÓN: Esperar 1.5 segundos (1500ms) para que Cypress pase la aserción.
             await new Promise(resolve => setTimeout(resolve, 1500)); 
@@ -161,7 +108,9 @@ function init() {
             
         } catch (error) {
             // Captura errores de guardado lanzados por handlePetRegistration
-            displayMessage(error.message, 'error');
+            console.error('[register.presenter] error during registration:', error);
+            const msg = error && error.message ? error.message : 'Ocurrió un error inesperado al registrar la mascota.';
+            displayMessage(msg, 'error');
         }
     });
 }

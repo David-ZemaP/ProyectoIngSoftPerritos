@@ -43,6 +43,8 @@ export class RegistrationPresenter {
 
     try {
       const result = await registerUser(fullName, email, password, confirmPassword);
+      // Expose created user id for E2E cleanup
+      try { window.__LAST_CREATED_USER_ID = result.uid; } catch (e) { /* ignore in non-browser env */ }
       this.showSuccess(result.message);
       this.form.reset();
       

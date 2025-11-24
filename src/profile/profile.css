@@ -103,6 +103,24 @@ body { background: linear-gradient(135deg, var(--profile-bg-gradient-start), var
 .adopted-badge { position:absolute; right:12px; top:12px; background:#bff0e6; color:#0f766e; padding:0.25rem 0.6rem; border-radius:999px; font-weight:700; box-shadow:0 6px 12px rgba(0,0,0,0.08) }
 .adopted-card .meta strong{ display:block; font-size:1.05rem }
 
+/* Match Details Modal */
+.match-details-modal { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; z-index:125 }
+.match-details-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.50) }
+.match-details-panel { position:relative; width:580px; max-width:calc(100% - 40px); background:white; border-radius:12px; overflow:hidden; box-shadow:0 30px 60px rgba(0,0,0,0.30); z-index:126 }
+.match-details-img { height:240px; background-size:cover; background-position:center; position:relative }
+.match-details-close { position:absolute; right:12px; top:12px; background:rgba(255,255,255,0.95); border-radius:50%; border:none; width:40px; height:40px; cursor:pointer; font-size:1.4rem; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.15); z-index:127 }
+.match-details-close:hover { background:white }
+.match-details-body { padding:1.5rem }
+.match-details-body h3 { margin:0 0 0.4rem 0; color:var(--profile-deep-teal); font-size:1.8rem }
+.match-details-info { margin:1rem 0; line-height:1.8 }
+.match-details-info p { margin:0.6rem 0; color:#555 }
+.match-details-info strong { color:var(--profile-deep-teal) }
+.match-details-actions { display:flex; gap:0.8rem; justify-content:flex-end; margin-top:1.5rem; border-top:1px solid #e6eef0; padding-top:1rem }
+.match-details-actions .btn { padding:0.6rem 1.2rem; border-radius:0.6rem; border:none; cursor:pointer; font-weight:600; transition:all 0.2s ease }
+.match-details-actions .btn.secondary { background:#f0f4f4; color:var(--profile-deep-teal) }
+.match-details-actions .btn.primary { background:linear-gradient(90deg,var(--profile-accent),var(--profile-accent-2)); color:white }
+.match-details-actions .btn:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,0.12) }
+
 /* Dev tools removed */
 
 #edit-modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:80 }

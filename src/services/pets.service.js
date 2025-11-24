@@ -2,7 +2,7 @@
 // 
 // Responsabilidad: Capa de acceso a datos (DAL) para la colección 'pets' en Firestore.
 
-import { db } from '../firebase';
+import { db } from '../firebase.js';
 import {
   collection, addDoc, doc, getDoc, getDocs,
   updateDoc, deleteDoc, query, where, orderBy, serverTimestamp

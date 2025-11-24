@@ -4,6 +4,7 @@ import { searchPets, getPet } from '../services/pets.service.js';
 import { adoptPet } from '../Adoption/adoption.js';
 import Pet from '../models/Pet.js';
 import { updateProfile } from 'firebase/auth';
+import '../services/page-guard.js';
 
 const profileDisplay = document.getElementById('profile-display');
 const profileEmail = document.getElementById('profile-email');
@@ -82,37 +83,54 @@ const renderMatchesList = async (matchIds = []) => {
   if (!container) return;
   container.innerHTML = '';
   if (!matchIds.length) {
-    container.innerHTML = '<p style="color:#666">No tienes matches aún.</p>';
+    container.innerHTML = '<p style="color:#666;text-align:center;padding:2rem">No tienes matches aún. ¡Ve a la sección Match para encontrar tu compañero perfecto!</p>';
     return;
   }
 
   const ids = matchIds.slice(0, 12);
+  let loadedCount = 0;
+  
   for (const pid of ids) {
     try {
       const pet = await getPet(pid);
       if (!pet) continue;
+      
       const card = document.createElement('div');
       card.className = 'match-card';
       const bg = pet.photoUrl || 'https://placehold.co/800x450/A3A3A3/FFFFFF?text=Mascota';
+      
+      const dateStr = pet.createdAt ? (
+        typeof pet.createdAt === 'object' && pet.createdAt.toDate
+          ? pet.createdAt.toDate().toLocaleDateString('es-ES')
+          : String(pet.createdAt).substring(0, 10)
+      ) : 'Fecha desconocida';
+      
       card.innerHTML = `
         <div class="bg" style="background-image:url('${bg}')"></div>
         <div class="badge-heart"><i class="fa-solid fa-heart"></i></div>
         <div class="meta">
-          <strong>${pet.name ?? 'Sin nombre'}</strong>
-          <div style="font-size:0.9rem;opacity:0.9">${pet.breed ?? ''} <span style="display:block;font-size:0.8rem;opacity:0.8">${pet.createdAt ? pet.createdAt : ''}</span></div>
+          <strong>${escapeHtml(pet.name ?? 'Sin nombre')}</strong>
+          <div style="font-size:0.9rem;opacity:0.9">${escapeHtml(pet.breed ?? '-')} ${escapeHtml(pet.gender ? `(${pet.gender})` : '')}</div>
+          <div style="font-size:0.8rem;opacity:0.8">Match el ${dateStr}</div>
         </div>
-        <button class="adopt-btn" data-pet-id="${pid}">Adoptar</button>
+        <button class="adopt-btn" data-pet-id="${pid}">Ver Detalles</button>
       `;
 
-      // adopt action: open confirmation modal first
+      // Click to view details
       card.querySelector('.adopt-btn').addEventListener('click', (e) => {
-        openAdoptConfirm(pet, pid, card);
+        e.preventDefault();
+        openMatchDetails(pet, pid);
       });
 
       container.appendChild(card);
+      loadedCount++;
     } catch (e) {
       console.warn('Error fetch pet for matches', e);
     }
+  }
+  
+  if (loadedCount === 0) {
+    container.innerHTML = '<p style="color:#666;text-align:center;padding:2rem">No se pudieron cargar los matches.</p>';
   }
 };
 
@@ -328,8 +346,55 @@ function escapeHtml(str) {
   });
 }
 
-/* --- Adoption confirmation + success UI --- */
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// --- Match Details Modal ---
+const openMatchDetails = (pet, petId) => {
+  closeMatchDetails();
+  const modal = document.createElement('div');
+  modal.id = 'match-details-modal';
+  modal.className = 'match-details-modal';
+  const bg = pet.photoUrl || 'https://placehold.co/800x450/A3A3A3/FFFFFF?text=Mascota';
+  modal.innerHTML = `
+    <div class="match-details-backdrop"></div>
+    <div class="match-details-panel">
+      <button class="match-details-close" title="Cerrar">✕</button>
+      <div class="match-details-img" style="background-image:url('${escapeHtml(bg)}')"></div>
+      <div class="match-details-body">
+        <h3>${escapeHtml(pet.name || 'Mascota')}</h3>
+        <div class="match-details-info">
+          <p><strong>Edad:</strong> ${escapeHtml(pet.age || 'No especificada')}</p>
+          <p><strong>Especie:</strong> ${escapeHtml(pet.species || 'No especificada')}</p>
+          <p><strong>Raza:</strong> ${escapeHtml(pet.breed || 'No especificada')}</p>
+          <p><strong>Género:</strong> ${escapeHtml(pet.gender ? (pet.gender === 'macho' ? 'Macho' : pet.gender === 'hembra' ? 'Hembra' : pet.gender) : 'No especificado')}</p>
+          <p><strong>Descripción:</strong></p>
+          <p style="font-style:italic;color:#666">"${escapeHtml(pet.personality || 'Sin descripción')}"</p>
+        </div>
+        <div class="match-details-actions">
+          <button class="btn secondary" id="close-details">Cerrar</button>
+          <button class="btn primary" id="adopt-from-details" data-pet-id="${petId}">Adoptar esta Mascota</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  
+  modal.querySelector('.match-details-close').addEventListener('click', closeMatchDetails);
+  modal.querySelector('#close-details').addEventListener('click', closeMatchDetails);
+  modal.querySelector('#adopt-from-details').addEventListener('click', (e) => {
+    const petId = e.currentTarget.getAttribute('data-pet-id');
+    closeMatchDetails();
+    // Find the pet card and call adopt
+    const matchCard = document.querySelector(`.match-card button[data-pet-id="${petId}"]`);
+    if (matchCard && matchCard.closest('.match-card')) {
+      openAdoptConfirm(pet, petId, matchCard.closest('.match-card'));
+    }
+  });
+};
+
+const closeMatchDetails = () => {
+  const ex = document.getElementById('match-details-modal');
+  if (ex) ex.remove();
+};
+
 
 const openAdoptConfirm = (pet, petId, card) => {
   closeAdoptConfirm();

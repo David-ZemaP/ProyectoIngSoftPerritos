@@ -646,12 +646,12 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "bfd64a354b2e9382324e651e92fc5b2396942781",
     "author": "NicoleUg",
     "commit": {
       "date": "2025-11-24T07:50:51.000Z",
       "message": "feat: add recent matches and adopted pets sections to profile page",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/bfd64a354b2e9382324e651e92fc5b2396942781"
     },
     "stats": {
       "total": 273,
@@ -661,6 +661,25 @@
     },
     "coverage": 59.41,
     "test_count": 54,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-11-24T19:22:01.000Z",
+      "message": "Corrección de tests",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 4527,
+      "additions": 3964,
+      "deletions": 563,
+      "date": "2025-11-24"
+    },
+    "coverage": 47.06,
+    "test_count": 52,
     "failed_tests": 0,
     "conclusion": "success"
   }

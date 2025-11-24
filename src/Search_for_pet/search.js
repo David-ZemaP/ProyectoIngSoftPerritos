@@ -1,33 +1,9 @@
-function buscarMascota({ nombre, especie, genero, edad, raza }) {
-    const mascota = {
-        nombre: 'Max',
-        edad: 3,
-        raza: 'Bulldog',
-        especie: 'Perro',
-        genero: 'Macho'
-    };
+import coreSearch from '../core/searchUseCase.js';
 
-
-    if (nombre && nombre === mascota.nombre) {
-        throw new Error('¡Mascota Encontrada por nombre!');
-    }
-
-    if (especie && especie === mascota.especie) {
-        throw new Error('¡Mascota Encontrada por especie!');
-    }
-    if (edad !== undefined && edad === mascota.edad) {
-        throw new Error('¡Mascota Encontrada por edad!');
-    }
-
-    if (raza && raza === mascota.raza) {
-        throw new Error('¡Mascota Encontrada por raza!');
-    }
-
-    if (genero && genero === mascota.genero) {
-        throw new Error('¡Mascota Encontrada por género!');
-    }
-
-    return '¡Mascota No Encontrada!';
+/**
+ * Legacy small search helper kept for compatibility with existing tests.
+ * Delegates to core.findPetByAttributes which has the original intent-revealing name.
+ */
+export default function buscarMascota(params) {
+  return coreSearch.findPetByAttributes(params);
 }
-
-export default buscarMascota;

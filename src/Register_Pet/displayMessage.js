@@ -23,9 +23,9 @@ function displayMessage(message, type = '') {
         return;
     }
 
-    // 1. Limpieza inicial: quitamos todas las clases de tipo posibles y el contenido
+    // 1. Limpieza inicial: quitamos todas las clases de tipo posibles
+    messageBox.classList.remove('text-success', 'text-error', 'hidden');
     messageBox.textContent = '';
-    messageBox.classList.remove('text-success', 'text-error', 'hidden'); // Quitamos hidden por defecto.
 
     // 2. Si hay un mensaje, lo mostramos y aplicamos estilo
     if (message) {
@@ -37,14 +37,13 @@ function displayMessage(message, type = '') {
             messageBox.classList.add(styleClass);
         }
         
-        // Hace visible el contenedor (CRUCIAL)
-        // Ya quitamos 'hidden' en la limpieza, pero podemos asegurar que no esté aquí.
-        // O, si prefieres usar 'hidden' como estado inicial:
-        // messageBox.classList.remove('hidden'); 
+        // Asegurar que está visible
+        messageBox.style.display = 'block';
         
     } else {
         // Si no hay mensaje (limpieza), aseguramos que esté oculto.
         messageBox.classList.add('hidden');
+        messageBox.style.display = 'none';
     }
 }
 
