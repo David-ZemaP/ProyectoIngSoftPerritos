@@ -608,17 +608,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "d41990e875f616262887bf2917d921cd48b0cc64",
     "author": "MateoDVE",
     "commit": {
       "date": "2025-11-24T03:35:53.000Z",
       "message": "feat: update commit history with new adoption feature and registration form validation",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/d41990e875f616262887bf2917d921cd48b0cc64"
     },
     "stats": {
       "total": 0,
       "additions": 0,
       "deletions": 0,
+      "date": "2025-11-24"
+    },
+    "coverage": 59.41,
+    "test_count": 54,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-24T03:42:56.000Z",
+      "message": "feat: add null check for submitButton in setLoading method for login and registration presenters",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 12,
+      "additions": 8,
+      "deletions": 4,
       "date": "2025-11-24"
     },
     "coverage": 59.41,

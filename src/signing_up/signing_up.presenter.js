@@ -91,8 +91,10 @@ export class RegistrationPresenter {
    * Activa/desactiva el estado de carga
    */
   setLoading(isLoading) {
-    this.submitButton.disabled = isLoading;
-    this.submitButton.textContent = isLoading ? 'Registrando...' : 'Register';
+    if (this.submitButton) {
+      this.submitButton.disabled = isLoading;
+      this.submitButton.textContent = isLoading ? 'Registrando...' : 'Crear Cuenta';
+    }
   }
 }
 
