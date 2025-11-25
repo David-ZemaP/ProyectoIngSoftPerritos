@@ -704,11 +704,13 @@
   },
   {
     "sha": "33a8e7cbf8ed4a7a8eb3af278c38e90df29bf221",
+    "sha": "502ddd3b1f16c5beb60c05d021ca0318654fc6c1",
     "author": "MateoDVE",
     "commit": {
       "date": "2025-11-25T06:08:24.000Z",
       "message": "fix Cypress test",
       "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/33a8e7cbf8ed4a7a8eb3af278c38e90df29bf221"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/502ddd3b1f16c5beb60c05d021ca0318654fc6c1"
     },
     "stats": {
       "total": 233,
@@ -733,6 +735,16 @@
       "total": 42,
       "additions": 26,
       "deletions": 16,
+    "author": "NicoleUg",
+    "commit": {
+      "date": "2025-11-25T06:39:40.000Z",
+      "message": "fix: mejorar el manejo de datos del perfil de usuario y la adopción de actualizaciones de la interfaz de usuario",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 127,
+      "additions": 88,
+      "deletions": 39,
       "date": "2025-11-25"
     },
     "coverage": 47.06,

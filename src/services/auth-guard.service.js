@@ -3,30 +3,22 @@ import { onAuthStateChanged } from 'firebase/auth';
 
 /**
  * Verifica si el usuario está autenticado.
- * Si no está autenticado, redirige al login.
- * @param {string} redirectTo - URL a la que redirigir si no está autenticado
- * @returns {Promise<Object>} - Promesa que resuelve con el usuario autenticado
+ * Si no hay sesión, opcionalmente redirige y rechaza la promesa.
+ * @param {string} [redirectTo] - URL a la que redirigir si no hay sesión
+ * @returns {Promise<import('firebase/auth').User>} - Usuario autenticado
  */
-export function requireAuth(redirectTo = '/src/login/login.html') {
+export function requireAuth(redirectTo) {
   return new Promise((resolve, reject) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      unsubscribe(); // Desuscribirse después de la primera verificación
+      unsubscribe();
       if (user) {
         resolve(user);
       } else {
-        window.location.href = redirectTo;
+        if (redirectTo) {
+          window.location.href = redirectTo;
+        }
         reject(new Error('Usuario no autenticado'));
       }
-    });
-  });
-}
-
-export function requireAuth() {
-  return new Promise((resolve, reject) => {
-    const unsub = auth.onAuthStateChanged((user) => {
-      unsub();
-      if (user) resolve(user);
-      else reject('No autenticado');
     });
   });
 }

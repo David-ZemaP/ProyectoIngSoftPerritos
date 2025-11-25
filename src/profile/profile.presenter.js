@@ -1,10 +1,11 @@
 import { auth, db } from '../firebase.js';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
 import { searchPets, getPet } from '../services/pets.service.js';
 import { adoptPet } from '../Adoption/adoption.js';
 import Pet from '../models/Pet.js';
 import { updateProfile } from 'firebase/auth';
 import '../services/page-guard.js';
+import { userService } from '../services/user.service.js';
 
 const profileDisplay = document.getElementById('profile-display');
 const profileEmail = document.getElementById('profile-email');
@@ -19,7 +20,28 @@ const loadProfileStats = async (user) => {
     // 1) Fetch user document to read matches/adoptions arrays
     const userRef = doc(db, 'users', user.uid);
     const snap = await getDoc(userRef);
-    const data = snap.exists() ? snap.data() : {};
+    let data = {};
+
+    if (!snap.exists()) {
+      data = {
+        uid: user.uid,
+        email: user.email || null,
+        displayName: user.displayName || null,
+        matches: [],
+        adoptions: [],
+        createdAt: new Date().toISOString(),
+      };
+      await setDoc(userRef, data, { merge: true });
+    } else {
+      data = snap.data() || {};
+      const pending = {};
+      if (!Array.isArray(data.matches)) pending.matches = [];
+      if (!Array.isArray(data.adoptions)) pending.adoptions = [];
+      if (Object.keys(pending).length) {
+        await updateDoc(userRef, pending);
+        data = { ...data, ...pending };
+      }
+    }
 
     const matches = Array.isArray(data.matches) ? data.matches.length : 0;
     const adoptions = Array.isArray(data.adoptions) ? data.adoptions.length : 0;
@@ -461,6 +483,35 @@ const showToast = (text, ms = 2200) => {
   }, ms);
 };
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const finalizeAdoptionUi = (pet, card, { partial = false } = {}) => {
+  const matchesEl = document.getElementById('matches-count');
+  const adoptedEl = document.getElementById('adopted-count');
+  if (matchesEl) matchesEl.textContent = String(Math.max(0, Number(matchesEl.textContent || '0') - 1));
+  if (adoptedEl) adoptedEl.textContent = String(Number(adoptedEl.textContent || '0') + 1);
+
+  const toastMsg = partial
+    ? `Registramos tu solicitud para ${pet.name || 'la mascota'}. Espera confirmación.`
+    : `¡${pet.name} ahora es parte de tu familia!`;
+  const toastDuration = partial ? 2600 : 1800;
+
+  showToast(toastMsg, toastDuration);
+  closeAdoptConfirm();
+
+  const adoptBtn = card.querySelector('.adopt-btn');
+  if (adoptBtn) {
+    adoptBtn.textContent = partial ? 'Pendiente' : 'Adoptado';
+    adoptBtn.classList.add('adopted');
+    adoptBtn.disabled = true;
+  }
+  setTimeout(() => {
+    if (card && card.parentNode) card.remove();
+  }, 900);
+
+  showAdoptSuccess(pet, { partial });
+};
+
 const performAdopt = async (pet, petId, card, confirmBtn) => {
   try {
   // simulate short processing for UX (<= 2s)
@@ -471,42 +522,48 @@ const performAdopt = async (pet, petId, card, confirmBtn) => {
   if (pet.ownerId && pet.ownerId === user.uid) throw new Error('No puedes adoptar tu propia mascota');
   const adoptPromise = adoptPet(user.uid, petId);
   await Promise.all([adoptPromise, simulated]);
-
-    // update counts in UI
-    const matchesEl = document.getElementById('matches-count');
-    const adoptedEl = document.getElementById('adopted-count');
-    if (matchesEl) matchesEl.textContent = String(Math.max(0, Number(matchesEl.textContent || '0') - 1));
-    if (adoptedEl) adoptedEl.textContent = String(Number(adoptedEl.textContent || '0') + 1);
-
-    // show short success toast and success modal
-    showToast(`¡${pet.name} ahora es parte de tu familia!`, 1800);
-    closeAdoptConfirm();
-    // mark card adopted and remove after a moment
-    const adoptBtn = card.querySelector('.adopt-btn');
-    if (adoptBtn) { adoptBtn.textContent = 'Adoptado'; adoptBtn.classList.add('adopted'); adoptBtn.disabled = true; }
-    setTimeout(() => { card.remove(); }, 900);
-
-    // show final success modal
-    showAdoptSuccess(pet);
+    finalizeAdoptionUi(pet, card, { partial: false });
   } catch (err) {
+    if (err && err.code === 'permission-denied') {
+      try {
+        const user = auth.currentUser;
+        if (!user) throw err;
+        await Promise.all([
+          userService.addAdoptedPet(user.uid, petId),
+          sleep(800 + Math.floor(Math.random() * 600)),
+        ]);
+        finalizeAdoptionUi(pet, card, { partial: true });
+        if (confirmBtn) confirmBtn.textContent = 'Registrado';
+        return;
+      } catch (fallbackErr) {
+        console.error('Fallback adopt registration failed', fallbackErr);
+      }
+    }
     console.error('Adopt failed', err);
     if (confirmBtn) { confirmBtn.disabled = false; confirmBtn.textContent = 'Sí, adoptar'; }
     alert('No se pudo completar la adopción. Intenta nuevamente.');
   }
 };
 
-const showAdoptSuccess = (pet) => {
+const showAdoptSuccess = (pet, { partial = false } = {}) => {
   closeAdoptSuccess();
   const modal = document.createElement('div');
   modal.id = 'adopt-success-modal';
   modal.className = 'adopt-success';
+  const title = partial ? '¡Solicitud enviada!' : '¡Felicitaciones!';
+  const body = partial
+    ? `Registramos tu solicitud para adoptar a <strong>${escapeHtml(pet.name || 'la mascota')}</strong>. Nos pondremos en contacto tras la confirmación del publicador.`
+    : `Has adoptado oficialmente a <strong>${escapeHtml(pet.name || 'la mascota')}</strong>. Pronto recibirás información sobre los siguientes pasos.`;
+  const note = partial
+    ? 'Revisa tu bandeja de entrada para conocer el estado de la adopción.'
+    : 'Te contactaremos pronto con los detalles de la adopción.';
   modal.innerHTML = `
     <div class="adopt-success-backdrop"></div>
     <div class="adopt-success-panel">
       <div class="success-icon">✓</div>
-      <h3>¡Felicitaciones!</h3>
-      <p>Has adoptado oficialmente a <strong>${escapeHtml(pet.name || 'la mascota')}</strong>. Pronto recibirás información sobre los siguientes pasos.</p>
-      <div class="success-note">Te contactaremos pronto con los detalles de la adopción.</div>
+      <h3>${title}</h3>
+      <p>${body}</p>
+      <div class="success-note">${note}</div>
       <div style="display:flex;justify-content:center;margin-top:1rem">
         <button id="success-close" class="btn primary">Cerrar</button>
       </div>
