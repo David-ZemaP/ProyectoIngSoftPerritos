@@ -224,3 +224,72 @@
             transform: translateX(-100vw) rotate(-30deg);
             opacity: 0;
         }
+                /* --- Overlays de Like / Dislike (centrados) --- */
+                .swipe-overlay {
+                    position: absolute;
+                    inset: 0;
+                    z-index: 12;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    pointer-events: none;
+                    opacity: 0;
+                    transition: opacity 180ms ease, transform 300ms ease;
+                    border-radius: var(--radius);
+                }
+                .swipe-overlay.show {
+                    opacity: 1;
+                }
+                .swipe-overlay.green {
+                    background-color: rgba(16, 185, 129, 0.85); /* green-500/85 */
+                }
+                .swipe-overlay.red {
+                    background-color: rgba(239, 68, 68, 0.85); /* red-500/85 */
+                }
+                .overlay-icon {
+                    border: 8px solid white;
+                    border-radius: 1rem;
+                    padding: 1rem;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 6rem;
+                    height: 6rem;
+                    box-shadow: var(--shadow-md);
+                    transform: rotate(12deg) scale(1);
+                }
+                .overlay-icon.x {
+                    transform: rotate(-12deg) scale(1);
+                }
+                .overlay-icon svg {
+                    width: 3.5rem;
+                    height: 3.5rem;
+                    color: white;
+                }
+
+                /* --- Toast breve --- */
+                .toast {
+                    position: absolute;
+                    top: -1.5rem;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: rgba(0,0,0,0.85);
+                    color: white;
+                    padding: 0.75rem 1rem;
+                    border-radius: 0.5rem;
+                    box-shadow: var(--shadow-md);
+                    z-index: 30;
+                    font-weight: 600;
+                    pointer-events: none;
+                    transition: opacity 180ms ease, transform 200ms ease;
+                }
+                .toast.hidden {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-6px);
+                    display: none;
+                }
+                .toast.show {
+                    display: block;
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }

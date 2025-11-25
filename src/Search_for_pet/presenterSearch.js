@@ -1,6 +1,7 @@
 // src/Search_for_pet/presenterSearch.js
 import '../firebase.js';
-import { searchPets } from '../services/pets.service.js';
+import coreSearch from '../core/searchUseCase.js';
+import petsAdapter from '../adapters/petsServiceAdapter.js';
 import Pet from '../models/Pet.js';
 
 
@@ -109,11 +110,9 @@ async function runSearch() {
   const gender = normalizeGender($('sex-select')?.value || '');
   const ageBucket = $('age-select')?.value || 'todos';
 
-  // 1) Firestore (filtramos en server SOLO por species; lo demás en cliente)
-  let results = await searchPets({ species });
 
-  // Asegurar instancias Pet
-  results = results.map((r) => (r instanceof Pet ? r : new Pet(r)));
+  // 1) Fetch from persistence layer via core use-case + adapter
+  let results = await coreSearch.fetchAndFilterPets({ species }, petsAdapter);
 
   // 2) Filtros en cliente
   const filtered = applyClientFilters(results, { name, breed, gender, ageBucket });

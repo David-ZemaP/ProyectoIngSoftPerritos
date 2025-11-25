@@ -5,8 +5,8 @@
   "default": "index.html",
   "type": "module",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html src/login/login.html src/signing_up/signing_up.html src/Match/match.html src/Register_Pet/Register.html src/Search_for_pet/Search.html",
+  "start": "parcel index.html src/Match/match.html src/Search_for_pet/Search.html src/Register_Pet/Register.html src/profile/profile.html",
+    "build": "parcel build index.html src/Match/match.html src/Search_for_pet/Search.html src/Register_Pet/Register.html src/profile/profile.html",
     "test": "node ./script/tddScript.js",
     "cypress": "cypress open",
     "cypress-run": "cypress run",
@@ -24,6 +24,7 @@
     "cross-spawn": "^7.0.3",
     "cypress": "^13.17.0",
     "eslint": "^9.10.0",
+    "firebase-admin": "^13.6.0",
     "husky": "^9.1.6",
     "jest": "^29.7.0",
     "jsdom": "^27.0.1",

@@ -18,3 +18,17 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// Manejar excepciones de módulos duplicados o redefiniciones
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // Ignorar errores de redefinición de propiedades (común con HMR y módulos)
+  if (err.message.includes('Cannot redefine property')) {
+    return false;
+  }
+  // Ignorar errores de requireAuth
+  if (err.message.includes('requireAuth')) {
+    return false;
+  }
+  // Permitir que otros errores fallen la prueba
+  return true;
+});

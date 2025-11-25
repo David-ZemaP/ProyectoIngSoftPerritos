@@ -589,17 +589,17 @@
     "conclusion": "success"
   },
   {
-    "sha": "9e4d3d18914a9208dc00a61f2c052122b2d64d2b",
-    "author": "MateoDVE",
+    "sha": "f2652f3f455e9abf680f6e15b5331ed6deb0b5a2",
+    "author": "NicoleUg",
     "commit": {
-      "date": "2025-11-24T03:32:23.000Z",
-      "message": "feat: add required attributes to registration form inputs for validation",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/9e4d3d18914a9208dc00a61f2c052122b2d64d2b"
+      "date": "2025-11-24T04:36:00.000Z",
+      "message": "feat: implement swipe overlays for like/dislike functionality and add reset button",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/f2652f3f455e9abf680f6e15b5331ed6deb0b5a2"
     },
     "stats": {
-      "total": 120,
-      "additions": 71,
-      "deletions": 49,
+      "total": 272,
+      "additions": 270,
+      "deletions": 2,
       "date": "2025-11-24"
     },
     "coverage": 59.41,
@@ -608,16 +608,16 @@
     "conclusion": "success"
   },
   {
-    "sha": "d41990e875f616262887bf2917d921cd48b0cc64",
-    "author": "MateoDVE",
+    "sha": "a24f564ca1bf36df0fa59b4812c4922cdc8c7360",
+    "author": "NicoleUg",
     "commit": {
-      "date": "2025-11-24T03:35:53.000Z",
-      "message": "feat: update commit history with new adoption feature and registration form validation",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/d41990e875f616262887bf2917d921cd48b0cc64"
+      "date": "2025-11-24T07:06:06.000Z",
+      "message": "feat: create profile page with user information and navigation",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/a24f564ca1bf36df0fa59b4812c4922cdc8c7360"
     },
     "stats": {
-      "total": 0,
-      "additions": 0,
+      "total": 44,
+      "additions": 44,
       "deletions": 0,
       "date": "2025-11-24"
     },
@@ -627,17 +627,17 @@
     "conclusion": "success"
   },
   {
-    "sha": "2ad704d899f87732181ae3a23735356bebedc02b",
-    "author": "MateoDVE",
+    "sha": "7b9d4f51919a84cd5a937d9615813987919f34b6",
+    "author": "NicoleUg",
     "commit": {
-      "date": "2025-11-24T03:42:56.000Z",
-      "message": "feat: add null check for submitButton in setLoading method for login and registration presenters",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/2ad704d899f87732181ae3a23735356bebedc02b"
+      "date": "2025-11-24T07:06:47.000Z",
+      "message": "feat: enhance profile page with user stats, inline editing, and improved navigation",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/7b9d4f51919a84cd5a937d9615813987919f34b6"
     },
     "stats": {
-      "total": 12,
-      "additions": 8,
-      "deletions": 4,
+      "total": 527,
+      "additions": 506,
+      "deletions": 21,
       "date": "2025-11-24"
     },
     "coverage": 59.41,
@@ -646,21 +646,78 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
-    "author": "MateoDVE",
+    "sha": "bfd64a354b2e9382324e651e92fc5b2396942781",
+    "author": "NicoleUg",
     "commit": {
-      "date": "2025-11-24T03:51:09.000Z",
-      "message": "feat: update paths in HTML and JS files for consistent routing and add Netlify configuration",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "date": "2025-11-24T07:50:51.000Z",
+      "message": "feat: add recent matches and adopted pets sections to profile page",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/bfd64a354b2e9382324e651e92fc5b2396942781"
     },
     "stats": {
-      "total": 42,
-      "additions": 23,
-      "deletions": 19,
+      "total": 273,
+      "additions": 259,
+      "deletions": 14,
       "date": "2025-11-24"
     },
     "coverage": 59.41,
     "test_count": 54,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "f715b7a0d82c71d7d9d89353543331d340c9e254",
+    "author": "Harold Sejas",
+    "commit": {
+      "date": "2025-11-24T19:22:01.000Z",
+      "message": "Corrección de tests",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/f715b7a0d82c71d7d9d89353543331d340c9e254"
+    },
+    "stats": {
+      "total": 4527,
+      "additions": 3964,
+      "deletions": 563,
+      "date": "2025-11-24"
+    },
+    "coverage": 47.06,
+    "test_count": 52,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "3d88283e572c9b50bd536ee22b75d4a16b469c8d",
+    "author": "Robert",
+    "commit": {
+      "date": "2025-11-25T04:54:24.000Z",
+      "message": "fix: redireccionamiento del login y correccion del loop",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/3d88283e572c9b50bd536ee22b75d4a16b469c8d"
+    },
+    "stats": {
+      "total": 468,
+      "additions": 270,
+      "deletions": 198,
+      "date": "2025-11-25"
+    },
+    "coverage": 47.06,
+    "test_count": 52,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-25T06:08:24.000Z",
+      "message": "fix Cypress test",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 233,
+      "additions": 189,
+      "deletions": 44,
+      "date": "2025-11-25"
+    },
+    "coverage": 47.06,
+    "test_count": 52,
     "failed_tests": 0,
     "conclusion": "success"
   }

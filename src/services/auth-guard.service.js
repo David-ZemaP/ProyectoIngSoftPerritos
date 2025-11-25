@@ -21,6 +21,16 @@ export function requireAuth(redirectTo = '/src/login/login.html') {
   });
 }
 
+export function requireAuth() {
+  return new Promise((resolve, reject) => {
+    const unsub = auth.onAuthStateChanged((user) => {
+      unsub();
+      if (user) resolve(user);
+      else reject('No autenticado');
+    });
+  });
+}
+
 /**
  * Obtiene el usuario actualmente autenticado.
  * @returns {Object|null} - Usuario autenticado o null
