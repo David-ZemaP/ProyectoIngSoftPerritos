@@ -665,18 +665,37 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "f715b7a0d82c71d7d9d89353543331d340c9e254",
     "author": "Harold Sejas",
     "commit": {
       "date": "2025-11-24T19:22:01.000Z",
       "message": "Corrección de tests",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/f715b7a0d82c71d7d9d89353543331d340c9e254"
     },
     "stats": {
       "total": 4527,
       "additions": 3964,
       "deletions": 563,
       "date": "2025-11-24"
+    },
+    "coverage": 47.06,
+    "test_count": 52,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "Robert",
+    "commit": {
+      "date": "2025-11-25T04:54:24.000Z",
+      "message": "fix: redireccionamiento del login y correccion del loop",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 468,
+      "additions": 270,
+      "deletions": 198,
+      "date": "2025-11-25"
     },
     "coverage": 47.06,
     "test_count": 52,

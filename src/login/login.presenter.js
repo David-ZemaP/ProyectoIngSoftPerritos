@@ -13,13 +13,13 @@ export class LoginPresenter {
    */
   init() {
     this.form = document.getElementById('login-form');
+    if (!this.form) return;
+
     this.emailInput = document.getElementById('email');
     this.passwordInput = document.getElementById('password');
     this.submitButton = this.form.querySelector('button[type="submit"]');
 
-    if (this.form) {
-      this.form.addEventListener('submit', (e) => this.handleSubmit(e));
-    }
+    this.form.addEventListener('submit', (e) => this.handleSubmit(e));
   }
 
   /**
@@ -37,15 +37,27 @@ export class LoginPresenter {
 
     try {
       const result = await loginUser(email, password);
+
+      // 👉 Guardar sesión en localStorage para que page-guard la use
+      localStorage.setItem(
+        'user',
+        JSON.stringify({
+          uid: result.uid,
+          email: result.email,
+          displayName: result.displayName ?? '',
+        })
+      );
+
       this.showSuccess(result.message);
       this.form.reset();
-      
+
       // Redirigir después de 1 segundo a la página principal de la app
       setTimeout(() => {
-        window.location.href = '../Match/match.html';
+        // Ruta desde la raíz del servidor (localhost:1234)
+        window.location.href = '/src/Match/match.html';
       }, 1000);
     } catch (error) {
-      this.showError(error.message);
+      this.showError(error.message || 'Error al iniciar sesión');
     } finally {
       this.setLoading(false);
     }
@@ -78,7 +90,7 @@ export class LoginPresenter {
    */
   clearMessages() {
     const messages = this.form.querySelectorAll('.message');
-    messages.forEach(msg => msg.remove());
+    messages.forEach((msg) => msg.remove());
   }
 
   /**
@@ -86,7 +98,9 @@ export class LoginPresenter {
    */
   setLoading(isLoading) {
     this.submitButton.disabled = isLoading;
-    this.submitButton.textContent = isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión';
+    this.submitButton.textContent = isLoading
+      ? 'Iniciando sesión...'
+      : 'Iniciar Sesión';
   }
 }
 

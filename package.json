@@ -5,8 +5,8 @@
   "default": "index.html",
   "type": "module",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html",
+  "start": "parcel index.html src/Match/match.html src/Search_for_pet/Search.html src/Register_Pet/Register.html src/profile/profile.html",
+    "build": "parcel build index.html src/Match/match.html src/Search_for_pet/Search.html src/Register_Pet/Register.html src/profile/profile.html",
     "test": "node ./script/tddScript.js",
     "cypress": "cypress open",
     "cypress-run": "cypress run",
