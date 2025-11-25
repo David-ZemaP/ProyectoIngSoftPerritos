@@ -1,16 +1,35 @@
 [
   {
-    "sha": "HEAD",
+    "sha": "3da391896d120ab981b8870bf17cd625d143121f",
     "author": "MateoDVE",
     "commit": {
       "date": "2025-11-25T06:54:45.000Z",
       "message": "fix: solucion de test de adopccion de  cypress",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/3da391896d120ab981b8870bf17cd625d143121f"
     },
     "stats": {
       "total": 31,
       "additions": 28,
       "deletions": 3,
+      "date": "2025-11-25"
+    },
+    "coverage": 47.06,
+    "test_count": 52,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-25T07:13:49.000Z",
+      "message": "fix: login comit netlify",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 10,
+      "additions": 10,
+      "deletions": 0,
       "date": "2025-11-25"
     },
     "coverage": 47.06,
