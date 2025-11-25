@@ -1,12 +1,36 @@
 describe('ATDD: Flujo Completo de Swipe y Detección de Match', () => {
+  // Usar credenciales de un usuario de prueba existente o crear uno
+  const testEmail = 'cypressmatch@test.com';
+  const testPassword = 'Test123!';
+
+  before(() => {
+    // Intentar crear el usuario de prueba (si ya existe, continuará)
+    cy.visit('http://localhost:1234/src/signing_up/signing_up.html');
+    cy.wait(300);
+    cy.get('input#full-name').type('Cypress Match Test');
+    cy.get('input#email').type(testEmail);
+    cy.get('input#password').type(testPassword);
+    cy.get('input#confirm-password').type(testPassword);
+    cy.get('button[type="submit"]').click();
+    cy.wait(2500);
+  });
+
   beforeEach(() => {
-    // Use absolute path to ensure the correct page is loaded by Parcel dev server
-    cy.visit('/src/Match/match.html');
+    // Hacer login antes de cada prueba
+    cy.visit('http://localhost:1234/src/login/login.html');
+    cy.wait(300);
+    cy.get('input#email').clear().type(testEmail);
+    cy.get('input#password').clear().type(testPassword);
+    cy.get('button[type="submit"]').click();
+    cy.wait(2000);
+
+    // Navegar a la página de match
+    cy.visit('http://localhost:1234/src/Match/match.html');
 
     // Wait for main controls to be available and initial load to finish
-    cy.get('[data-testid="like-button"]', { timeout: 5000 }).should('exist');
+    cy.get('[data-testid="like-button"]', { timeout: 10000 }).should('exist');
     // Ensure the presenter has finished initial loading (status-message updates and is not "Cargando...")
-    cy.get('#status-message', { timeout: 5000 }).should(($s) => {
+    cy.get('#status-message', { timeout: 10000 }).should(($s) => {
       expect($s.text().trim()).not.to.be.empty;
     });
   });

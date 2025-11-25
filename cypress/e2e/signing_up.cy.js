@@ -63,6 +63,7 @@ describe('User Registration E2E - ATDD', () => {
             const timestamp = Date.now();
             const testEmail = `test${timestamp}@test.com`;
             const fullName = 'Juan Perez';
+            let userId = null;
 
             // Given: Usuario llena el formulario correctamente
             cy.get('input#full-name').type(fullName);
@@ -78,33 +79,28 @@ describe('User Registration E2E - ATDD', () => {
                 .should('be.disabled')
                 .and('contain', 'Registrando...');
 
-            // Then: Debe aparecer un mensaje de éxito y limpiar el formulario
-            // Aceptar dos señales de éxito: el mensaje de éxito en DOM O
-            // que el formulario haya vuelto a su estado (botón habilitado)
-            cy.document().then((doc) => {
-                const success = doc.querySelector('.success-message');
-                if (success) {
-                    expect(success).to.be.visible;
-                    expect(success.textContent).to.include('Usuario registrado exitosamente');
-                } else {
-                    // Fallback: comprobar que el botón volvió a estar habilitado
-                    cy.get('button[type="submit"]', { timeout: 10000 })
-                        .should('not.be.disabled')
-                        .and('contain', 'Register');
-                }
-            }).then(() => {
-                // Cleanup: eliminar el usuario creado por id expuesto en window
-                cy.window().its('__LAST_CREATED_USER_ID', { timeout: 10000 }).then((id) => {
-                    if (id) {
-                        cy.task('deleteUserById', { id }).then((res) => cy.log('Deleted user by id', JSON.stringify(res)));
-                    }
-                });
+            // Then: Debe aparecer un mensaje de éxito
+            cy.get('.success-message', { timeout: 10000 })
+                .should('be.visible')
+                .and('contain', 'Usuario registrado exitosamente');
+
+            // Capturar el ID del usuario antes de la redirección
+            cy.window().then((win) => {
+                userId = win.__LAST_CREATED_USER_ID;
+                cy.log('User ID captured:', userId);
             });
 
-            cy.get('input#full-name').should('have.value', '');
-            cy.get('input#email').should('have.value', '');
-            cy.get('input#password').should('have.value', '');
-            cy.get('input#confirm-password').should('have.value', '');
+            // Then: Debe redirigir a la página de match
+            cy.url({ timeout: 10000 }).should('include', '/src/Match/match.html');
+
+            // Cleanup: eliminar el usuario creado
+            cy.then(() => {
+                if (userId) {
+                    cy.task('deleteUserById', { id: userId }).then((res) => 
+                        cy.log('Deleted user by id', JSON.stringify(res))
+                    );
+                }
+            });
         });
     });
 
@@ -115,6 +111,7 @@ describe('User Registration E2E - ATDD', () => {
         it('Dado que el usuario intenta registrarse con un email ya existente, cuando intenta registrarse, entonces debe ver un mensaje de error', () => {
             // Primero registramos el usuario
             const duplicateEmail = `duplicate${Date.now()}@test.com`;
+            let userId = null;
             
             cy.get('input#full-name').type('Usuario Duplicado');
             cy.get('input#email').type(duplicateEmail);
@@ -122,11 +119,13 @@ describe('User Registration E2E - ATDD', () => {
             cy.get('input#confirm-password').type('password123');
             cy.get('button[type="submit"]').click();
             
-            // Esperar a que se registre exitosamente
+            // Esperar a que se registre exitosamente y capturar el ID
             cy.get('.success-message', { timeout: 10000 }).should('be.visible');
+            cy.window().then((win) => {
+                userId = win.__LAST_CREATED_USER_ID;
+            });
             
-            // Esperar a que se limpie el formulario o volver a la página
-            cy.wait(1000);
+            // Volver a la página de registro antes de la redirección
             cy.visit('http://localhost:1234/src/signing_up/signing_up.html');
             cy.wait(100);
             
@@ -141,6 +140,15 @@ describe('User Registration E2E - ATDD', () => {
             cy.get('.error-message', { timeout: 10000 })
                 .should('be.visible')
                 .and('contain', 'Este correo electrónico ya está registrado');
+
+            // Cleanup: eliminar el usuario duplicado
+            cy.then(() => {
+                if (userId) {
+                    cy.task('deleteUserById', { id: userId }).then((res) => 
+                        cy.log('Deleted duplicate user', JSON.stringify(res))
+                    );
+                }
+            });
         });
     });
 
@@ -226,6 +234,7 @@ describe('User Registration E2E - ATDD', () => {
         it('Dado que el usuario está en proceso de registro, entonces el botón debe estar deshabilitado y mostrar un indicador de carga', () => {
             const timestamp = Date.now();
             const testEmail = `test${timestamp}@test.com`;
+            let userId = null;
 
             // Given: Usuario llena el formulario
             cy.get('input#full-name').type('Juan Perez');
@@ -241,11 +250,25 @@ describe('User Registration E2E - ATDD', () => {
                 .should('be.disabled')
                 .and('contain', 'Registrando...');
 
-            // Then: Después del proceso, el botón debe volver a estar habilitado
+            // Then: Debe aparecer mensaje de éxito
             cy.get('.success-message', { timeout: 10000 }).should('be.visible');
-            cy.get('button[type="submit"]')
-                .should('not.be.disabled')
-                .and('contain', 'Register');
+
+            // Capturar el ID antes de la redirección
+            cy.window().then((win) => {
+                userId = win.__LAST_CREATED_USER_ID;
+            });
+
+            // Then: La página debe redirigir
+            cy.url({ timeout: 5000 }).should('include', '/src/Match/match.html');
+
+            // Cleanup
+            cy.then(() => {
+                if (userId) {
+                    cy.task('deleteUserById', { id: userId }).then((res) => 
+                        cy.log('Deleted user', JSON.stringify(res))
+                    );
+                }
+            });
         });
     });
 
@@ -254,6 +277,8 @@ describe('User Registration E2E - ATDD', () => {
     // ----------------------------------------------------------------------
     describe('Escenario 10: Múltiples intentos de registro con diferentes errores', () => {
         it('Dado que el usuario comete errores y los corrige, entonces debe poder ver los mensajes actualizados correctamente', () => {
+            let userId = null;
+
             // Primer intento: contraseñas no coinciden
             cy.get('input#full-name').type('Juan Perez');
             cy.get('input#email').type('juan@test.com');
@@ -286,6 +311,20 @@ describe('User Registration E2E - ATDD', () => {
             cy.get('.success-message', { timeout: 10000 })
                 .should('be.visible')
                 .and('contain', 'Usuario registrado exitosamente');
+
+            // Capturar el ID del usuario
+            cy.window().then((win) => {
+                userId = win.__LAST_CREATED_USER_ID;
+            });
+
+            // Cleanup
+            cy.then(() => {
+                if (userId) {
+                    cy.task('deleteUserById', { id: userId }).then((res) => 
+                        cy.log('Deleted user', JSON.stringify(res))
+                    );
+                }
+            });
         });
     });
 });

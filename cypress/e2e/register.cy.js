@@ -1,8 +1,31 @@
 describe("Registro de Mascota E2E", () => {
+    // Usar credenciales de un usuario de prueba
+    const testEmail = 'cypressregister@test.com';
+    const testPassword = 'Test123!';
+
+    before(() => {
+        // Crear el usuario de prueba (si ya existe, continuará)
+        cy.visit('http://localhost:1234/src/signing_up/signing_up.html');
+        cy.wait(300);
+        cy.get('input#full-name').type('Cypress Register Test');
+        cy.get('input#email').type(testEmail);
+        cy.get('input#password').type(testPassword);
+        cy.get('input#confirm-password').type(testPassword);
+        cy.get('button[type="submit"]').click();
+        cy.wait(2500);
+    });
     
-    // Antes de cada prueba, navegamos a la página
+    // Antes de cada prueba, hacer login y navegar a la página
     beforeEach(() => {
-        // Asegúrate de que esta ruta es correcta para Parcel/tu servidor
+        // Hacer login antes de cada prueba
+        cy.visit('http://localhost:1234/src/login/login.html');
+        cy.wait(300);
+        cy.get('input#email').clear().type(testEmail);
+        cy.get('input#password').clear().type(testPassword);
+        cy.get('button[type="submit"]').click();
+        cy.wait(2000);
+
+        // Navegar a la página de registro
         cy.visit("http://localhost:1234/src/Register_Pet/Register.html"); 
         
         // Alias para el contenedor de mensajes
