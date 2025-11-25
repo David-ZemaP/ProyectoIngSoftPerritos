@@ -2,11 +2,10 @@ import { auth } from '../firebase.js';
 import coreMatch from '../core/matchUseCase.js';
 import petsAdapter from '../adapters/petsServiceAdapter.js';
 import userAdapter from '../adapters/userServiceAdapter.js';
-import Pet from '../models/Pet.js';
+
 import { checkMatch } from './match.js';
 import '../services/page-guard.js';
 
-// --- UI refs ---
 const petCardEl = document.getElementById('pet-card');
 const dislikeBtn = document.getElementById('dislike-btn');
 const likeBtn = document.getElementById('like-btn');
@@ -17,11 +16,10 @@ const cardWrapperEl = document.getElementById('card-wrapper');
 const resetBtn = document.getElementById('reset-btn');
 const toastEl = document.getElementById('toast');
 
-// --- Estado ---
 let pets = [];
 let currentPetIndex = 0;
 let isProcessing = false;
-// --- Drag state ---
+
 let pointerDown = false;
 let startX = 0;
 let startY = 0;
@@ -29,14 +27,14 @@ let currentX = 0;
 let currentY = 0;
 const SWIPE_THRESHOLD = 120; // px
 
-// --- Overlays (creados una vez) ---
 let likeOverlayEl = null;
 let dislikeOverlayEl = null;
 
 const createOverlays = () => {
-  if (!cardWrapperEl) return;
+  if (!cardWrapperEl) {
+    return;
+  }
 
-  // Heart overlay (like)
   likeOverlayEl = document.createElement('div');
   likeOverlayEl.className = 'swipe-overlay green';
   likeOverlayEl.innerHTML = `
@@ -47,7 +45,6 @@ const createOverlays = () => {
     </div>
   `;
 
-  // X overlay (dislike)
   dislikeOverlayEl = document.createElement('div');
   dislikeOverlayEl.className = 'swipe-overlay red';
   dislikeOverlayEl.innerHTML = `
@@ -63,12 +60,10 @@ const createOverlays = () => {
   cardWrapperEl.appendChild(dislikeOverlayEl);
 };
 
-/**
- * Show overlay for a short time. durationMs controls how long it stays visible.
- * If durationMs is omitted, defaults to 650ms.
- */
 const showOverlay = (direction, durationMs = 650) => {
-  if (!likeOverlayEl || !dislikeOverlayEl) return;
+  if (!likeOverlayEl || !dislikeOverlayEl) {
+    return;
+  }
   const el = direction === 'like' ? likeOverlayEl : dislikeOverlayEl;
   const other = direction === 'like' ? dislikeOverlayEl : likeOverlayEl;
   other.style.opacity = '0';
@@ -76,13 +71,14 @@ const showOverlay = (direction, durationMs = 650) => {
   el.style.display = 'flex';
   el.classList.add('show');
   el.style.transform = 'scale(1.02)';
-  // ensure we clear previous timeouts by storing on element
-  if (el._hideTimeout) clearTimeout(el._hideTimeout);
+
+  if (el._hideTimeout) {
+    window.clearTimeout(el._hideTimeout);
+  }
   el._hideTimeout = setTimeout(() => {
     el.classList.remove('show');
     el.style.transform = '';
     el._hideTimeout = null;
-    // keep display none after fade out
     setTimeout(() => {
       el.style.display = 'none';
     }, 180);
@@ -90,20 +86,24 @@ const showOverlay = (direction, durationMs = 650) => {
 };
 
 const updateOverlayDuringDrag = (dx) => {
-  if (!likeOverlayEl || !dislikeOverlayEl) return;
+  if (!likeOverlayEl || !dislikeOverlayEl) {
+    return;
+  }
   const ratio = Math.min(Math.abs(dx) / SWIPE_THRESHOLD, 1);
   if (dx > 0) {
-    // like
     likeOverlayEl.style.display = 'flex';
     likeOverlayEl.style.opacity = `${ratio}`;
     dislikeOverlayEl.style.opacity = '0';
-    // ensure hidden after
-    if (ratio === 0) likeOverlayEl.style.display = 'none';
+    if (ratio === 0) {
+      likeOverlayEl.style.display = 'none';
+    }
   } else if (dx < 0) {
     dislikeOverlayEl.style.display = 'flex';
     dislikeOverlayEl.style.opacity = `${ratio}`;
     likeOverlayEl.style.opacity = '0';
-    if (ratio === 0) dislikeOverlayEl.style.display = 'none';
+    if (ratio === 0) {
+      dislikeOverlayEl.style.display = 'none';
+    }
   } else {
     likeOverlayEl.style.opacity = '0';
     dislikeOverlayEl.style.opacity = '0';
@@ -113,7 +113,9 @@ const updateOverlayDuringDrag = (dx) => {
 };
 
 const showToast = (text, ms = 1800) => {
-  if (!toastEl) return;
+  if (!toastEl) {
+    return;
+  }
   toastEl.textContent = text;
   toastEl.classList.remove('hidden');
   toastEl.classList.add('show');
@@ -180,15 +182,16 @@ const advanceToNextPet = (direction, { fromDrag = false } = {}) => {
   isProcessing = true;
 
   const currentPet = pets[currentPetIndex];
-  const nextPetIndex = (currentPetIndex + 1) % pets.length;
-  const nextPet = pets[nextPetIndex];
+
+  const nextPetIndex = currentPetIndex + 1;
 
   dislikeBtn.disabled = true;
   likeBtn.disabled = true;
   statusMessageEl.textContent = 'Procesando...';
 
-  // Mostrar overlay de like/dislike (animación centrada) en clicks
-  if (!fromDrag) showOverlay(direction, 820); // persist while card animates (≈500ms) + small buffer
+  if (!fromDrag) {
+    showOverlay(direction, 820);
+  }
 
   const transformValue =
     direction === 'like' ? 'translateX(150%) rotate(10deg)' : 'translateX(-150%) rotate(-10deg)';
@@ -196,17 +199,14 @@ const advanceToNextPet = (direction, { fromDrag = false } = {}) => {
   petCardEl.style.opacity = '0';
 
   setTimeout(async () => {
-    // Handle like action: save to database and check for matches
     if (direction === 'like') {
       const user = auth.currentUser;
 
       if (user) {
         try {
-          // Use core use-case to save match
           await coreMatch.likePet(user, currentPet, userAdapter);
           console.log(`Saved match: ${currentPet.name}`);
 
-          // Check Business Rule (Show Animation?)
           const isMatched = checkMatch(currentPet.id);
           if (isMatched) {
             await showMatchAnimation(currentPet.name ?? 'esa mascota');
@@ -220,26 +220,36 @@ const advanceToNextPet = (direction, { fromDrag = false } = {}) => {
     }
 
     currentPetIndex = nextPetIndex;
-    petCardEl.style.transition = 'none';
-    petCardEl.style.transform = 'none';
-    petCardEl.style.opacity = '0';
 
-    renderPetCard(nextPet);
-
-    setTimeout(() => {
-      petCardEl.style.transition = 'transform 0.5s ease-out, opacity 0.5s ease-out';
-      petCardEl.style.opacity = '1';
-      petCardEl.style.transform = 'none';
-      dislikeBtn.disabled = false;
-      likeBtn.disabled = false;
+    if (currentPetIndex >= pets.length) {
+      pets = [];
+      renderPetCard(null);
       isProcessing = false;
-    }, 50);
+    } else {
+      const nextPet = pets[currentPetIndex];
+      petCardEl.style.transition = 'none';
+      petCardEl.style.transform = 'none';
+      petCardEl.style.opacity = '0';
+
+      renderPetCard(nextPet);
+
+      setTimeout(() => {
+        petCardEl.style.transition = 'transform 0.5s ease-out, opacity 0.5s ease-out';
+        petCardEl.style.opacity = '1';
+        petCardEl.style.transform = 'none';
+        dislikeBtn.disabled = false;
+        likeBtn.disabled = false;
+        isProcessing = false;
+      }, 50);
+    }
   }, 500);
 };
 
 const init = async () => {
   try {
-    const results = await coreMatch.loadPets(petsAdapter);
+    const user = auth.currentUser;
+
+    const results = await coreMatch.loadPets(petsAdapter, userAdapter, user ? user.uid : null);
     pets = results;
   } catch (e) {
     console.error('Error cargando mascotas:', e);
@@ -253,13 +263,13 @@ const init = async () => {
 
   renderPetCard(pets[currentPetIndex]);
 
-  // create overlays after initial render
   createOverlays();
 
-  // --- Pointer (drag / swipe) handlers ---
   if (petCardEl) {
     petCardEl.addEventListener('pointerdown', (ev) => {
-      if (isProcessing) return;
+      if (isProcessing) {
+        return;
+      }
       pointerDown = true;
       startX = ev.clientX;
       startY = ev.clientY;
@@ -270,37 +280,42 @@ const init = async () => {
     });
 
     petCardEl.addEventListener('pointermove', (ev) => {
-      if (!pointerDown) return;
+      if (!pointerDown) {
+        return;
+      }
       currentX = ev.clientX - startX;
       currentY = ev.clientY - startY;
       const rotate = currentX / 15;
       petCardEl.style.transform = `translate(${currentX}px, ${currentY * 0.3}px) rotate(${rotate}deg)`;
-      // optional slight fade as you drag further
       petCardEl.style.opacity = `${Math.max(0.6, 1 - Math.abs(currentX) / 800)}`;
       updateOverlayDuringDrag(currentX);
     });
 
     petCardEl.addEventListener('pointerup', (ev) => {
-      if (!pointerDown) return;
+      if (!pointerDown) {
+        return;
+      }
       pointerDown = false;
-      try { petCardEl.releasePointerCapture(ev.pointerId); } catch (e) {}
+      try {
+        petCardEl.releasePointerCapture(ev.pointerId);
+      } catch {}
       petCardEl.style.transition = 'transform 0.35s ease-out, opacity 0.35s ease-out';
 
-      // determine if swipe threshold met
       if (Math.abs(currentX) > SWIPE_THRESHOLD) {
         const dir = currentX > 0 ? 'like' : 'dislike';
-        // ensure overlays clear
         likeOverlayEl.style.opacity = '0';
         dislikeOverlayEl.style.opacity = '0';
-        // call advance with fromDrag true so it doesn't re-show overlay twice
         advanceToNextPet(dir, { fromDrag: true });
       } else {
-        // Below threshold: reset card position
         petCardEl.style.transition = 'transform 0.25s ease-out, opacity 0.25s ease-out';
         petCardEl.style.transform = 'none';
         petCardEl.style.opacity = '1';
-        if (likeOverlayEl) likeOverlayEl.style.opacity = '0';
-        if (dislikeOverlayEl) dislikeOverlayEl.style.opacity = '0';
+        if (likeOverlayEl) {
+          likeOverlayEl.style.opacity = '0';
+        }
+        if (dislikeOverlayEl) {
+          dislikeOverlayEl.style.opacity = '0';
+        }
       }
     });
   }
@@ -317,7 +332,9 @@ const init = async () => {
   if (resetBtn) {
     resetBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      if (!pets || !pets.length) return;
+      if (!pets || !pets.length) {
+        return;
+      }
       currentPetIndex = 0;
       renderPetCard(pets[currentPetIndex]);
       showToast('¡Lista reiniciada!');
