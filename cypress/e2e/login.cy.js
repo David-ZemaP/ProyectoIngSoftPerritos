@@ -67,10 +67,23 @@ describe('User Login E2E - ATDD', () => {
     // ----------------------------------------------------------------------
     describe('Escenario 4: Inicio de sesión exitoso', () => {
         it('Dado que el usuario tiene credenciales válidas, cuando inicia sesión, entonces debe ver un mensaje de éxito y ser redirigido', () => {
-            // Nota: Este test requiere que exista un usuario de prueba en Firebase
-            // Puedes crear uno manualmente o usar el que registraste previamente
-            const testEmail = 'test@matchpet.com'; // Cambia esto por un usuario válido
-            const testPassword = 'password123';
+            // Primero crear el usuario de prueba
+            const testEmail = `cypresslogin${Date.now()}@test.com`;
+            const testPassword = 'Cypress123!';
+            
+            // Ir a registro y crear usuario
+            cy.visit('http://localhost:1234/src/signing_up/signing_up.html');
+            cy.wait(100);
+            cy.get('input#full-name').type('Cypress Test User');
+            cy.get('input#email').type(testEmail);
+            cy.get('input#password').type(testPassword);
+            cy.get('input#confirm-password').type(testPassword);
+            cy.get('button[type="submit"]').click();
+            cy.wait(2500); // Esperar a que se complete el registro
+            
+            // Volver a login
+            cy.visit('http://localhost:1234/src/login/login.html');
+            cy.wait(100);
 
             // Given: Usuario llena el formulario con credenciales válidas
             cy.get('input#email').type(testEmail);
@@ -119,7 +132,7 @@ describe('User Login E2E - ATDD', () => {
     // ----------------------------------------------------------------------
     describe('Escenario 6: Limpieza de espacios en blanco', () => {
         it('Dado que el usuario ingresa email con espacios extras, cuando inicia sesión, entonces los espacios deben ser eliminados automáticamente', () => {
-            const testEmail = 'test@matchpet.com';
+            const testEmail = 'noexiste@test.com';
             const testPassword = 'password123';
 
             // Given: Usuario llena el formulario con espacios extras en el email
@@ -129,8 +142,12 @@ describe('User Login E2E - ATDD', () => {
             // When: Usuario hace click en iniciar sesión
             cy.get('button[type="submit"]').click();
 
-            // Then: Debe procesar la solicitud (los espacios se limpian internamente)
-            cy.get('button[type="submit"]', { timeout: 10000 })
+            // Then: Debe procesar la solicitud y mostrar un error (prueba que trim funciona)
+            cy.get('.error-message', { timeout: 10000 })
+                .should('be.visible');
+            
+            // El botón debe volver a estar habilitado después del proceso
+            cy.get('button[type="submit"]')
                 .should('not.be.disabled');
         });
     });
@@ -176,10 +193,13 @@ describe('User Login E2E - ATDD', () => {
                 }
             });
 
-            // Segundo intento: email inválido
+            // Segundo intento: email inválido (HTML5 previene el envío)
             cy.get('input#email').type('invalid-email');
             cy.get('input#password').type('password123');
             cy.get('button[type="submit"]').click();
+            
+            // Verificar que HTML5 marcó el campo como inválido
+            cy.get('input#email:invalid').should('exist');
 
             cy.document().then((doc) => {
                 const invalid = doc.querySelector('input#email:invalid');

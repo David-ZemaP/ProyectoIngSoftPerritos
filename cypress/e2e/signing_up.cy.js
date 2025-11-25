@@ -113,16 +113,28 @@ describe('User Registration E2E - ATDD', () => {
     // ----------------------------------------------------------------------
     describe('Escenario 5: Validación de email duplicado', () => {
         it('Dado que el usuario intenta registrarse con un email ya existente, cuando intenta registrarse, entonces debe ver un mensaje de error', () => {
-            // Given: Usuario llena el formulario con un email que ya existe
-            // Nota: Este email debe existir previamente en tu base de datos de prueba
-            const existingEmail = 'existing@test.com';
+            // Primero registramos el usuario
+            const duplicateEmail = `duplicate${Date.now()}@test.com`;
             
-            cy.get('input#full-name').type('Juan Perez');
-            cy.get('input#email').type(existingEmail);
+            cy.get('input#full-name').type('Usuario Duplicado');
+            cy.get('input#email').type(duplicateEmail);
             cy.get('input#password').type('password123');
             cy.get('input#confirm-password').type('password123');
-
-            // When: Usuario hace click en registrarse
+            cy.get('button[type="submit"]').click();
+            
+            // Esperar a que se registre exitosamente
+            cy.get('.success-message', { timeout: 10000 }).should('be.visible');
+            
+            // Esperar a que se limpie el formulario o volver a la página
+            cy.wait(1000);
+            cy.visit('http://localhost:1234/src/signing_up/signing_up.html');
+            cy.wait(100);
+            
+            // Intentar registrar con el mismo email
+            cy.get('input#full-name').type('Juan Perez');
+            cy.get('input#email').type(duplicateEmail);
+            cy.get('input#password').type('password123');
+            cy.get('input#confirm-password').type('password123');
             cy.get('button[type="submit"]').click();
 
             // Then: Debe aparecer un mensaje de error

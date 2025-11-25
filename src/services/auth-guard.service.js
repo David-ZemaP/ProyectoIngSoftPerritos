@@ -7,23 +7,14 @@ import { onAuthStateChanged } from 'firebase/auth';
  * @param {string} redirectTo - URL a la que redirigir si no está autenticado
  * @returns {Promise<Object>} - Promesa que resuelve con el usuario autenticado
  */
-export function requireAuth(redirectTo = '../login/login.html') {
+export function requireAuth(redirectTo = '/src/login/login.html') {
   return new Promise((resolve, reject) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       unsubscribe(); // Desuscribirse después de la primera verificación
       if (user) {
         resolve(user);
       } else {
-        // Usar ruta relativa desde la ubicación actual
-        const currentPath = window.location.pathname;
-        let loginPath = redirectTo;
-        
-        // Si estamos en una subcarpeta, ajustar la ruta
-        if (currentPath.includes('/src/')) {
-          loginPath = '../login/login.html';
-        }
-        
-        window.location.href = loginPath;
+        window.location.href = redirectTo;
         reject(new Error('Usuario no autenticado'));
       }
     });

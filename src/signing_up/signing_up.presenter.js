@@ -50,7 +50,7 @@ export class RegistrationPresenter {
       
       // Redirigir después de 2 segundos a la página principal de la app
       setTimeout(() => {
-        window.location.href = '../Match/match.html';
+        window.location.href = '/src/Match/match.html';
       }, 2000);
     } catch (error) {
       this.showError(error.message);
@@ -93,8 +93,10 @@ export class RegistrationPresenter {
    * Activa/desactiva el estado de carga
    */
   setLoading(isLoading) {
-    this.submitButton.disabled = isLoading;
-    this.submitButton.textContent = isLoading ? 'Registrando...' : 'Register';
+    if (this.submitButton) {
+      this.submitButton.disabled = isLoading;
+      this.submitButton.textContent = isLoading ? 'Registrando...' : 'Crear Cuenta';
+    }
   }
 }
 
