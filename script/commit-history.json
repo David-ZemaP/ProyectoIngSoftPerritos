@@ -19,17 +19,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "7704e0473527f792e60b6fc36a93bc117e9d5d0c",
     "author": "MateoDVE",
     "commit": {
       "date": "2025-11-25T07:13:49.000Z",
       "message": "fix: login comit netlify",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/7704e0473527f792e60b6fc36a93bc117e9d5d0c"
     },
     "stats": {
       "total": 10,
       "additions": 10,
       "deletions": 0,
+      "date": "2025-11-25"
+    },
+    "coverage": 47.06,
+    "test_count": 52,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-25T07:23:42.000Z",
+      "message": "fix: remove commented-out build and deploy steps from CI workflow",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 2,
+      "additions": 0,
+      "deletions": 2,
       "date": "2025-11-25"
     },
     "coverage": 47.06,

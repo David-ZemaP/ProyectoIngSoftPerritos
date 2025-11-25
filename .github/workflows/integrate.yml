@@ -29,13 +29,11 @@ jobs:
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
             message: ${{ steps.coverage.outputs.report }}
-      #####
       - name: Run E2E Tests
         uses: cypress-io/github-action@v4
         with:
           start: npm start
           wait-on: "http://localhost:1234"
-      #####
       #- name: Build for deploy
       #  run: npm run build
       #- name: Deploy to GitHub Pages
