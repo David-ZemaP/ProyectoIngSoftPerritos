@@ -703,17 +703,36 @@
     "conclusion": "success"
   },
   {
-    "sha": "HEAD",
+    "sha": "33a8e7cbf8ed4a7a8eb3af278c38e90df29bf221",
     "author": "MateoDVE",
     "commit": {
       "date": "2025-11-25T06:08:24.000Z",
       "message": "fix Cypress test",
-      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/33a8e7cbf8ed4a7a8eb3af278c38e90df29bf221"
     },
     "stats": {
       "total": 233,
       "additions": 189,
       "deletions": 44,
+      "date": "2025-11-25"
+    },
+    "coverage": 47.06,
+    "test_count": 52,
+    "failed_tests": 0,
+    "conclusion": "success"
+  },
+  {
+    "sha": "HEAD",
+    "author": "MateoDVE",
+    "commit": {
+      "date": "2025-11-25T06:46:09.000Z",
+      "message": "fix: update global styles and adjust navbar dimensions",
+      "url": "https://github.com/David-ZemaP/ProyectoIngSoftPerritos/commit/HEAD"
+    },
+    "stats": {
+      "total": 42,
+      "additions": 26,
+      "deletions": 16,
       "date": "2025-11-25"
     },
     "coverage": 47.06,
