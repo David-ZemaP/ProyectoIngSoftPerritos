@@ -18,23 +18,20 @@
         }
 
         /* --- Estilos Globales y Layout --- */
+        * {
+            box-sizing: border-box;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             font-size: var(--font-size);
-            background-color: var(--background);
-            color: var(--foreground);
             background-image: linear-gradient(135deg, #e0f7fa 0%, #f1f8e9 100%);
             min-height: 100vh;
-            padding: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        @media (min-width: 768px) {
-            body {
-                padding: 2rem;
-            }
+            margin: 0;
+            padding: 0;
+            padding-top: 80px;
+            color: var(--foreground);
         }
         
         #app-container {
@@ -43,6 +40,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin: 40px auto;
+            padding: 20px 0;
         }
 
         h1 {
