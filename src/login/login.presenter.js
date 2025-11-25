@@ -28,6 +28,12 @@ export class LoginPresenter {
   async handleSubmit(event) {
     event.preventDefault();
 
+    // Validar que los elementos necesarios estén disponibles
+    if (!this.emailInput || !this.passwordInput) {
+      console.error('Elementos del formulario no inicializados correctamente');
+      return;
+    }
+
     const email = this.emailInput.value.trim();
     const password = this.passwordInput.value;
 
@@ -68,6 +74,7 @@ export class LoginPresenter {
    */
   showError(message) {
     this.clearMessages();
+    if (!this.form) return;
     const errorDiv = document.createElement('div');
     errorDiv.className = 'message error-message';
     errorDiv.textContent = message;
@@ -79,6 +86,7 @@ export class LoginPresenter {
    */
   showSuccess(message) {
     this.clearMessages();
+    if (!this.form) return;
     const successDiv = document.createElement('div');
     successDiv.className = 'message success-message';
     successDiv.textContent = message;
@@ -89,6 +97,7 @@ export class LoginPresenter {
    * Limpia los mensajes anteriores
    */
   clearMessages() {
+    if (!this.form) return;
     const messages = this.form.querySelectorAll('.message');
     messages.forEach((msg) => msg.remove());
   }
@@ -97,6 +106,7 @@ export class LoginPresenter {
    * Activa/desactiva el estado de carga
    */
   setLoading(isLoading) {
+    if (!this.submitButton) return;
     this.submitButton.disabled = isLoading;
     this.submitButton.textContent = isLoading
       ? 'Iniciando sesión...'
